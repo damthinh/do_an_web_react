@@ -1,0 +1,15 @@
+.main{
+    display: flex;
+    
+}
+.danhmuc{
+    width: 30%;
+}
+.text{
+    text-align: center;
+}
+.button_page{
+    /* display: flex; */
+    justify-content: center;
+    /* align-items: center; */
+}

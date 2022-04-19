@@ -1,0 +1,119 @@
+button:hover {
+    background-color: rgb(15, 116, 204);
+    color: white;
+}
+
+.divImg {
+    position: relative;
+}
+
+.btnImg {
+    position: absolute;
+    right: 0;
+    background: none;
+}
+
+Button:hover {
+    background-color: rgb(15, 116, 204);
+    color: white;
+}
+
+.main {
+    display: flex;
+
+}
+
+.danhmuc {
+    width: 30%;
+}
+
+.text {
+    text-align: center;
+}
+
+.button_page {
+    /* display: flex; */
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.table {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.text1 {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.text2 {
+    font-size: 20px;
+}
+
+.butonscss {
+    background-color: rgba(0, 0, 0, .1);
+    /* border-bra: ; */
+    border: none;
+    border-radius: 10px;
+}
+
+.butonscss:hover {
+    color: white(224, 217, 240);
+    background-color: #1976d2;
+}
+
+/* .styleMain {
+    height: '70vh';
+    display: flex;
+    justify-content: space-around;
+    width: 100%
+}
+
+.mainDonHang {
+    height: '30vh';
+    width: '40%';
+    background-color: '#28a745';
+    display: 'flex';
+    flex-direction: 'column'
+}
+
+.mainSanPham {
+    height: '30vh';
+    width: '40%';
+    background-color: '#17a2b8';
+    display: 'flex';
+    flex-direction: 'column'
+}
+
+.mainUser {
+    height: '30vh';
+    width: '40%';
+    background-color: '#ffc107';
+    display: 'flex';
+    flex-direction: 'column'
+}
+
+.icon {
+    height: '20vh';
+    width: '40%';
+    align-items: 'center';
+    justify-content: 'center'
+}
+
+.body {
+    display: 'flex';
+    justify-content: 'space-between';
+    height: '30vh'
+}
+
+.text {
+    display: 'flex';
+    flex-direction: 'column';
+    align-items: 'center';
+    justify-content: 'center'
+} */
+/* button{
+    border-radius: 10px;
+} */

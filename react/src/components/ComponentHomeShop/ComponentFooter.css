@@ -1,0 +1,185 @@
+
+#footer {
+    position: relative;
+}
+
+.footer-1 {
+    border-bottom: 1px solid #ddd;
+}
+
+.top-footer {
+    background-image: url(../../img/footer.jpg);
+    height: 212px;
+    position: relative;
+    margin-bottom: 44px;
+}
+
+.top-footer a {
+    display: inline-block;
+    font-size: 29px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-transform: uppercase;
+    border: solid 4px rgba(255, 255, 255, .6);
+    background: rgba(0, 0, 0, .7);
+    z-index: 1;
+    padding: 10px 82px;
+    text-decoration: none;
+}
+
+.top-footer:hover a {
+    background-color: black;
+}
+
+.row {
+    margin-top: 44px;
+    margin-left: 40px;
+    margin-bottom: 48px;
+    margin-right: 40px;
+}
+
+.row .col-3 h4 {
+    font-size: 14px;
+    color: #252a2b;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.row .fa-phone-alt {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #e52c25;
+    border-radius: 50%;
+    background-color: #e52c25;
+    color: #fff;
+    padding-top: 7px;
+    padding-left: 6px;
+    font-size: 11px;
+}
+
+.ll {
+    margin-bottom: -33px;
+}
+
+.phone {
+    font-size: 27px;
+    color: #252a2b;
+    text-decoration: none;
+    margin: auto;
+}
+
+.row .phone-text {
+    font-size: 11px;
+    color: #252a2b;
+    margin-top: 5px;
+}
+
+.form {}
+
+.form-wr {
+    width: 206px;
+    height: 36px;
+}
+
+.form-control {
+    width: 72px;
+    line-height: 35px;
+    font-size: 16px;
+    position: absolute;
+    background: #000;
+    border: 0;
+    color: #fff;
+    padding: 0px 8px;
+    height: 36px;
+    top: 325px;
+    right: 342px;
+}
+
+.follow {
+    padding-left: 36px;
+}
+
+.icon {
+    font-size: 30px;
+}
+
+.icon i {
+    margin-left: 12px;
+}
+
+.infor {
+    background-color: rgb(240, 240, 240);
+    padding-right: 20px;
+    height: 262px;
+}
+
+.row .col-4 h4 {
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.cheap,
+.we,
+.support {
+    padding-top: 16px;
+}
+
+.cheap p {
+    font-size: 14px;
+    color: #252a2b;
+    margin-bottom: 10px;
+}
+
+/* .we,
+.support {
+    display: flex;
+    flex-direction: column;
+}
+
+.we a,
+.support a {
+    text-decoration: none;
+    color: #252a2b;
+    line-height: 30px;
+}
+
+.logo {
+    max-width: 160px;
+    margin-top: 20px;
+}
+
+.design {
+    height: 58px;
+}
+
+.design p {
+    color: #252a2b;
+    font-size: 13px;
+    font-weight: 400;
+    float: right;
+    margin-right: 40px;
+    margin-top: 19px;
+}
+
+.design p a {
+    font-size: 15px;
+    color: #dc3333;
+    text-decoration: none;
+} */
+
+.fa-facebook-f:hover {
+    color: #3b5998;
+}
+
+.fa-instagram:hover {
+    color: #7b472c;
+}
+
+/* .col col-3{
+    align-items: center;
+} */

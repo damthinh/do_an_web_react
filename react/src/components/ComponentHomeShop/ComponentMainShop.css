@@ -1,0 +1,140 @@
+.main{
+    width: 20%;
+    /* /* display: flex; */
+    justify-content: center; 
+    
+    border-radius: 20px;
+}
+.main:hover .card .imgBx img {
+    /* width: 100%; */
+    width: 99%;
+    height: 100%;
+    padding: 15px;
+}
+.rowMain {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    margin-top: 44px;
+    margin-left: 100px;
+    /* margin-bottom: 48px; */
+    margin-right: 100px;
+    /* background-color: "f1f1f1" */
+}
+.imgBx {
+    width: 100%;
+    /* width: 221px;
+    height: 313.33px; */
+    padding: 15px;
+}
+.card {
+    /* width: 22%; */
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    display: flex;
+    
+    /* flex-direction: row; */
+    margin: 20px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+/* .card .details {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    transition: .9s;
+} */
+/* .card .imgBx {
+    position: absolute;
+    z-index: 0;
+} */
+.col{
+    
+    margin-bottom: 20px;
+}
+.card .imgBx img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* .card .details {
+    z-index: 1;
+    display: none;
+} */
+
+/* .card:hover .details {
+    display: block;
+    transition: .9s;
+}
+
+.details img {
+    height: 221px;
+    width: 100%;
+} */
+
+.pro-name a {
+    text-decoration: none;
+    color: #252a2b;
+    font-size: 15px;
+}
+.price{
+    width: 100%;
+}
+.pro-prices {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 28px;
+}
+
+.pro-prices p {
+    font-size: 14px;
+    color: #000;
+    font-weight: 700;
+}
+
+.pro-prices span {
+    color: #939393;
+    font-weight: 400;
+    font-size: 14px;
+    text-decoration: line-through;
+}
+.card .discount span {
+    height: 35px;
+    background: #f23329;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    z-index: 1;
+    border-radius: 0 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 35px;
+    font-weight: 600;
+    left: 0;
+    top: 0;
+}
+.oos span {
+    /* width: 100px;
+    height: 100px; */
+    border-radius: 5px;
+    color: #f5eeed;
+    font-weight: 700;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /* right: 10px; */
+    background: #fff;
+    padding: 5px 15px;
+    z-index: 1;
+    border: 1px;
+    background-color: #f23329;
+}
+img{
+    
+}
