@@ -2,7 +2,6 @@
 import * as types from "../constants" 
 
 export function paginationSanPhamUserRequest(payload) {
-    console.log("action");
     return{
         type : types.PAGINATION_SANPHAMUSER_REQUEST,
         payload
@@ -20,22 +19,22 @@ export function paginationSanPhamUserFailure(payload) {
         payload
     }
 }
-// xemchitiet
-export function xemchitietSanPhamUserRequest(payload) {
+// search
+export function searchSanPhamUserRequest(payload) {
     return{
-        type : types.XEMCHITIET_SANPHAM_REQUEST,
+        type : types.SEARCH_SANPHAMUSER_REQUEST,
         payload
     }
 }
-export function xemchitietSanPhamUserSuccess(payload) {
+export function searchSanPhamUserSuccess(payload) {
     return{
-        type : types.XEMCHITIET_SANPHAM_SUCCESS,
+        type : types.SEARCH_SANPHAMUSER_SUCCESS,
         payload
     }
 }
-export function xemchitietSanPhamUserFailure(payload) {
+export function searchSanPhamUserFailure(payload) {
     return{
-        type : types.XEMCHITIET_SANPHAM_FAILURE,
+        type : types.SEARCH_SANPHAMUSER_FAILURE,
         payload
     }
 }

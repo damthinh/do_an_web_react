@@ -121,16 +121,6 @@ export default class ComponentMainChiTietSanPham extends Component {
                                 <span className='properties'>Hệ điều hành:</span>
                                 <span className='detail'>{item[0].he_dieu_hanh}</span>
                             </li>
-
-                            {/* <li>
-                            <span></span>
-                            <span></span>
-                        </li>
-                        
-                        <li>
-                            <span></span>
-                            <span></span>
-                        </li> */}
                         </ul>
                     </div>
                 </div>

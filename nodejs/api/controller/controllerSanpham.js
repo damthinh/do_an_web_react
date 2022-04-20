@@ -9,9 +9,10 @@ exports.addSanpham = async (req, res) => {
             ram,
             bo_nho_trong,
             pin,
-            sim } = req.body
+            sim,man_hinh,camera,mo_ta,giam_gia } = req.body
         let file = req.files
         console.log("req.body", req.body);
+        console.log("req.files", req.files);
         let arrImg = []
         for (let i = 0; i < file.length; i++) {
             const url = `http://localhost:3001/${file[i].filename}`;
@@ -22,10 +23,10 @@ exports.addSanpham = async (req, res) => {
             for (let i = 0; i < file.length; i++) {
                 fs.unlink(`img/${file[i].filename}`)
             }
-            res.send("da co sp")
+            return res.send({errorMessage:"da co sp"})
         } else {
-            addCauhinh = await modelCauhinh.create({ he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim })
-            let addSanpham = await modelSanpham.create({ name, gia, so_luong, img: arrImg, id_cau_hinh: addCauhinh._id })
+            addCauhinh = await modelCauhinh.create({ he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim ,man_hinh,camera,mo_ta})
+            let addSanpham = await modelSanpham.create({ name, gia,giam_gia, so_luong, img: arrImg, id_cau_hinh: addCauhinh._id })
             const textSearch = req.query.q
             const limit = parseInt(req.query.limit)
             const getData = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } })
@@ -65,7 +66,7 @@ exports.updateSanpham = async (req, res) => {
             ram,
             bo_nho_trong,
             pin,
-            sim } = req.body
+            sim ,man_hinh,camera,mo_ta,giam_gia} = req.body
         let id_san_pham = req.params.id
         let file = req.files
         let arrImgNew = []
@@ -79,12 +80,12 @@ exports.updateSanpham = async (req, res) => {
             for (let i = 0; i < arrImg.length; i++) {
                 fs.unlink(`img/${arrImg[i].slice(22)}`)
             }
-            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, img: arrImgNew }, { new: true })
-            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim })
+            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, img: arrImgNew ,giam_gia}, { new: true })
+            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim,man_hinh,camera,mo_ta })
             res.send({ updateSanpham })
         } else {
-            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong }, { new: true })
-            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim })
+            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong,giam_gia }, { new: true })
+            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim,man_hinh,camera,mo_ta })
 
             let listSanPham = [updateSanpham]
             res.send({ listSanPham })

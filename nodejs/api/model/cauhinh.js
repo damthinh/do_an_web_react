@@ -6,7 +6,10 @@ const todoSchema = Mongoose.Schema({
     ram:String,
     bo_nho_trong:String,
     pin:String,
-    sim:String  
+    sim:String  ,
+    mo_ta:String,
+    man_hinh:String,
+    camera:String
 },{versionKey:false})
 const modelCauhinh = Mongoose.model("cauhinh",todoSchema)
 

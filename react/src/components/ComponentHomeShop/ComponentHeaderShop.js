@@ -61,10 +61,6 @@ export default class ComponentHeaderShop extends Component {
                                 <a href="#" className="text-nav">sale off: up to 50%</a>
                             </li>
                         </ul>
-                        <input className='input' placeholder='Nhập tên điện thoại... cần tìm' />
-                        <button className='butonscss'>
-                            <SearchIcon />
-                        </button>
                         <div className="Avatar">
                             <Avatar  sx={{ marginRight: '10px', marginLeft: '10px' }} onClick={() => {
                                 // window.location.href = './'

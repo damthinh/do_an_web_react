@@ -11,20 +11,20 @@ import { color } from '@mui/system';
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [name, setName] = React.useState('');
-    const [gia, setGia] = React.useState('');
-    const [camera, setCamera] = React.useState('');
-    const [man_hinh, setMan_hinh] = React.useState('');
+    const [name, setName] = React.useState('samsung');
+    const [gia, setGia] = React.useState('22990000');
+    const [camera, setCamera] = React.useState('12.0 MP + 12.0 MP + 12.0 MP');
+    const [man_hinh, setMan_hinh] = React.useState('6.7 inch, OLED, Super Retina XDR, 2778 x 1284 Pixels');
     // const [gia, setGia] = React.useState('');
-    const [giam_gia, setGiam_gia] = React.useState('');
-    const [so_luong, setSo_luong] = React.useState('');
-    const [he_dieu_hanh, setHe_dieu_hanh] = React.useState('');
-    const [chip, setChip] = React.useState('');
-    const [ram, setRam] = React.useState('');
-    const [bo_nho_trong, setBo_nho_trong] = React.useState('');
-    const [pin, setPin] = React.useState('');
-    const [sim, setSim] = React.useState('');
-    const [mo_ta, setMo_ta] = React.useState('');
+    const [giam_gia, setGiam_gia] = React.useState('15');
+    const [so_luong, setSo_luong] = React.useState('20');
+    const [he_dieu_hanh, setHe_dieu_hanh] = React.useState('iOS 15');
+    const [chip, setChip] = React.useState('Apple A15 Bionic');
+    const [ram, setRam] = React.useState('6 GB');
+    const [bo_nho_trong, setBo_nho_trong] = React.useState('128 GB');
+    const [pin, setPin] = React.useState('4352 mAh');
+    const [sim, setSim] = React.useState('2 - 1 eSIM, 1 Nano SIM');
+    const [mo_ta, setMo_ta] = React.useState('iPhone 13 Pro Max xứng đáng là một chiếc iPhone lớn nhất, mạnh mẽ nhất và có thời lượng pin dài nhất từ trước đến nay sẽ cho bạn trải nghiệm tuyệt vời, từ những tác vụ bình thường cho đến các ứng dụng chuyên nghiệp.');
     const [file, setFile] = React.useState([]);
     const [arrImg, setArrImg] = React.useState([]);
 
@@ -62,9 +62,8 @@ export default function FormDialog(props) {
         form.append('bo_nho_trong', bo_nho_trong)
         form.append('pin', pin)
         form.append('sim', sim)
-        form.append('sim', mo_ta)
-        props.addSanPhamRequest({ form: form, name: name })
-        setOpen(false);
+        form.append('mo_ta', mo_ta)
+        props.addSanPhamRequest({ form: form, name: name })     
     };
     const handleChangeFile = (fileInPut) => {
         var newArr = []

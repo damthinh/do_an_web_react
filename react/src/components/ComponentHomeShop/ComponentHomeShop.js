@@ -6,9 +6,9 @@ export default class ComponentHomeShop extends Component {
   render() {
     return (
       <div sx={{position:'absolute'}}>
-          <ComponentHeaderShop/>
-          <ComponentMainShop/>
-          <ComponentFooter/>
+          <ComponentHeaderShop {...this.props}/>
+          <ComponentMainShop {...this.props}/>
+          <ComponentFooter {...this.props}/>
       </div>
     )
   }
