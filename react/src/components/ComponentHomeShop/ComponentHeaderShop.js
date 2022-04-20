@@ -72,7 +72,9 @@ export default class ComponentHeaderShop extends Component {
                             <ul className="menu">
                                 <li>
                                     <div className="text-shoes">
-                                        <button className='button'>Quản lý tài khoản</button>
+                                        <button className='button'onClick={()=>{
+                                            window.location.href = "/taikhoan"
+                                        }}>Quản lý tài khoản</button>
                                     </div>
                                 </li>
                                 <li>

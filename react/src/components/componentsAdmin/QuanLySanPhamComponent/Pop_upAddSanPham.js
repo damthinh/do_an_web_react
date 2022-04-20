@@ -13,6 +13,10 @@ export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [name, setName] = React.useState('');
     const [gia, setGia] = React.useState('');
+    const [camera, setCamera] = React.useState('');
+    const [man_hinh, setMan_hinh] = React.useState('');
+    // const [gia, setGia] = React.useState('');
+    const [giam_gia, setGiam_gia] = React.useState('');
     const [so_luong, setSo_luong] = React.useState('');
     const [he_dieu_hanh, setHe_dieu_hanh] = React.useState('');
     const [chip, setChip] = React.useState('');
@@ -47,7 +51,10 @@ export default function FormDialog(props) {
             form.append("img", arrFile[i])
         }
         form.append('name', name)
+        form.append('giam_gia', giam_gia)
         form.append('gia', gia)
+        form.append('camera', camera)
+        form.append('man_hinh', man_hinh)
         form.append('so_luong', so_luong)
         form.append('he_dieu_hanh', he_dieu_hanh)
         form.append('chip', chip)
@@ -116,6 +123,16 @@ export default function FormDialog(props) {
                     <TextField
                         autoFocus
                         margin="dense"
+                        label="Giảm Giá"
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => {
+                            setGiam_gia(e.target.value)
+                        }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
                         label="Hệ điều hành"
                         fullWidth
                         variant="standard"
@@ -172,6 +189,26 @@ export default function FormDialog(props) {
                         variant="standard"
                         onChange={(e) => {
                             setSim(e.target.value)
+                        }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        label="Camera"
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => {
+                            // setSim(e.target.value)
+                        }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        label="Màn Hình"
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => {
+                            // setSim(e.target.value)
                         }}
                     />
                     <TextField

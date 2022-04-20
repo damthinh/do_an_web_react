@@ -113,7 +113,7 @@ export default class ComponentMainChiTietSanPham extends Component {
                             </li>
 
                             <li>
-                                <span className='properties'>CPU:</span>
+                                <span className='properties'>Chíp:</span>
                                 <span className='detail'>{item[0].CPU}</span>
                             </li>
 
