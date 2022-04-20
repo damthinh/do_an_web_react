@@ -77,7 +77,9 @@ export default class TableComponentQuanlySanPham extends Component {
                     </table>
                 </Grid>
                 <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center',margin:'20px' }}>
-                <button className='butonscss'>Thanh toán</button>
+                <button className='butonscss' onClick={()=>{
+                    window.location.href ='/thantoan'
+                }}>Thanh toán</button>
                 </Grid>
                 <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center',margin:'20px' }}>
                     <Stack  >

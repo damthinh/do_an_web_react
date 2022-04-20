@@ -5,6 +5,7 @@
 
 .footer-1 {
     border-bottom: 1px solid #ddd;
+    width: 100%;
 }
 
 .top-footer {
@@ -35,21 +36,26 @@
     background-color: black;
 }
 
-.row {
+.rows {
+    display: flex;
+
     margin-top: 44px;
     margin-left: 40px;
     margin-bottom: 48px;
     margin-right: 40px;
 }
-
-.row .col-3 h4 {
+.rows .col-3{
+    flex: 0 0 27%;
+    max-width: 27%;
+}
+.rows .col-3 h4 {
     font-size: 14px;
     color: #252a2b;
     text-transform: uppercase;
     font-weight: 600;
 }
 
-.row .fa-phone-alt {
+.rows .fa-phone-alt {
     width: 25px;
     height: 25px;
     border: 1px solid #e52c25;
@@ -72,7 +78,7 @@
     margin: auto;
 }
 
-.row .phone-text {
+.rows .phone-text {
     font-size: 11px;
     color: #252a2b;
     margin-top: 5px;
@@ -117,7 +123,7 @@
     height: 262px;
 }
 
-.row .col-4 h4 {
+.rows .col-4 h4 {
     text-transform: uppercase;
     font-size: 14px;
     margin-top: 20px;

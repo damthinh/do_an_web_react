@@ -1,0 +1,48 @@
+
+.mainHome{
+    width: 100%;
+}
+.mainThanhToan{
+    display: flex;
+    margin: 40px;
+    
+    flex-direction: column;
+
+}
+
+.maintext{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TextField{
+    width: 70%;
+}
+.thong_so{
+    width: 40%;
+}
+.thong_so ul{
+    width: 100%;
+}
+
+.mainTop{
+    
+    display: flex;
+    margin: 40px;
+}
+.mainBottom{
+    
+    display: flex;
+    margin: 40px;
+    
+    justify-content: space-evenly;
+}
+.checkbox{
+    width: 20px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -6,6 +6,7 @@ import LoginPage from './LoginPage';
 import ChiTietSanPhamPage from './ChiTietSanPhamPage';
 import GioHangPage from './GioHangPage';
 import DonHangPage from './DonHangPage';
+import ThanToanPage from './ThanhToanPage';
 export {
   HomePage,
   ItemPage,
@@ -13,6 +14,7 @@ export {
   LoginPage,
   ChiTietSanPhamPage,
   GioHangPage,
-  DonHangPage
+  DonHangPage,
+  ThanToanPage
   // HomeAdmin
 };

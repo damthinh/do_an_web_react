@@ -11,7 +11,7 @@ export default class ComponentFooter extends Component {
                             <a href="#">hệ thống cửa hàng</a>
                         </div>
                     </div>
-                    <div className="row">
+                    <div className="rows">
                         <div className="col col-3">
                             <h4>goị mua hàng ( 08:30-21:30 )</h4>
                             {/* <div className="ll">
@@ -43,7 +43,7 @@ export default class ComponentFooter extends Component {
                         </div> */}
                     </div>
                     <div className="infor">
-                        <div className="row">
+                        <div className="rows">
                             <div className="col col-4">
                                 <h4>cheap store</h4>
                                 <div className="cheap">

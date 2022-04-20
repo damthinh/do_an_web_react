@@ -6,7 +6,6 @@ export default class ComponentGioHang extends Component {
   render() {
     return (
       <div>
-          
           <ComponentHeaderShop/>
           <ComponetMainGioHang/>
           <ComponentFooter/>
