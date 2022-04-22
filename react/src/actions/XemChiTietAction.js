@@ -21,22 +21,22 @@ export function xemchitietSanPhamUserFailure(payload) {
     }
 }
 
-// datHang
-export function datHangSanPhamUserRequest(payload) {
+// addGioHang
+export function addGioHangRequest(payload) {
     return{
-        type : types.DATHANG_REQUEST,
+        type : types.ADD_GIOHANG_REQUEST,
         payload
     }
 }
-export function datHangSanPhamUserSuccess(payload) {
+export function addGioHangSuccess(payload) {
     return{
-        type : types.DATHANG_SUCCESS,
+        type : types.ADD_GIOHANG_SUCCESS,
         payload
     }
 }
-export function datHangSanPhamUserFailure(payload) {
+export function addGioHangFailure(payload) {
     return{
-        type : types.DATHANG_FAILURE,
+        type : types.ADD_GIOHANG_FAILURE,
         payload
     }
 }

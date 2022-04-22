@@ -61,6 +61,7 @@ ul{
     display: flex;
     margin: none;
     justify-content: center;
+    align-items: center;
 
 }
 
@@ -74,19 +75,63 @@ ul{
     justify-content: center;
     flex-direction: column;
 }
-.img-san-pham{
-    width: 40%;
+.card_img{
     
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    display: flex;
+    margin: 20px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    height: 370px;
+    width: 20%;
+    flex-direction: column;
+}
+.card_img img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.oos span {
+    /* width: 100px;
+    height: 100px; */
+    border-radius: 5px;
+    color: #f5eeed;
+    font-weight: 700;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /* right: 10px; */
+    background: #fff;
+    padding: 5px 15px;
+    z-index: 1;
+    border: 1px;
+    background-color: #f23329;
+}
+
+.card_img .discount span {
+    height: 35px;
+    background: #f23329;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    z-index: 1;
+    border-radius: 0 0 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-}
-.img-san-pham img{
-    object-fit: cover;
-    width: 70%;
+    position: absolute;
+    width: 35px;
+    font-weight: 600;
+    left: 46px;
+    top: 30px;
 }
 
 .button{
     border-radius: 10px;
+}
+.textMota{
+    
 }

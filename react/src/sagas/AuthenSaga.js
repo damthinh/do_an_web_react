@@ -11,6 +11,8 @@ function* loginSaga(action) {
             console.log('res',res);
             localStorage.setItem('token',res.token)
             localStorage.setItem('role',res.getUser.role)
+            
+            localStorage.setItem('idUser',res.getUser._id)
             window.location.href ='/home'
             yield put (actions.LoginUserSuccess())
         }

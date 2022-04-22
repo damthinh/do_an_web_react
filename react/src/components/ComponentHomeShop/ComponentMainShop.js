@@ -40,6 +40,7 @@ export default class ComponentMainShop extends Component {
                 console.log("Math.ceil((item.gia * item.giam_gia) / 100)", Math.ceil((item.gia * item.giam_gia) / 100));
                 return (
                     <div key={key} className='main' onClick={() => {
+                        localStorage.setItem('idSanPham',item._id)
                         window.location.href = '/chitietsanpham'
                     }}>
                         <div className="card">

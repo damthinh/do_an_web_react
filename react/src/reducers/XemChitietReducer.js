@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
 
         case types.XEMCHITIET_SANPHAM_REQUEST:
-        case types.DATHANG_REQUEST:
+        case types.ADD_GIOHANG_REQUEST:
             return {
                 ...state,
                 isFetching: true,
@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
             }
 
         case types.XEMCHITIET_SANPHAM_FAILURE:
-        case types.DATHANG_FAILURE:
+        case types.ADD_GIOHANG_FAILURE:
             return {
                 ...state,
                 isFetching: false,
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
                 error: false,
                 errorMessage: action.payload,
             }
-        case types.DATHANG_SUCCESS:
+        case types.ADD_GIOHANG_SUCCESS:
             return {
                 ...state,
                 isFetching: false,

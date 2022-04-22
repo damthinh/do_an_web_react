@@ -1,5 +1,5 @@
 import * as constants from "../constants"
-export default function callApiJson(method, path, data) {
+export default function callAPIJson(method, path, data) {
     let objFetch = {}
     if(method === constants.HTTP_READ || method === constants.HTTP_DELETE){
         objFetch = {

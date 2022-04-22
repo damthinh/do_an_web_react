@@ -10,7 +10,7 @@ export default class ComponentChiTietSanPham extends Component {
       <div>
           
           <ComponentHeaderShop/>
-          <ComponentMainChiTietSanPham/>
+          <ComponentMainChiTietSanPham {...this.props}/>
           <ComponentFooter/>
       </div>
     )
