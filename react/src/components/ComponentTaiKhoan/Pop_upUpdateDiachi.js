@@ -12,55 +12,69 @@ import { Link } from 'react-router-dom';
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [dia_chi, setDia_chi] = React.useState('');
-    const [Password, setPassword] = React.useState('');
-    const [CheckPassword, setCheckPassword] = React.useState('');
-    const [alertPass, setAlertPass] = React.useState('');
+    const [Name, setName] = React.useState('');
+    const [Sdt, setSdt] = React.useState('');
+    const [id_dia_chi, setId_dia_chi] = React.useState('');
     const handleClickOpen = () => {
-        setDia_chi()
+        console.log("props", props);
+        setDia_chi(props.item.dia_chi)
+        setName(props.item.Name)
+        setSdt(props.item.Sdt)
+        setId_dia_chi(props.item._id)
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
     };
     const handleOK = () => {
-        setOpen(false);
+        if (dia_chi != '' && Name != '' && Sdt != '') {
+
+            props.updateDiaChiRequest({ Name: Name, dia_chi: dia_chi, Sdt: Sdt, id_dia_chi: id_dia_chi })
+            setOpen(false);
+        } else {
+            alert("Nhập đủ thông tin")
+        }
     };
     return (
         <div>
             <button className='button' variant="outlined" onClick={handleClickOpen}>
-            update
+                update
             </button>
-            <Dialog open={open} onClose={handleClose} sx={{width:"100%"}}>
+            <Dialog open={open} onClose={handleClose} sx={{ width: "100%" }}>
                 <DialogTitle>Thêm Địa Chỉ</DialogTitle>
-                <DialogContent sx={{width:'400px'}}>
-                    <TextField 
+                <DialogContent sx={{ width: '400px' }}>
+                    <TextField
                         autoFocus
                         margin="dense"
                         label="Địa Chỉ"
+                        value={dia_chi}
                         fullWidth
                         variant="standard"
                         onChange={(e) => {
                             setDia_chi(e.target.value)
                         }}
                     />
-                    {/* <TextField
+                    <TextField
                         autoFocus
                         margin="dense"
-                        id="name"
-                        type={'password'}
-                        label="Mật khẩu"
+                        label="Name"
+                        value={Name}
                         fullWidth
                         variant="standard"
-                        title="Invalid email address"
+                        onChange={(e) => {
+                            setName(e.target.value)
+                        }}
                     />
                     <TextField
                         autoFocus
-                        type={'password'}
                         margin="dense"
-                        label="Nhập Lại Mật Khẩu"
+                        label="Sdt"
+                        value={Sdt}
                         fullWidth
-                        variant="standard"
-                    /> */}
+                        onChange={(e) => {
+                            setSdt(e.target.value)
+                        }}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>

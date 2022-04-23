@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 import { AuthenSaga } from './AuthenSaga';
 import { HomeSaga } from './HomeSaga';
 import { SanPhamSaga } from './QuanLySanPhamSaga';
+import { TaiKhoanSaga } from './TaiKhoanSaga';
 import { XemChiTietSaga } from './XemChiTietSaga';
 
 export default function* rootSaga() {
@@ -9,6 +10,7 @@ export default function* rootSaga() {
     ...SanPhamSaga,
     ...AuthenSaga,
     ...HomeSaga,
-    ...XemChiTietSaga
+    ...XemChiTietSaga,
+    ...TaiKhoanSaga
   ]);
 }

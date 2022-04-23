@@ -8,25 +8,33 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from 'react-router-dom';
+import { getIdUser } from '../../constants';
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [dia_chi, setDia_chi] = React.useState('');
-    const [Password, setPassword] = React.useState('');
-    const [CheckPassword, setCheckPassword] = React.useState('');
-    const [alertPass, setAlertPass] = React.useState('');
+    const [Name, setName] = React.useState('');
+    const [Sdt, setSdt] = React.useState('');
     const handleClickOpen = () => {
+        
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
     };
     const handleOK = () => {
+        if (dia_chi != '' && Name != '' && Sdt != '') {
+            props.addDiaChiRequest({Name:Name,dia_chi:dia_chi,Sdt:Sdt,id_user:getIdUser()})
+            
         setOpen(false);
+        } else {
+            alert("Nhập đủ thông tin")
+        }
+        
     };
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button style={{ display: props.listDiaChi.length >=5 ? 'none' : 'inline-block'}} variant="outlined" onClick={handleClickOpen}>
             Thêm Địa Chỉ
             </Button>
             <Dialog open={open} onClose={handleClose} sx={{width:"100%"}}>
@@ -42,24 +50,25 @@ export default function FormDialog(props) {
                             setDia_chi(e.target.value)
                         }}
                     />
-                    {/* <TextField
+                    <TextField
                         autoFocus
                         margin="dense"
-                        id="name"
-                        type={'password'}
-                        label="Mật khẩu"
+                        label="Name"
                         fullWidth
                         variant="standard"
-                        title="Invalid email address"
+                        onChange={(e)=>{
+                            setName(e.target.value)
+                        }}
                     />
                     <TextField
                         autoFocus
-                        type={'password'}
                         margin="dense"
-                        label="Nhập Lại Mật Khẩu"
+                        label="Sdt"
                         fullWidth
-                        variant="standard"
-                    /> */}
+                        onChange={(e)=>{
+                            setSdt(e.target.value)
+                        }}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>

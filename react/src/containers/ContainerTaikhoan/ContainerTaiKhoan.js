@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ComponentTaiKhoan from '../../components/ComponentTaiKhoan/ComponentTaiKhoan'
 import * as actions from '../../actions/TaiKhoanAction'
+import { getIdUser } from '../../constants'
 export class ContainerTaiKhoan extends Component {
   componentDidMount(){
-    this.props.getUserRequest()
+    this.props.getUserRequest({id_user:getIdUser()})
   }
   render() {
     return (
@@ -20,8 +21,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch)=> {
   return{
-    getUserRequest:()=>{
-      dispatch(actions.getUserRequest())
+    getUserRequest:(data)=>{
+      dispatch(actions.getUserRequest(data))
     },
     addDiaChiRequest:(data)=>{
       dispatch(actions.addDiaChiRequest(data))

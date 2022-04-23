@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { getIdUser } from '../../constants';
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
@@ -20,7 +21,7 @@ export default function FormDialog(props) {
     };
     const handleOK = () => {
         
-        props.addGioHangRequest({id_user:localStorage.getItem('idUser'),id_san_pham:localStorage.getItem('idSanPham'),so_luong:so_luong})
+        props.addGioHangRequest({id_user:getIdUser(),id_san_pham:localStorage.getItem('idSanPham'),so_luong:so_luong})
         setSo_luong('')
         setOpen(false);
     };

@@ -8,7 +8,7 @@ export default class ComponentTaiKhoan extends Component {
     return (
       <div>
       <ComponentHeaderShop />
-      <ComponentMainTaiKhoan/>
+      <ComponentMainTaiKhoan {...this.props}/>
       <ComponentFooter /></div>
     )
   }

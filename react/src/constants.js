@@ -3,6 +3,11 @@
 // export const DOMAIN = "https://f32531d8ff9a.ngrok.io";
 export const DOMAIN = "http://localhost:3001/";
 
+export function getIdUser(){
+    return localStorage.getItem('idUser')
+}
+
+
 export const LIMIT = 3;
 export const LIMITSANPHAM = 20;
 
