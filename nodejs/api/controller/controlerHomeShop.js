@@ -10,7 +10,7 @@ exports.getIdSanpham = async (req, res) => {
         })
         res.send({ getId })
     } catch (error) {
-        res.send({ errorMessage: error })
+        res.send({ errorMessage:error.message })
     }
 }
 exports.addGiohang = async (req, res) => {
@@ -38,6 +38,6 @@ exports.addGiohang = async (req, res) => {
         }
         res.send({ checkUser, checksanpham ,addGiohang})
     } catch (error) {
-        res.send({ errorMessage: error })
+        res.send({ errorMessage:error.message })
     }
 }

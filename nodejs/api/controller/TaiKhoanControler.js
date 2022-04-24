@@ -9,7 +9,7 @@ exports.getUser = async (req, res) => {
         let user = await modelThongTinUser.find({id_user:id_user})
         res.send({ listDiaChi ,user})
     } catch (error) {
-        res.send({ errorMessage: error })
+        res.send({ errorMessage:error.message })
     }
 }
 
@@ -19,7 +19,7 @@ exports.addDiaChi = async (req, res) => {
         let addDiaChi = await modelDiaChi.create({id_user,dia_chi,Name,Sdt})
         res.send({ addDiaChi})
     } catch (error) {
-        res.send({ errorMessage: error })
+        res.send({ errorMessage:error.message })
     }
 }
 
@@ -29,7 +29,7 @@ exports.updateDiaChi = async (req, res) => {
         let updateDiaChi = await modelDiaChi.findByIdAndUpdate(id_dia_chi,{dia_chi,Name,Sdt},{new:true})
         res.send({ updateDiaChi})
     } catch (error) {
-        res.send({ errorMessage: error })
+        res.send({ errorMessage:error.message })
     }
 }
 
@@ -39,7 +39,7 @@ exports.deleteDiaChi = async (req, res) => {
         let deleteDiaCHi = await modelDiaChi.findByIdAndDelete(id_diaChi)
         res.send({ deleteDiaCHi})
     } catch (error) {
-        res.send({ errorMessage: error })
+        res.send({ errorMessage:error.message })
     }
 }
 exports.updateThongTin = async(req,res)=>{
@@ -48,6 +48,6 @@ exports.updateThongTin = async(req,res)=>{
         let updateThongTin = await modelThongTinUser.findByIdAndUpdate(id_thong_tin,{Sdt})
         res.send(updateThongTin)
     } catch (error) {
-        res.send({ errorMessage: error })
+        res.send({ errorMessage:error.message })
     }
 }

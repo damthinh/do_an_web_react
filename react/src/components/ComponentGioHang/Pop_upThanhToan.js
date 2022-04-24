@@ -1,7 +1,16 @@
+// import './component.css'
 import '../componentsAdmin/component.css'
-// import './ComponentMainThanhToan.css'
-import React, { Component } from 'react'
+import './ComponentMainThanhToan.css'
+import * as React from 'react';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { Link } from 'react-router-dom';
+import { getIdUser } from '../../constants';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -16,9 +25,15 @@ let item = [{
 let list = [{ 'name': 'iphone3', 'gia': '1000d', 'so_luong': '3', 'img': ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU'] }
     , { 'name': 'iphone13', 'gia': '2000d', 'so_luong': '1', 'img': ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU'] }
 ]
-export default class ComponentMainThanhToan extends Component {
-    render() {
-        let listSanPham = []
+let listSanPham = []
+export default function FormDialog(props) {
+    const [open, setOpen] = React.useState(false);
+    const [dia_chi, setDia_chi] = React.useState('');
+    const [Name, setName] = React.useState('');
+    const [Sdt, setSdt] = React.useState('');
+    const handleClickOpen = () => {
+
+
         listSanPham = list.map((item, key) => {
             return (
                 <tr key={key}>
@@ -31,9 +46,48 @@ export default class ComponentMainThanhToan extends Component {
                 </tr>
             )
         })
-        return (
-            <div className='mainThanhToan' >
-                <div className='mainTop'>
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleOK = () => {
+        // if (dia_chi != '' && Name != '' && Sdt != '') {
+        //     props.addDiaChiRequest({ Name: Name, dia_chi: dia_chi, Sdt: Sdt, id_user: getIdUser() })
+
+            
+        // } else {
+        //     alert("Nhập đủ thông tin")
+        // }
+        setOpen(false);
+    };
+
+    return (
+        <div className='mainTop'>
+            <Button variant="outlined" onClick={handleClickOpen}>
+                Thanh Toán
+            </Button>
+            <Dialog open={open} onClose={handleClose} sx={{ width: "100%" }}>
+                <DialogTitle>Thanh toán</DialogTitle>
+                <div open={open} onClose={handleClose} className='mainThanhToan' >
+                    {/* <div className='mainTop'>
+                        
+                        
+                    </div> */}
+                    <Grid sx={{ backgroundColor: "#f1f1f1", height: '70%' }}>
+                        <table className='table' >
+                            <tbody >
+                                <tr display={{ backgroundColor: "gray" }}>
+                                    <th width={70} className="text">STT</th>
+                                    <th width={100} className="text">NAME</th>
+                                    <th width={100} className="text">Giá</th>
+                                    <th width={100} className="text">Số Lượng</th>
+                                    <th width={200} className="text">IMG</th>
+                                </tr>
+                                {listSanPham}
+                            </tbody>
+                        </table>
+                    </Grid>
                     <div className='maintext'>
                         <TextField className='TextField'
                             autoFocus
@@ -62,12 +116,13 @@ export default class ComponentMainThanhToan extends Component {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                // value={trang_thai}
-                                // onChange={handleChange}
+                                    value={dia_chi}
+                                    onChange={(e) => {
+                                        setDia_chi(e.target.value)
+                                    }}
                                 >
                                     <MenuItem value={'Số 43 ngách 15/18 ngõ gốc đề'}>Số 43 ngách 15/18 ngõ gốc đề minh khai-hai bà trưng</MenuItem>
-                                    {/* <MenuItem value={'đang chuẩn bị'}>đang chuẩn bị</MenuItem> */}
-                                    {/* <MenuItem value={'đang giao hàng'}></MenuItem> */}
+
                                     <button>thêm địa chỉ</button>
                                 </Select>
                             </FormControl>
@@ -80,37 +135,12 @@ export default class ComponentMainThanhToan extends Component {
                             variant="standard"
                         />
                     </div>
-                    <Grid sx={{ backgroundColor: "#f1f1f1", height: '70%' }}>
-                        <table className='table' >
-                            <tbody >
-                                <tr display={{ backgroundColor: "gray" }}>
-                                    <th width={70} className="text">STT</th>
-                                    <th width={100} className="text">NAME</th>
-                                    <th width={100} className="text">Giá</th>
-                                    <th width={100} className="text">Số Lượng</th>
-                                    <th width={200} className="text">IMG</th>
-                                </tr>
-                                {listSanPham}
-                            </tbody>
-                        </table>
-                    </Grid>
-                </div>
-                <div className='mainBottom'>
-                    <div className='thong_so'>
-                        <div className='title'>Phương thức thanh toán</div>
-                        <ul className='main-thong-so'>
-                            <li>
-                                <span className="checkbox"><input type={'checkbox'} /></span>
-                                <span className='detail'>Thanh toán khi nhận hàng</span>
-                            </li>
+                    {/* <div className='mainBottom'>
+                        
 
-                            <li>
-                                <span className="checkbox"><input type={'checkbox'} /></span>
-                                <span className='detail'>Thanh toán MOMO</span>
-                            </li>
-                        </ul>
-                    </div>
+                        
 
+                    </div> */}
                     <div className='thong_so'>
                         <div className='title'>ĐƠN HÀNG CỦA BẠN</div>
                         <ul className='main-thong-so'>
@@ -130,14 +160,32 @@ export default class ComponentMainThanhToan extends Component {
                             </li>
                         </ul>
                     </div>
+                    <div className='thong_so'>
+                        <div className='title'>Phương thức thanh toán</div>
+                        <ul className='main-thong-so'>
+                            <li>
+                                <span className="checkbox"><input type={'checkbox'} /></span>
+                                <span className='detail'>Thanh toán khi nhận hàng</span>
+                            </li>
 
+                            <li>
+                                <span className="checkbox"><input type={'checkbox'} /></span>
+                                <span className='detail'>Thanh toán MOMO</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <Grid sx={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
+                        <button className='butonscss' onClick={() => {
+                            window.location.href = '/thantoan'
+                        }}>Đặt hàng</button>
+                    </Grid>
                 </div>
-                <Grid sx={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
-                    <button className='butonscss' onClick={() => {
-                        window.location.href = '/thantoan'
-                    }}>Đặt hàng</button>
-                </Grid>
-            </div>
-        )
-    }
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleOK}>OK</Button>
+                </DialogActions>
+            </Dialog>
+
+        </div>
+    )
 }

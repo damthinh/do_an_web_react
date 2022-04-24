@@ -7,7 +7,7 @@ export default class ComponentGioHang extends Component {
     return (
       <div>
           <ComponentHeaderShop/>
-          <ComponetMainGioHang/>
+          <ComponetMainGioHang {...this.props}/>
           <ComponentFooter/>
       </div>
     )

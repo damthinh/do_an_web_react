@@ -2,6 +2,7 @@ import './ComponentTaiKhoan.css'
 import React, { Component } from 'react'
 import Pop_upAddDiaChi from './Pop_upAddDiaChi'
 import Pop_upUpdateDiachi from './Pop_upUpdateDiachi'
+import Pop_upDoiMatKhau from './Pop_upDoiMatKhau'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -50,6 +51,9 @@ export default class ComponentMainTaiKhoan extends Component {
                         <li>
                             <span className='properties'>SDT:</span>
                             <span className='detail'>{user.Sdt}</span>
+                        </li>
+                        <li>
+                            <Pop_upDoiMatKhau {...this.props}/>
                         </li>
 {/* 
                         <li>

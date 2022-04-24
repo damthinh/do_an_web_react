@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import AuthenReducer from './AuthenReducer';
+import GioHangReducer from './GioHangReducer';
 import HomeReducer from './HomeReducer';
 import QuanLySanPhamReducer from './QuanLySanPhamReducer';
 import TaiKhoanReducer from './TaiKhoanReducer';
@@ -9,5 +10,6 @@ export default combineReducers({
     authen: AuthenReducer,
     home:HomeReducer,
     chiTiet:XemChitietReducer,
-    taiKhoan:TaiKhoanReducer
+    taiKhoan:TaiKhoanReducer,
+    gioHang:GioHangReducer
 });
