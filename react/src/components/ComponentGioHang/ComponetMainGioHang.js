@@ -13,14 +13,9 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { LIMIT } from '../../constants';
 import Pop_upThanhToan from './Pop_upThanhToan'
-let list = [{ 'name' : 'iphone 13', 'gia' :'200000' , 'so_luong':'2' ,'img':['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg']},
-{ 'name' : 'iphone 12', 'gia' :'100000' , 'so_luong':'1' ,'img':['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg']},
-{ 'name' : 'iphone 13', 'gia' :'200000' , 'so_luong':'2' ,'img':['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg']},
-{ 'name' : 'iphone 13', 'gia' :'200000' , 'so_luong':'2' ,'img':['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg']},
-{ 'name' : 'iphone 13', 'gia' :'200000' , 'so_luong':'2' ,'img':['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg']},
-{ 'name' : 'iphone 13', 'gia' :'200000' , 'so_luong':'2' ,'img':['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg']},
-
-]
+import Pop_upUpdateSoLuong from './Pop_upUpdateSoLuong'
+let list = []
+let id_gio_hang = []
 export default class TableComponentQuanlySanPham extends Component {
     state = {
         textSearch: '',
@@ -36,34 +31,35 @@ export default class TableComponentQuanlySanPham extends Component {
         // handleChange = (event, value) => {
         //   this.setState({page:value})
         // };
-        let {activePage,totalPage} = this.props
+        let { activePage, totalPage } = this.props
         let listGioHang = []
         let stt = (1 - 1) * LIMIT
 
-            listGioHang = this.props.listGioHang.map((item, key) => {
-                // let num =item.so_luong
-                return (
-                    <tr key={key}>
-                        <td className="text">{stt + key + 1}</td>
-                        <td className="text"><input type={'checkbox'}/></td>
-                        <td className="text">{item.id_san_pham.name}</td>
-                        <td className="text">{item.id_san_pham.gia}</td>
-                        <td className="text"><input style={{width:'50px'}} placeholder ={item.so_luong} type={'number'}  onChange={(e)=>{item.so_luong = e.target.value }} ></input></td>
-                        <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
-                        <td className="text"><DeleteIcon variant="outlined" onClick={() => {
-                            this.props.deleteGioHangRequest({ id_gio_hang: item._id })
-                        }}>delete</DeleteIcon></td>
-                        {/* <td className="text"><Pop_upUpdateSanPham {...this.props}
-              item={item}
-            /></td> */}
-                    </tr>
-                )
-            })
+        listGioHang = this.props.listGioHang.map((item, key) => {
+            // let num =item.so_luong
+            return (
+                <tr key={key}>
+                    <td className="text">{stt + key + 1}</td>
+                    <td className="text"><input type={'checkbox'} onChange={async(e) => {
+                         (e.target.checked) ?  list.push(item) :  list.splice(list.indexOf(item),1);
+                         (e.target.checked) ?  id_gio_hang.push(item._id) :  id_gio_hang.splice(id_gio_hang.indexOf(item._id),1);
+                    }} /></td>
+                    <td className="text">{item.id_san_pham.name}</td>
+                    <td className="text">{Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))}</td>
+                    <td className="text">{item.so_luong}</td>
+                    <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
+                    <td className="text"><DeleteIcon variant="outlined" onClick={() => {
+                        this.props.deleteGioHangRequest({ id_gio_hang: item._id })
+                    }}>delete</DeleteIcon></td>
+                    <td className="text"><Pop_upUpdateSoLuong {...this.props} item={item} /></td>
+                </tr>
+            )
+        })
         return (
             <Grid sx={{ height: '100%', backgroundColor: "#f1f1f1" }} >
-                <Grid sx={{ backgroundColor: "#f1f1f1", height: '70%',margin:'10px' }}>
+                <Grid sx={{ backgroundColor: "#f1f1f1", height: '70%', margin: '10px' }}>
                     <table className='table' >
-                        <tbody >
+                        <tbody>
                             <tr display={{ backgroundColor: "gray" }}>
                                 <th width={70} className="text">STT</th>
                                 <th width={100} className="text">Chon</th>
@@ -77,15 +73,13 @@ export default class TableComponentQuanlySanPham extends Component {
                         </tbody>
                     </table>
                 </Grid>
-                <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center',margin:'20px' }}>
-                <button className='butonscss' onClick={()=>{
-                    window.location.href ='/thantoan'
-                }}>Thanh toán</button>
-                <Pop_upThanhToan />
+                <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center', margin: '20px' }}>
+
+                    <Pop_upThanhToan {...this.props} list={list} id_gio_hang={id_gio_hang} />
                 </Grid>
-                <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center',margin:'20px' }}>
+                <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center', margin: '20px' }}>
                     <Stack  >
-                        <Pagination count={totalPage}  className='button_page' color="primary" onChange={(e, value) => {
+                        <Pagination count={totalPage} className='button_page' color="primary" onChange={(e, value) => {
                             if (totalPage === 1) {
 
                             } else {

@@ -25,41 +25,61 @@ let item = [{
 let list = [{ 'name': 'iphone3', 'gia': '1000d', 'so_luong': '3', 'img': ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU'] }
     , { 'name': 'iphone13', 'gia': '2000d', 'so_luong': '1', 'img': ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU'] }
 ]
-let listSanPham = []
+// let listSanPham = []
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [dia_chi, setDia_chi] = React.useState('');
-    const [Name, setName] = React.useState('');
-    const [Sdt, setSdt] = React.useState('');
+    const [id_dia_chi, setId_ia_chi] = React.useState('');
+    const [loi_nhan, setLoi_nhan] = React.useState('');
+    const [so_san_pham, setSo_san_pham] = React.useState('');
+    const [phuong_thuc_thanh_toan, setPhuong_thuc_thanh_toan] = React.useState('');
+    
+    const [listSanPham, setListSanPham] = React.useState('');
+    const [tong_tien, setTongTien] = React.useState('');
+    const [listDiaChi, setListDiaChi] = React.useState('');
+
+    let number = 0
     const handleClickOpen = () => {
-
-
-        listSanPham = list.map((item, key) => {
+        console.log("props", props.list.length);
+        setListSanPham(props.list.map((item, key) => {
             return (
                 <tr key={key}>
                     <td className="text">{key + 1}</td>
-                    <td className="text">{item.name}</td>
-                    <td className="text">{item.gia}</td>
+                    <td className="text">{item.id_san_pham.name}</td>
+                    <td className="text">{Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))}</td>
                     <td className="text">{item.so_luong}</td>
-                    <td className="text" ><img alt='' src={item.img[0]} width={'100px'} height={'100px'} /></td>
+                    <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
 
                 </tr>
             )
-        })
+        }))
+        
+        setSo_san_pham(props.list.length)
+        setListDiaChi(
+            props.listDiaChi.map((item, key) => {
+                return (
+                    <MenuItem key={key} value={item._id}>
+                        Tên: {item.Name} SĐT: {item.Sdt} Địa Chỉ: {item.dia_chi}
+                    </MenuItem>
+                )
+            })
+        )
+        for (let i = 0; i < props.list.length; i++) {
+            let index = Math.ceil(props.list[i].id_san_pham.gia - ((props.list[i].id_san_pham.gia * props.list[i].id_san_pham.giam_gia) / 100))
+            number = number + index
+        }
+        setTongTien(number)
         setOpen(true);
     };
     const handleClose = () => {
+        setTongTien(0)
+        // setListSanPham('')
+        // setListDiaChi('')
         setOpen(false);
     };
     const handleOK = () => {
-        // if (dia_chi != '' && Name != '' && Sdt != '') {
-        //     props.addDiaChiRequest({ Name: Name, dia_chi: dia_chi, Sdt: Sdt, id_user: getIdUser() })
-
-            
-        // } else {
-        //     alert("Nhập đủ thông tin")
-        // }
-        setOpen(false);
+        console.log("phuong_thuc_thanh_toan",phuong_thuc_thanh_toan);
+        props.thanhToanGioHangRequest({tong_tien:tong_tien,phuong_thuc_thanh_toan:phuong_thuc_thanh_toan,loi_nhan:loi_nhan,id_gio_hang:props.id_gio_hang,id_dia_chi:id_dia_chi,so_san_pham:so_san_pham})
+        // setOpen(false);
     };
 
     return (
@@ -70,13 +90,9 @@ export default function FormDialog(props) {
             <Dialog open={open} onClose={handleClose} sx={{ width: "100%" }}>
                 <DialogTitle>Thanh toán</DialogTitle>
                 <div open={open} onClose={handleClose} className='mainThanhToan' >
-                    {/* <div className='mainTop'>
-                        
-                        
-                    </div> */}
                     <Grid sx={{ backgroundColor: "#f1f1f1", height: '70%' }}>
-                        <table className='table' >
-                            <tbody >
+                        <table className='table'>
+                            <tbody>
                                 <tr display={{ backgroundColor: "gray" }}>
                                     <th width={70} className="text">STT</th>
                                     <th width={100} className="text">NAME</th>
@@ -89,69 +105,44 @@ export default function FormDialog(props) {
                         </table>
                     </Grid>
                     <div className='maintext'>
-                        <TextField className='TextField'
-                            autoFocus
-                            // value={sdt}
-                            margin="dense"
-                            label="Họ và tên *"
-                            variant="standard"
-                        />
-                        <TextField className='TextField'
-                            autoFocus
-                            // value={sdt}
-                            margin="dense"
-                            label="Số điện thoại"
-                            variant="standard"
-                        />
-                        <TextField className='TextField'
-                            autoFocus
-                            // value={sdt}
-                            margin="dense"
-                            label="Email"
-                            variant="standard"
-                        />
                         <Box className='TextField' sx={{ minWidth: 120, marginTop: '20px' }}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Địa Chỉ</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={dia_chi}
+                                    value={id_dia_chi}
                                     onChange={(e) => {
-                                        setDia_chi(e.target.value)
+                                        setId_ia_chi(e.target.value)
                                     }}
                                 >
-                                    <MenuItem value={'Số 43 ngách 15/18 ngõ gốc đề'}>Số 43 ngách 15/18 ngõ gốc đề minh khai-hai bà trưng</MenuItem>
-
+                                    {listDiaChi}
                                     <button>thêm địa chỉ</button>
                                 </Select>
                             </FormControl>
                         </Box>
                         <TextField className='TextField'
                             autoFocus
-                            // value={sdt}
+                            value={loi_nhan}
                             margin="dense"
                             label="Lời nhắn"
                             variant="standard"
+                            onChange={(e)=>{
+                                setLoi_nhan(e.target.value)
+                            }}
                         />
                     </div>
-                    {/* <div className='mainBottom'>
-                        
-
-                        
-
-                    </div> */}
                     <div className='thong_so'>
                         <div className='title'>ĐƠN HÀNG CỦA BẠN</div>
                         <ul className='main-thong-so'>
                             <li>
                                 <span className='properties'>Số sản phẩm:</span>
-                                <span className='detail'>2</span>
+                                <span className='detail'>{so_san_pham}</span>
                             </li>
 
                             <li>
                                 <span className='properties'>Tổng tiền sản phẩm:</span>
-                                <span className='detail'>3000</span>
+                                <span className='detail'>{tong_tien} đ</span>
                             </li>
 
                             <li>
@@ -164,7 +155,9 @@ export default function FormDialog(props) {
                         <div className='title'>Phương thức thanh toán</div>
                         <ul className='main-thong-so'>
                             <li>
-                                <span className="checkbox"><input type={'checkbox'} /></span>
+                                <span className="checkbox"><input type={'checkbox'} onChange={(e)=>{
+                                    e.target.checked ? setPhuong_thuc_thanh_toan("Thanh toán khi nhận hàng") : setPhuong_thuc_thanh_toan('')
+                                }} /></span>
                                 <span className='detail'>Thanh toán khi nhận hàng</span>
                             </li>
 

@@ -18,6 +18,7 @@ const mapStateToProps = (store) => ({
   listGioHang: store.gioHang.listGioHang,
   activePage:store.gioHang.activePage,
   totalPage:store.gioHang.totalPage,
+  listDiaChi:store.gioHang.listDiaChi,
 })
 
 const mapDispatchToProps = (dispatch)=>{
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch)=>{
     },
     thanhToanGioHangRequest:(data)=>{
       dispatch(actions.thanhToanGioHangRequest(data))
+    },
+    updateGioHangRequest:(data)=>{
+      dispatch(actions.updateGioHangRequest(data))
     },
   }
 }

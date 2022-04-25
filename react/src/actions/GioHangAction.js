@@ -38,6 +38,26 @@ export function deleteGioHangFailure(payload) {
         payload
     }
 }
+// update
+
+export function updateGioHangRequest(payload) {
+    return{
+        type : types.UPDATE_GIOHANG_REQUEST,
+        payload
+    }
+}
+export function updateGioHangSuccess(payload) {
+    return{
+        type : types.UPDATE_GIOHANG_SUCCESS,
+        payload
+    }
+}
+export function updateGioHangFailure(payload) {
+    return{
+        type : types.UPDATE_GIOHANG_FAILURE,
+        payload
+    }
+}
 // thanhToan
 
 export function thanhToanGioHangRequest(payload) {

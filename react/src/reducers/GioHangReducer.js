@@ -1,6 +1,7 @@
 import * as types from '../constants'
 const initialState = {
     listGioHang: [],
+    listDiaChi:[],
     isFetching: false,
     dataFetched: false,
     error: false,
@@ -15,10 +16,12 @@ export default (state = initialState, action) => {
         case types.PAGINATION_GIOHANG_REQUEST:
         case types.DELETE_GIOHANG_REQUEST:
         case types.THANHTOAN_GIOHANG_REQUEST:
+            case types.UPDATE_GIOHANG_REQUEST:
 
             return {
                 ...state,
                 listGioHang: [],
+                listDiaChi:[],
                 isFetching: true,
                 dataFetched: false,
                 error: false,
@@ -31,6 +34,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 listGioHang: action.payload.listGioHang,
+                listDiaChi:action.payload.listDiaChi,
                 isFetching: false,
                 dataFetched: true,
                 error: false,
@@ -40,9 +44,12 @@ export default (state = initialState, action) => {
             }
         case types.DELETE_GIOHANG_SUCCESS:
         case types.THANHTOAN_GIOHANG_SUCCESS:
+            
+            case types.UPDATE_GIOHANG_SUCCESS:
             return {
                 ...state,
                 listGioHang: [],
+                listDiaChi:[],
                 isFetching: false,
                 dataFetched: true,
                 error: false,
@@ -55,10 +62,13 @@ export default (state = initialState, action) => {
         case types.PAGINATION_GIOHANG_FAILURE:
         case types.DELETE_GIOHANG_FAILURE:
         case types.THANHTOAN_GIOHANG_FAILURE:
+            
+            case types.UPDATE_GIOHANG_FAILURE:
 
             return {
                 ...state,
                 listGioHang: [],
+                listDiaChi:[],
                 isFetching: false,
                 dataFetched: false,
                 error: true,
