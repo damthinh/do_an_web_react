@@ -7,6 +7,7 @@ const todoSchema = Mongoose.Schema({
         type:String,
         default:"Chờ xác nhận"
     },
+    ngay_dat:Date,
     tong_tien:Number,
     so_san_pham:Number,
     id_user:{

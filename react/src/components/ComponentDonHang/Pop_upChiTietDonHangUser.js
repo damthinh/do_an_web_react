@@ -21,37 +21,37 @@ import { Grid } from '@mui/material';
 let list = []
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [ma_don_hang, setMa_don_hang] = React.useState('1M123');
-    // const [ma_don_hang, setMa_don_hang] = React.useState('1M123');
+    const [Name, setName] = React.useState('1M123');
+    // const [Name, setName] = React.useState('1M123');
     const [sdt, setSdt] = React.useState('0123456789');
     const [dia_chi, setDia_chi] = React.useState('so 43 ngach 15/18 ngõ Gốc đề minh khai-hai bà trưng-hà nội ');
     const [ghi_chu, setGhi_chu] = React.useState('Hàng dễ vỡ');
     const [ngay_dat, setNgay_dat] = React.useState('12/3/2022');
     const [tong_don_hang, setTong_don_hang] = React.useState('3000');
+    
+    const [phuong_thuc_thanh_toan, setPhuong_thuc_thanh_toan] = React.useState('');
 
     const [trang_thai, setTrang_thai] = React.useState('Chờ xét duyệt');
-    const [list, setList] = React.useState([]);
+    // const [list, setList] = React.useState();
     
 var listSanPham =[]
     const handleClickOpen = () => {
+        list =props.item.id_gio_hang
         
         console.log("propss_popup",props);
         setOpen(true);
-        // setName(props.item.name)
-        // setGia(props.item.gia)
-        // setTrang_thai('Chờ xét duyệt')
-        // setHe_dieu_hanh(props.item.id_cau_hinh.he_dieu_hanh)
-        // setChip(props.item.id_cau_hinh.chip)
-        // setRam(props.item.id_cau_hinh.ram)
-        // setBo_nho_trong(props.item.id_cau_hinh.bo_nho_trong)
-        // setPin(props.item.id_cau_hinh.pin)
-        // setSim(props.item.id_cau_hinh.sim)
-        // setArrImg(props.item.img)
+        setGhi_chu(props.item.ghi_chu)
+        setSdt(props.item.id_dia_chi.Sdt)
+        setName(props.item.id_dia_chi.Name)
+        setDia_chi(props.item.id_dia_chi.dia_chi)
+        setTong_don_hang(props.item.tong_tien)
+        setPhuong_thuc_thanh_toan(props.item.phuong_thuc_thanh_toan)
+        setNgay_dat(props.item.ngay_dat.toUTCString())
         // setId(props.item._id)
-        setList([{'name':'iphone3','gia':'1000d','so_luong':'3','img':['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU']}
-        ,{'name':'iphone13','gia':'2000d','so_luong':'1','img':['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU']}
-    ])
+    // setList(props.item.id_gio_hang)
+    console.log("list",list);
     };
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -65,10 +65,10 @@ var listSanPham =[]
         return (
             <tr key={key}>
                 <td className="text">{key + 1}</td>
-                <td className="text">{item.name}</td>
-                <td className="text">{item.gia}</td>
+                <td className="text">{item.id_san_pham.name}</td>
+                <td className="text">{item.id_san_pham.gia}</td>
                 <td className="text">{item.so_luong}</td>
-                <td className="text" ><img alt='' src={item.img[0]} width={'100px'} height={'100px'} /></td>
+                <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
                 
             </tr>
         )
@@ -89,10 +89,10 @@ var listSanPham =[]
                             <Grid item xs={6}>
                                 <TextField
                                     autoFocus
-                                    value={ma_don_hang}
+                                    value={Name}
                                     margin="dense"
                                     id="name"
-                                    label="Mã đơn hàng"
+                                    label="tên Người Nhận"
                                     fullWidth
                                     variant="standard"
                                     onChange={(e) => {
@@ -118,9 +118,6 @@ var listSanPham =[]
                                     label="Địa Chỉ"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setSo_luong(e.target.value)
-                                    }}
                                 />
                                 <TextField
                                     autoFocus
@@ -130,9 +127,6 @@ var listSanPham =[]
                                     label="Ghi chú"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setSo_luong(e.target.value)
-                                    }}
                                 />
                                 <TextField
                                     autoFocus
@@ -142,27 +136,22 @@ var listSanPham =[]
                                     label="Ngày đặt "
                                     fullWidth
                                     variant="standard"
-                                    // onChange={(e) => {
-                                    //     setNgay_dat(e.target.value)
-                                    // }}
                                 />
                             </Grid>
                             <Grid item xs={1} >
 
                             </Grid>
-                            <Grid item xs={4} sx={{ height: '50vh' }}>
-                                {/* <TextField
+                            <Grid item xs={5} sx={{ height: '50vh' }}>
+                                <TextField
                                     autoFocus
                                     // value={name}
                                     margin="dense"
                                     id="name"
-                                    label="Tên Sản Phẩm"
+                                    value={phuong_thuc_thanh_toan}
+                                    label="Phương Thức Thanh Toán"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setName(e.target.value)
-                                    }}
-                                /> */}
+                                />
                                 <TextField sx={{ height: '10vh' }}
                                     autoFocus
                                     value={tong_don_hang}
@@ -170,9 +159,6 @@ var listSanPham =[]
                                     label="Tổng tiền"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setGia(e.target.value)
-                                    }}
                                 />
                                 <TextField sx={{ height: '10vh' }}
                                     autoFocus
@@ -181,26 +167,8 @@ var listSanPham =[]
                                     label="Trạng thái"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setGia(e.target.value)
-                                    }}
                                 />
 
-                                {/* <Box sx={{ minWidth: 120, height: '50vh' }}>
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select-label">Trạng thái</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={trang_thai}
-                                            // onChange={handleChange}
-                                        >
-                                            {/* <MenuItem value={'Chờ xét duyệt'}>Chờ xét duyệt</MenuItem>
-                                            <MenuItem value={'đang chuẩn bị'}>đang chuẩn bị</MenuItem>
-                                            <MenuItem value={'đang giao hàng'}>đang giao hàng</MenuItem> */}
-                                        {/* </Select>
-                                    </FormControl>
-                                </Box> */} 
                                 
                             </Grid>
                         </Grid>

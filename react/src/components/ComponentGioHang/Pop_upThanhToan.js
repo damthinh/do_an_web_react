@@ -24,13 +24,15 @@ export default function FormDialog(props) {
     const [ghi_chu, setGhi_chu] = React.useState('');
     const [so_san_pham, setSo_san_pham] = React.useState('');
     const [phuong_thuc_thanh_toan, setPhuong_thuc_thanh_toan] = React.useState('');
-    
+
     const [listSanPham, setListSanPham] = React.useState('');
     const [tong_tien, setTongTien] = React.useState('');
     const [listDiaChi, setListDiaChi] = React.useState('');
 
-    let number = 0
+
     const handleClickOpen = () => {
+        let number = 0
+        let soSanPham=0
         setListSanPham(props.list.map((item, key) => {
             return (
                 <tr key={key}>
@@ -43,8 +45,8 @@ export default function FormDialog(props) {
                 </tr>
             )
         }))
+
         
-        setSo_san_pham(props.list.length)
         setListDiaChi(
             props.listDiaChi.map((item, key) => {
                 return (
@@ -54,11 +56,16 @@ export default function FormDialog(props) {
                 )
             })
         )
+        for (let i = 0; i <  props.list.length; i++) {
+            soSanPham = soSanPham+props.list[i].so_luong
+        }
+        console.log("props.list.", props.list);
         for (let i = 0; i < props.list.length; i++) {
-            let index = Math.ceil(props.list[i].id_san_pham.gia - ((props.list[i].id_san_pham.gia * props.list[i].id_san_pham.giam_gia) / 100))
+            let index = Math.ceil((props.list[i].id_san_pham.gia - ((props.list[i].id_san_pham.gia * props.list[i].id_san_pham.giam_gia) / 100)) * props.list[i].so_luong)
             number = number + index
         }
         setTongTien(number)
+        setSo_san_pham(soSanPham)
         setOpen(true);
     };
     const handleClose = () => {
@@ -71,8 +78,8 @@ export default function FormDialog(props) {
         setOpen(false);
     };
     const handleOK = () => {
-        props.thanhToanGioHangRequest({tong_tien:tong_tien,phuong_thuc_thanh_toan:phuong_thuc_thanh_toan,ghi_chu:ghi_chu,id_gio_hang:props.id_gio_hang,id_dia_chi:id_dia_chi,so_san_pham:so_san_pham,id_user:getIdUser()})
-        
+        props.thanhToanGioHangRequest({ tong_tien: tong_tien, phuong_thuc_thanh_toan: phuong_thuc_thanh_toan, ghi_chu: ghi_chu, id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham, id_user: getIdUser() })
+
         setTongTien(0)
         setId_ia_chi('')
         setGhi_chu('')
@@ -81,7 +88,7 @@ export default function FormDialog(props) {
         setListDiaChi('')
         setListSanPham([])
         setOpen(false);
-        
+
     };
 
     return (
@@ -129,7 +136,7 @@ export default function FormDialog(props) {
                             margin="dense"
                             label="Lời nhắn"
                             variant="standard"
-                            onChange={(e)=>{
+                            onChange={(e) => {
                                 setGhi_chu(e.target.value)
                             }}
                         />
@@ -157,7 +164,7 @@ export default function FormDialog(props) {
                         <div className='title'>Phương thức thanh toán</div>
                         <ul className='main-thong-so'>
                             <li>
-                                <span className="checkbox"><input type={'checkbox'} onChange={(e)=>{
+                                <span className="checkbox"><input type={'checkbox'} onChange={(e) => {
                                     e.target.checked ? setPhuong_thuc_thanh_toan("Thanh toán khi nhận hàng") : setPhuong_thuc_thanh_toan('')
                                 }} /></span>
                                 <span className='detail'>Thanh toán khi nhận hàng</span>
