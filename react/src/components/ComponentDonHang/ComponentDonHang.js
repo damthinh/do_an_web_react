@@ -7,7 +7,7 @@ export default class ComponentDonHang extends Component {
     return (
       <div>
           <ComponentHeaderShop/>
-          <ComponetMainDonHang/>
+          <ComponetMainDonHang {...this.props}/>
           <ComponentFooter/>
       </div>
     )

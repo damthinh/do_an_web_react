@@ -18,18 +18,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Grid } from '@mui/material';
-let item = [{
-    'man_hinh': "6.7 inch FHD+ Infinity-O Super AMOLED 120Hz", 'camera': '108.0 MP + 12.0 MP + 5.0 MP + 5.0 MP Chống rung quang học (OIS)', 'ram': '8 GB', 'bo_nho_trong': '	128 GB',
-    'pin': '5000 mAh, Sạc nhanh 25W', 'sim': '2 sim', 'CPU': 'Snapdragon 778G (6nm)', 'he_dieu_hanh': 'Android 12', 'mo_ta': 'iPhone 12 Pro - "Siêu phẩm công nghệ" với nhiều nâng cấp mạnh mẽ về thiết kế, cấu hình và hiệu năng, khẳng định đẳng cấp thời thượng trên thị trường smartphone cao cấp.'
-}]
-let list = [{ 'name': 'iphone3', 'gia': '1000d', 'so_luong': '3', 'img': ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU'] }
-    , { 'name': 'iphone13', 'gia': '2000d', 'so_luong': '1', 'img': ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU'] }
-]
-// let listSanPham = []
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [id_dia_chi, setId_ia_chi] = React.useState('');
-    const [loi_nhan, setLoi_nhan] = React.useState('');
+    const [ghi_chu, setGhi_chu] = React.useState('');
     const [so_san_pham, setSo_san_pham] = React.useState('');
     const [phuong_thuc_thanh_toan, setPhuong_thuc_thanh_toan] = React.useState('');
     
@@ -39,7 +31,6 @@ export default function FormDialog(props) {
 
     let number = 0
     const handleClickOpen = () => {
-        console.log("props", props.list.length);
         setListSanPham(props.list.map((item, key) => {
             return (
                 <tr key={key}>
@@ -72,14 +63,25 @@ export default function FormDialog(props) {
     };
     const handleClose = () => {
         setTongTien(0)
-        // setListSanPham('')
-        // setListDiaChi('')
+        setId_ia_chi('')
+        setGhi_chu('')
+        setSo_san_pham('')
+        setPhuong_thuc_thanh_toan('')
+        setListDiaChi('')
         setOpen(false);
     };
     const handleOK = () => {
-        console.log("phuong_thuc_thanh_toan",phuong_thuc_thanh_toan);
-        props.thanhToanGioHangRequest({tong_tien:tong_tien,phuong_thuc_thanh_toan:phuong_thuc_thanh_toan,loi_nhan:loi_nhan,id_gio_hang:props.id_gio_hang,id_dia_chi:id_dia_chi,so_san_pham:so_san_pham})
-        // setOpen(false);
+        props.thanhToanGioHangRequest({tong_tien:tong_tien,phuong_thuc_thanh_toan:phuong_thuc_thanh_toan,ghi_chu:ghi_chu,id_gio_hang:props.id_gio_hang,id_dia_chi:id_dia_chi,so_san_pham:so_san_pham,id_user:getIdUser()})
+        
+        setTongTien(0)
+        setId_ia_chi('')
+        setGhi_chu('')
+        setSo_san_pham('')
+        setPhuong_thuc_thanh_toan('')
+        setListDiaChi('')
+        setListSanPham([])
+        setOpen(false);
+        
     };
 
     return (
@@ -123,12 +125,12 @@ export default function FormDialog(props) {
                         </Box>
                         <TextField className='TextField'
                             autoFocus
-                            value={loi_nhan}
+                            value={ghi_chu}
                             margin="dense"
                             label="Lời nhắn"
                             variant="standard"
                             onChange={(e)=>{
-                                setLoi_nhan(e.target.value)
+                                setGhi_chu(e.target.value)
                             }}
                         />
                     </div>

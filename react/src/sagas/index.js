@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects';
 import { AuthenSaga } from './AuthenSaga';
+import { DonHangSaga } from './DonHangSaga';
 import { GioHangSaga } from './GioHangSaga';
 import { HomeSaga } from './HomeSaga';
 import { SanPhamSaga } from './QuanLySanPhamSaga';
@@ -13,6 +14,7 @@ export default function* rootSaga() {
     ...HomeSaga,
     ...XemChiTietSaga,
     ...TaiKhoanSaga,
-    ...GioHangSaga
+    ...GioHangSaga,
+    ...DonHangSaga
   ]);
 }

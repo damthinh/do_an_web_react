@@ -49,8 +49,13 @@ function* updateGioHangSaga(action) {
 function* thanhToanGioHangSaga(action) {
     try {
         console.log("textSearch",action.payload);
+        
+        yield put(actions.paginationGioHangRequest({ activePage: 1 }))
+        let res = yield callAPIJson(types.HTTP_CREATE,`thanhtoan`,action.payload)
+        
+        console.log("ressssssssssssssss",res);
         // yield put(actions.thanhToanGioHangSuccess({ textSearch: textSearch }))
-        // yield put(actions.paginationSanPhamRequest({ activePage: 1 }))
+        yield put(actions.paginationGioHangRequest({ activePage: 1 }))
     } catch (error) {
         // yield put(actions.searchSanPhamFailure({ errorMessage: error })
         

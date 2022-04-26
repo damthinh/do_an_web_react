@@ -1,7 +1,8 @@
 const { registerUser, loginUser } = require("../controller/AuthenController")
 const { getIdSanpham, addGiohang } = require("../controller/controlerHomeShop")
 const { addSanpham, paginationSanpham, updateSanpham, deleteSanPham } = require("../controller/controllerSanpham")
-const { paginationGioHang, deleteGioHang, updateGioHang } = require("../controller/GioHangController")
+const { paginationDonHang } = require("../controller/DonHangController")
+const { paginationGioHang, deleteGioHang, updateGioHang, addDonHang } = require("../controller/GioHangController")
 const { getUser, addDiaChi, updateDiaChi, deleteDiaChi, updateThongTin } = require("../controller/TaiKhoanControler")
 
 const Router = (app)=>{
@@ -29,6 +30,9 @@ const Router = (app)=>{
     app.get('/giohang',paginationGioHang)
     app.delete('/giohang',deleteGioHang)
     app.put('/giohang',updateGioHang)
+    app.post('/thanhtoan',addDonHang)
+    // donhang
+    app.get('/donhang',paginationDonHang)
 }
 
 module.exports=Router

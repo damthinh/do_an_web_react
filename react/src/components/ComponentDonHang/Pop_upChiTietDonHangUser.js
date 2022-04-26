@@ -35,6 +35,7 @@ export default function FormDialog(props) {
 var listSanPham =[]
     const handleClickOpen = () => {
         
+        console.log("propss_popup",props);
         setOpen(true);
         // setName(props.item.name)
         // setGia(props.item.gia)

@@ -14,8 +14,7 @@ import Stack from '@mui/material/Stack';
 import { LIMIT } from '../../constants';
 import Pop_upThanhToan from './Pop_upThanhToan'
 import Pop_upUpdateSoLuong from './Pop_upUpdateSoLuong'
-let list = []
-let id_gio_hang = []
+
 export default class TableComponentQuanlySanPham extends Component {
     state = {
         textSearch: '',
@@ -34,15 +33,16 @@ export default class TableComponentQuanlySanPham extends Component {
         let { activePage, totalPage } = this.props
         let listGioHang = []
         let stt = (1 - 1) * LIMIT
-
+        let list = []
+        let id_gio_hang = []
         listGioHang = this.props.listGioHang.map((item, key) => {
             // let num =item.so_luong
             return (
                 <tr key={key}>
                     <td className="text">{stt + key + 1}</td>
-                    <td className="text"><input type={'checkbox'} onChange={async(e) => {
-                         (e.target.checked) ?  list.push(item) :  list.splice(list.indexOf(item),1);
-                         (e.target.checked) ?  id_gio_hang.push(item._id) :  id_gio_hang.splice(id_gio_hang.indexOf(item._id),1);
+                    <td className="text"><input type={'checkbox'} onChange={async (e) => {
+                        (e.target.checked) ? list.push(item) : list.splice(list.indexOf(item), 1);
+                        (e.target.checked) ? id_gio_hang.push(item._id) : id_gio_hang.splice(id_gio_hang.indexOf(item._id), 1);
                     }} /></td>
                     <td className="text">{item.id_san_pham.name}</td>
                     <td className="text">{Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))}</td>

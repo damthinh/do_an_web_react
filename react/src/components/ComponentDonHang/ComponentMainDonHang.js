@@ -25,98 +25,32 @@ export default class TableComponentQuanlyDonHang extends Component {
         textSearch: '',
         trang_thai: '', page: ''
     }
-    handleChange = (e) => {
-        // this.props.searchSanPhamRequest({ textSearch: e })
-        this.setState({ trang_thai: e })
-    };
     render() {
         let tableHeader =[]
-        let listSanPham = []
-        console.log("listSanPham", listSanPham);
+        let listDonHang = []
+        console.log("listDonHang", this.props);
 
-        let header = [{"tong_don":500,'don_chua_xac_nhan':35,'don_da_giao':200,'don_chuan_bi':25}]
         let totalPage = 3
-        // let stt = (this.props.activePage - 1) * LIMIT
 
 
-        listSanPham = list.map((item, key) => {
+        listDonHang = this.props.listDonHang.map((item, key) => {
 
             console.log("item.trang_thai", item.trang_thai);
             return (
                 <tr key={key}>
                     <td className="text">{key + 1}</td>
-                    <td className="text">{item.name}</td>
-                    <td className="text">{item.sdt}</td>
-                    <td className="text">{item.so_luong}</td>
-                    <td className="text">{item.dia_chi}</td>
-                    <td className="text">{item.gia}</td>
+                    <td className="text">{item.id_dia_chi.Name}</td>
+                    <td className="text">{item.id_dia_chi.Sdt}</td>
+                    <td className="text">{item.so_san_pham}</td>
+                    <td className="text">{item.id_dia_chi.dia_chi}</td>
+                    <td className="text">{item.tong_tien}</td>
                     <td className="text">{item.trang_thai}</td>
-                    <td className="text"><Pop_upChiTietDonHangUser /></td>
+                    <td className="text"><Pop_upChiTietDonHangUser {...this.props} item={item}/></td>
                 </tr>
             )
         })
-        // tableHeader = header.map((item, key) => {
-
-        //     console.log("item.trang_thai", item.trang_thai);
-        //     return (
-        //         <tr key={key}>
-        //             <td className="text">{item.tong_don}</td>
-        //             <td className="text">{item.don_chua_xac_nhan}</td>
-        //             <td className="text">{item.don_da_giao}</td>
-        //             <td className="text">{item.don_chuan_bi}</td>
-        //         </tr>
-        //     )
-        // })
         return (
             <Grid sx={{ height: '100%', backgroundColor: "#f1f1f1"  }} >
-                {/* <Grid sx={{ backgroundColor: "#f1f1f1", height: 'auto' }}>
-                    <table className='table' >
-                        <tbody >
-                            <tr>
-                                <th width={200} className="text">Tổng Đơn hàng :</th>
-                                <th width={200} className="text">Đơn hàng chưa xác nhận :</th>
-                                <th width={200} className="text">Đơn hàng đã giao :</th>
-                                <th width={200} className="text">Đơn hàng chuẩn bị :</th>
-                            </tr>
-                            {tableHeader}
-                        </tbody>
-                        
-                    </table>
-                </Grid> */}
-                {/* <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center' }} >
-                    <input style={{ height: '50%' }} value={this.state.textSearch}
-                        onChange={(e) => {
-                            this.setState({ textSearch: e.target.value })
-                        }}
-                    />
-                    <button style={{ width: '100px', height: '50%' }} onClick={() => {
-                        this.props.searchSanPhamRequest({ textSearch: this.state.textSearch })
-                    }}>search</button>
-                    <Button
-                        style={{ display: this.props.textSearch ? 'inline-block' : 'none' }}
-                        onClick={() => {
-                            this.setState({ textSearch: '' })
-                            this.props.searchSanPhamRequest({ textSearch: '' })
-                        }}>back get</Button>
-                </Grid> */}
-                {/* <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'space-evenly' }}>
-                    <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Trạng Thái</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={this.state.trang_thai}
-                                label="Age"
-                                onChange={(e) => { this.handleChange(e.target.value) }}
-                            >
-                                <MenuItem value={'Iphone'}>Iphone</MenuItem>
-                                <MenuItem value={'SamSung'}>SamSung</MenuItem>
-                                <MenuItem value={'XiaoMi'}>XiaoMi</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Box>
-                </Grid> */}
                 <Grid sx={{ backgroundColor: "#f1f1f1", height: '60%',margin:'10px' }}>
                     <table className='table' >
                         <tbody >
@@ -130,7 +64,7 @@ export default class TableComponentQuanlyDonHang extends Component {
                                 <th width={200} className="text">Trạng Thái</th>
                                 <th width={100} className="text">Xem Chi Tiết</th>
                             </tr>
-                            {listSanPham}
+                            {listDonHang}
                         </tbody>
                     </table>
                 </Grid>
@@ -145,9 +79,6 @@ export default class TableComponentQuanlyDonHang extends Component {
                         }} />
                     </Stack>
                 </Grid>
-                {/* <Grid>
-                    <Pop_upChiTietDonHangUser/>
-                </Grid> */}
             </Grid >
         )
     }
