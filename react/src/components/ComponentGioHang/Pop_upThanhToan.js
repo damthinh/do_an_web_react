@@ -31,42 +31,49 @@ export default function FormDialog(props) {
 
 
     const handleClickOpen = () => {
-        let number = 0
-        let soSanPham=0
-        setListSanPham(props.list.map((item, key) => {
-            return (
-                <tr key={key}>
-                    <td className="text">{key + 1}</td>
-                    <td className="text">{item.id_san_pham.name}</td>
-                    <td className="text">{Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))}</td>
-                    <td className="text">{item.so_luong}</td>
-                    <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
-
-                </tr>
-            )
-        }))
-
-        
-        setListDiaChi(
-            props.listDiaChi.map((item, key) => {
+        if (props.list.length > 0) {
+            let number = 0
+            let soSanPham = 0
+            setListSanPham(props.list.map((item, key) => {
                 return (
-                    <MenuItem key={key} value={item._id}>
-                        Tên: {item.Name} SĐT: {item.Sdt} Địa Chỉ: {item.dia_chi}
-                    </MenuItem>
+                    <tr key={key}>
+                        <td className="text">{key + 1}</td>
+                        <td className="text">{item.id_san_pham.name}</td>
+                        <td className="text">{Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))}</td>
+                        <td className="text">{item.so_luong}</td>
+                        <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
+
+                    </tr>
                 )
-            })
-        )
-        for (let i = 0; i <  props.list.length; i++) {
-            soSanPham = soSanPham+props.list[i].so_luong
+            }))
+
+
+            setListDiaChi(
+                props.listDiaChi.map((item, key) => {
+                    return (
+                        <MenuItem key={key} value={item._id}>
+                            Tên: {item.Name} SĐT: {item.Sdt} Địa Chỉ: {item.dia_chi}
+                        </MenuItem>
+                    )
+                })
+            )
+            for (let i = 0; i < props.list.length; i++) {
+                soSanPham = soSanPham + props.list[i].so_luong
+            }
+            console.log("props.list.", props.list);
+            for (let i = 0; i < props.list.length; i++) {
+                let index = Math.ceil((props.list[i].id_san_pham.gia - ((props.list[i].id_san_pham.gia * props.list[i].id_san_pham.giam_gia) / 100)) * props.list[i].so_luong)
+                number = number + index
+            }
+            setTongTien(number)
+            setSo_san_pham(soSanPham)
+
+            setPhuong_thuc_thanh_toan("Thanh toán khi nhận hàng")
+            setOpen(true);
+        } else {
+            alert("chọn sản phẩm để thanh toán")
         }
-        console.log("props.list.", props.list);
-        for (let i = 0; i < props.list.length; i++) {
-            let index = Math.ceil((props.list[i].id_san_pham.gia - ((props.list[i].id_san_pham.gia * props.list[i].id_san_pham.giam_gia) / 100)) * props.list[i].so_luong)
-            number = number + index
-        }
-        setTongTien(number)
-        setSo_san_pham(soSanPham)
-        setOpen(true);
+
     };
     const handleClose = () => {
         setTongTien(0)
@@ -78,16 +85,21 @@ export default function FormDialog(props) {
         setOpen(false);
     };
     const handleOK = () => {
-        props.thanhToanGioHangRequest({ tong_tien: tong_tien, phuong_thuc_thanh_toan: phuong_thuc_thanh_toan, ghi_chu: ghi_chu, id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham, id_user: getIdUser() })
+        if (id_dia_chi) {
+            props.thanhToanGioHangRequest({ tong_tien: tong_tien, phuong_thuc_thanh_toan: phuong_thuc_thanh_toan, ghi_chu: ghi_chu, id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham, id_user: getIdUser() })
 
-        setTongTien(0)
-        setId_ia_chi('')
-        setGhi_chu('')
-        setSo_san_pham('')
-        setPhuong_thuc_thanh_toan('')
-        setListDiaChi('')
-        setListSanPham([])
-        setOpen(false);
+            setTongTien(0)
+            setId_ia_chi('')
+            setGhi_chu('')
+            setSo_san_pham('')
+            setPhuong_thuc_thanh_toan('')
+            setListDiaChi('')
+            setListSanPham([])
+            setOpen(false);
+        } else {
+            alert("bạn chưa chọn đia chỉ")
+        }
+
 
     };
 
@@ -164,9 +176,7 @@ export default function FormDialog(props) {
                         <div className='title'>Phương thức thanh toán</div>
                         <ul className='main-thong-so'>
                             <li>
-                                <span className="checkbox"><input type={'checkbox'} onChange={(e) => {
-                                    e.target.checked ? setPhuong_thuc_thanh_toan("Thanh toán khi nhận hàng") : setPhuong_thuc_thanh_toan('')
-                                }} /></span>
+                                <span className="checkbox"><input type={'checkbox'}  defaultChecked /></span>
                                 <span className='detail'>Thanh toán khi nhận hàng</span>
                             </li>
 
@@ -176,11 +186,6 @@ export default function FormDialog(props) {
                             </li>
                         </ul>
                     </div>
-                    <Grid sx={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
-                        <button className='butonscss' onClick={() => {
-                            window.location.href = '/thantoan'
-                        }}>Đặt hàng</button>
-                    </Grid>
                 </div>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>

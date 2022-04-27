@@ -6,23 +6,6 @@ import Pagination from '@mui/material/Pagination';
 import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import { SignalCellularNullRounded } from '@mui/icons-material';
-let list = [{ '_id': '1', 'name': 'iphone 3', 'so_luong': 0, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': 32 },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': 50 },
-{ '_id': '1', 'name': 'iphone 3', 'so_luong': 1, 'img': ['https://imgs.viettelstore.vn/Images/Product/ProductImage/dien-thoai/Apple/iPhone%2013%20Pro%20Max/iPhone-13-Pro-Max-2.jpg'], 'gia': '1000', 'giam_gia': null },
-
-]
 export default class ComponentMainShop extends Component {
     state = {
         textSearch: ''

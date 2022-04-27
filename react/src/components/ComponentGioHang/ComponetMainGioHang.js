@@ -1,17 +1,10 @@
 import '../componentsAdmin/component.css'
-// import * as React from 'react';
-
-// import './CssQuanLySanPhamComponent.css'
 import React, { Component } from 'react'
-import Button from '@mui/material/Button';
-// import Pop_upAddSanPham from './Pop_upAddSanPham'
-// import Pop_upUpdateSanPham from './Pop_upUpdateSanPham'
 import DeleteIcon from '@mui/icons-material/Delete';
-// import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { LIMIT } from '../../constants';
+import {  LIMITGIOHANG } from '../../constants';
 import Pop_upThanhToan from './Pop_upThanhToan'
 import Pop_upUpdateSoLuong from './Pop_upUpdateSoLuong'
 
@@ -32,7 +25,7 @@ export default class TableComponentQuanlySanPham extends Component {
         // };
         let { activePage, totalPage } = this.props
         let listGioHang = []
-        let stt = (1 - 1) * LIMIT
+        let stt = (1 - 1) * LIMITGIOHANG
         let list = []
         let id_gio_hang = []
         listGioHang = this.props.listGioHang.map((item, key) => {
@@ -55,40 +48,49 @@ export default class TableComponentQuanlySanPham extends Component {
                 </tr>
             )
         })
-        return (
-            <Grid sx={{ height: '100%', backgroundColor: "#f1f1f1" }} >
-                <Grid sx={{ backgroundColor: "#f1f1f1", height: '70%', margin: '10px' }}>
-                    <table className='table' >
-                        <tbody>
-                            <tr display={{ backgroundColor: "gray" }}>
-                                <th width={70} className="text">STT</th>
-                                <th width={100} className="text">Chon</th>
-                                <th width={100} className="text">NAME</th>
-                                <th width={100} className="text">Giá</th>
-                                <th width={100} className="text">Số Lượng</th>
-                                <th width={200} className="text">IMG</th>
-                                <th width={100} className="text">DELETE</th>
-                            </tr>
-                            {listGioHang}
-                        </tbody>
-                    </table>
-                </Grid>
-                <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center', margin: '20px' }}>
-
-                    <Pop_upThanhToan {...this.props} list={list} id_gio_hang={id_gio_hang} />
-                </Grid>
-                <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center', margin: '20px' }}>
-                    <Stack  >
-                        <Pagination count={totalPage} className='button_page' color="primary" onChange={(e, value) => {
-                            if (totalPage === 1) {
-
-                            } else {
-                                this.props.paginationGioHangRequest({ activePage: value })
-                            }
-                        }} />
-                    </Stack>
-                </Grid>
-            </Grid >
-        )
+        if(listGioHang.length>0){
+            return (
+                <Grid sx={{ height: '100%', backgroundColor: "#f1f1f1" }} >
+                    <Grid sx={{ backgroundColor: "#f1f1f1", height: '70%', margin: '10px' }}>
+                        <table className='table' >
+                            <tbody>
+                                <tr display={{ backgroundColor: "gray" }}>
+                                    <th width={70} className="text">STT</th>
+                                    <th width={100} className="text">Chon</th>
+                                    <th width={100} className="text">NAME</th>
+                                    <th width={100} className="text">Giá</th>
+                                    <th width={100} className="text">Số Lượng</th>
+                                    <th width={200} className="text">IMG</th>
+                                    <th width={100} className="text">DELETE</th>
+                                </tr>
+                                {listGioHang}
+                            </tbody>
+                        </table>
+                    </Grid>
+                    <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center', margin: '20px' }}>
+    
+                        <Pop_upThanhToan {...this.props} list={list} id_gio_hang={id_gio_hang} />
+                    </Grid>
+                    <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center', margin: '20px' }}>
+                        <Stack  >
+                            <Pagination count={totalPage} className='button_page' color="primary" onChange={(e, value) => {
+                                if (totalPage === 1) {
+    
+                                } else {
+                                    this.props.paginationGioHangRequest({ activePage: value })
+                                }
+                            }} />
+                        </Stack>
+                    </Grid>
+                </Grid >
+            )
+        }else{
+            return(
+                <div>
+                    <h1 className="text">không có sản phẩm nào trong giỏ hàng</h1>
+                </div>
+            )
+        }
+        
     }
 }

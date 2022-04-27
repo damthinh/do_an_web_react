@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Pop_upAddSanPham from './Pop_upAddSanPham'
 import Pop_upUpdateSanPham from './Pop_upUpdateSanPham'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { LIMIT } from '../../../constants';
+import { LIMITSANPHAMADMIN } from '../../../constants';
 // import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
@@ -34,7 +34,7 @@ export default class TableComponentQuanlySanPham extends Component {
     // };
     let listSanPham = []
     let { totalPage } = this.props
-    let stt = (this.props.activePage - 1) * LIMIT
+    let stt = (this.props.activePage - 1) * LIMITSANPHAMADMIN
 
     if (this.props.listSanPham) {
       listSanPham = this.props.listSanPham.map((item, key) => {

@@ -1,36 +1,20 @@
 import '../componentsAdmin/component.css'
 import React, { Component } from 'react'
-import Button from '@mui/material/Button';
-// import Pop_upAddSanPham from './Pop_upAddSanPham'
-// import Pop_upUpdateSanPham from './Pop_upUpdateSanPham'
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import { LIMIT } from '../../../constants';
-// import SearchIcon from '@mui/icons-material/Search';
 import Pop_upChiTietDonHangUser from './Pop_upChiTietDonHangUser';
 import Pagination from '@mui/material/Pagination';
 
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-var list = [{ 'stt': 1, 'name': "HRM1",'sdt': '0869989162', 'gia': '100k', 'so_luong': 2, 'dia_chi': "số 42 ngách 15/18 ngõ gốc đề", 'trang_thai': "chờ xác nhận", "xem chiite": "aa" },
-{ 'stt': 1, 'name': "HRM1",'sdt': '0869989162', 'gia': '100k', 'so_luong': 2, 'dia_chi': "số 42 ngách 15/18 ngõ gốc đề", 'trang_thai': "chuẩn bị", "xem chiite": "aa" }
-]
 export default class TableComponentQuanlyDonHang extends Component {
     state = {
         textSearch: '',
         trang_thai: '', page: ''
     }
     render() {
-        let tableHeader =[]
         let listDonHang = []
         console.log("listDonHang", this.props);
 
-        let totalPage = 3
+        let totalPage = this.props.totalPage
 
 
         listDonHang = this.props.listDonHang.map((item, key) => {
@@ -74,7 +58,7 @@ export default class TableComponentQuanlyDonHang extends Component {
                             if (totalPage === 1) {
 
                             } else {
-                                // this.props.paginationSanPhamRequest({ activePage: value })
+                                this.props.paginationDonHangRequest({ activePage: value })
                             }
                         }} />
                     </Stack>

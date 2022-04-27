@@ -68,7 +68,7 @@ export default function FormDialog(props) {
         form.append('bo_nho_trong', bo_nho_trong)
         form.append('pin', pin)
         form.append('sim', sim)
-        form.append('sim', mo_ta)
+        form.append('mo_ta', mo_ta)
         props.updateSanPhamRequest({ form: form, name: name, id })
         setOpen(false);
     };

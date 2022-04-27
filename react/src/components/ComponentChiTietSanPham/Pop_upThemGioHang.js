@@ -19,16 +19,24 @@ export default function FormDialog(props) {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleOnChange = (e) => {
+        if (e <= props.so_luong) {
+            setSo_luong(e)
+        } else {
+            alert("bạn nhập quá số lượng ")
+        }
+    };
     const handleOK = () => {
-        
-        props.addGioHangRequest({id_user:getIdUser(),id_san_pham:localStorage.getItem('idSanPham'),so_luong:so_luong})
+
+        props.addGioHangRequest({ id_user: getIdUser(), id_san_pham: localStorage.getItem('idSanPham'), so_luong: so_luong })
         setSo_luong('')
         setOpen(false);
     };
     return (
         <div>
             <button className='button' variant="outlined" onClick={handleClickOpen}>
-            Thêm giỏ hàng
+                Thêm giỏ hàng
             </button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Số lượng Sản Phẩm</DialogTitle>
@@ -45,7 +53,7 @@ export default function FormDialog(props) {
                         fullWidth
                         variant="standard"
                         onChange={(e) => {
-                            setSo_luong(e.target.value)
+                            handleOnChange(e.target.value)
                         }}
                     />
                 </DialogContent>

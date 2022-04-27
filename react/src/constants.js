@@ -8,12 +8,12 @@ export function getIdUser(){
 }
 
 
-export const LIMIT = 3;
+export const LIMITSANPHAMADMIN = 3;
 export const LIMITSANPHAM = 20;
 
 export const LIMITGIOHANG = 4;
 
-export const LIMITDONHANG = 4;
+export const LIMITDONHANG = 1;
 
 // HTTP method 
 export const HTTP_READ = "GET"

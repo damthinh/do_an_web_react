@@ -1,6 +1,5 @@
 // import './component.css'
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,21 +7,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-// import { FormControl, FormLabel, RadioGroup as MuiRadioGroup, FormControlLabel, Radio } from '@material-ui/core';
-
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-// import MuiRadioGroup from '@material-ui/core'
 import { Grid } from '@mui/material';
 let list = []
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [Name, setName] = React.useState('1M123');
-    // const [Name, setName] = React.useState('1M123');
     const [sdt, setSdt] = React.useState('0123456789');
     const [dia_chi, setDia_chi] = React.useState('so 43 ngach 15/18 ngõ Gốc đề minh khai-hai bà trưng-hà nội ');
     const [ghi_chu, setGhi_chu] = React.useState('Hàng dễ vỡ');
@@ -32,7 +22,6 @@ export default function FormDialog(props) {
     const [phuong_thuc_thanh_toan, setPhuong_thuc_thanh_toan] = React.useState('');
 
     const [trang_thai, setTrang_thai] = React.useState('Chờ xét duyệt');
-    // const [list, setList] = React.useState();
     
 var listSanPham =[]
     const handleClickOpen = () => {
@@ -45,10 +34,9 @@ var listSanPham =[]
         setName(props.item.id_dia_chi.Name)
         setDia_chi(props.item.id_dia_chi.dia_chi)
         setTong_don_hang(props.item.tong_tien)
+        setTrang_thai(props.item.trang_thai)
         setPhuong_thuc_thanh_toan(props.item.phuong_thuc_thanh_toan)
-        setNgay_dat(props.item.ngay_dat.toUTCString())
-        // setId(props.item._id)
-    // setList(props.item.id_gio_hang)
+        setNgay_dat(new Date(props.item.ngay_dat).toLocaleDateString())
     console.log("list",list);
     };
 
@@ -56,10 +44,8 @@ var listSanPham =[]
         setOpen(false);
     };
     const handleOK = () => {
+        props.huyDonHangRequest({id:props.item._id})
         setOpen(false);
-    };
-    const handleChange = (event) => {
-        setTrang_thai(event.target.value);
     };
     listSanPham = list.map((item, key) => {
         return (
@@ -92,7 +78,7 @@ var listSanPham =[]
                                     value={Name}
                                     margin="dense"
                                     id="name"
-                                    label="tên Người Nhận"
+                                    label="Tên Người Nhận"
                                     fullWidth
                                     variant="standard"
                                     onChange={(e) => {
@@ -192,9 +178,8 @@ var listSanPham =[]
                 <DialogActions>
                     <button className='button' onClick={handleClose}>Cancel</button>
                     {
-                        trang_thai==='Chờ xét duyệt' ?<button className='button' onClick={handleClose}>Hủy Đơn Hàng</button>:null
+                        trang_thai==='Chờ xác nhận' ?<button className='button' onClick={handleOK}>Hủy Đơn Hàng</button>:null
                     }
-                    <button className='button' onClick={handleOK}>OK</button>
                 </DialogActions>
             </Dialog>
         </div>

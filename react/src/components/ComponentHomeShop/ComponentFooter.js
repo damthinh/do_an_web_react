@@ -1,6 +1,5 @@
 import './ComponentFooter.css'
 import React, { Component } from 'react'
-import logo from '../../img/logoSaleNoti.png'
 export default class ComponentFooter extends Component {
     render() {
         return (

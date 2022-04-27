@@ -9,7 +9,7 @@ exports.addSanpham = async (req, res) => {
             ram,
             bo_nho_trong,
             pin,
-            sim,man_hinh,camera,mo_ta,giam_gia } = req.body
+            sim, man_hinh, camera, mo_ta, giam_gia } = req.body
         let file = req.files
         console.log("req.body", req.body);
         console.log("req.files", req.files);
@@ -23,10 +23,10 @@ exports.addSanpham = async (req, res) => {
             for (let i = 0; i < file.length; i++) {
                 fs.unlink(`img/${file[i].filename}`)
             }
-            return res.send({errorMessage:"da co sp"})
+            return res.send({ errorMessage: "da co sp" })
         } else {
-            addCauhinh = await modelCauhinh.create({ he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim ,man_hinh,camera,mo_ta})
-            let addSanpham = await modelSanpham.create({ name, gia,giam_gia, so_luong, img: arrImg, id_cau_hinh: addCauhinh._id })
+            addCauhinh = await modelCauhinh.create({ he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta })
+            let addSanpham = await modelSanpham.create({ name, gia, giam_gia, so_luong, img: arrImg, id_cau_hinh: addCauhinh._id })
             const textSearch = req.query.q
             const limit = parseInt(req.query.limit)
             const getData = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } })
@@ -61,15 +61,19 @@ exports.paginationSanpham = async (req, res) => {
 
 exports.updateSanpham = async (req, res) => {
     try {
+        console.log("vo day");
         let { name, gia, so_luong, he_dieu_hanh,
             chip,
             ram,
             bo_nho_trong,
             pin,
-            sim ,man_hinh,camera,mo_ta,giam_gia} = req.body
+            sim, man_hinh, camera, mo_ta, giam_gia } = req.body
         let id_san_pham = req.params.id
         let file = req.files
         let arrImgNew = []
+
+        let limit = parseInt(req.query.limit)
+        let textSearch = req.query.q
         for (let i = 0; i < file.length; i++) {
             const url = `http://localhost:3001/${file[i].filename}`;
             arrImgNew.push(url)
@@ -80,15 +84,29 @@ exports.updateSanpham = async (req, res) => {
             for (let i = 0; i < arrImg.length; i++) {
                 fs.unlink(`img/${arrImg[i].slice(22)}`)
             }
-            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, img: arrImgNew ,giam_gia}, { new: true })
-            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim,man_hinh,camera,mo_ta })
-            res.send({ updateSanpham })
-        } else {
-            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong,giam_gia }, { new: true })
-            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim,man_hinh,camera,mo_ta })
+            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, img: arrImgNew, giam_gia }, { new: true })
+            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta })
 
+            let getlistSanpham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }, { _id: 1 })
+            for (let i = 0; i < getlistSanpham.length; i++) {
+                if (getlistSanpham[i]._id.equals(id_san_pham)) {
+                    activePage= Math.ceil(((i+1))/limit)
+                }
+            }
             let listSanPham = [updateSanpham]
-            res.send({ listSanPham })
+            return res.send({ activePage,listSanPham })
+        } else {
+            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, giam_gia }, { new: true })
+            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta })
+
+            let getlistSanpham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }, { _id: 1 })
+            for (let i = 0; i < getlistSanpham.length; i++) {
+                if (getlistSanpham[i]._id.equals(id_san_pham)) {
+                    activePage= Math.ceil(((i+1))/limit)
+                }
+            }
+            let listSanPham = [updateSanpham]
+            return res.send({listSanPham,activePage})
         }
     } catch (error) {
 

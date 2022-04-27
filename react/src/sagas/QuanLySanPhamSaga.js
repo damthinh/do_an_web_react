@@ -6,7 +6,7 @@ function* paginationSanPhamSaga(action) {
     try {
         let activePage = action.payload.activePage
         let textSearch = yield select((store) => store.sanPham.textSearch)
-        let res = yield callAPIForm(types.HTTP_READ, `paginationSanpham?page=${activePage}&q=${textSearch}&limit=${types.LIMIT}`)
+        let res = yield callAPIForm(types.HTTP_READ, `paginationSanpham?page=${activePage}&q=${textSearch}&limit=${types.LIMITSANPHAMADMIN}`)
         let listSanPham = res.listSanPham
         let totalPage = res.totalPage
         if (totalPage === 0) totalPage = 1
@@ -20,7 +20,7 @@ function* addSanPhamSaga(action) {
         let form = action.payload.form
         let name = action.payload.name
         let textSearch = yield select((store)=>store.sanPham.textSearch)
-        let res = yield callAPIForm(types.HTTP_CREATE,`addsanpham?limit=${types.LIMIT}&q=${textSearch}`,form)
+        let res = yield callAPIForm(types.HTTP_CREATE,`addsanpham?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`,form)
         let totalPage = res.totalPage
         let listSanPham = res.listSanPham
         if (name.toLowerCase().includes(textSearch.toLowerCase()))
@@ -36,17 +36,20 @@ function* addSanPhamSaga(action) {
 }
 function* updateSanPhamSaga(action) {
     try {
+        console.log('sagaaaaaaâ',action);
         let activePage =yield select((store)=>store.sanPham.activePage)
+        
+        let textSearch = yield select((store)=>(store.sanPham.textSearch))
         let form = action.payload.form
         let name = action.payload.name
         let id = action.payload.id
-        let res = yield callAPIForm (types.HTTP_UPDATE,`updatesanpham/${id}`,form)
+        let res = yield callAPIForm (types.HTTP_UPDATE,`updatesanpham/${id}?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`,form)
+        console.log("res",res);
         let listSanPham= res.listSanPham
-        let textSearch = yield select((store)=>(store.sanPham.textSearch))
         if (name.toLowerCase().includes(textSearch.toLowerCase())) 
         {
             yield put (actions.updateSanPhamSuccess({}))
-            yield put (actions.paginationSanPhamRequest({activePage:activePage}))
+            yield put (actions.paginationSanPhamRequest({activePage:res.activePage}))
         } else {
             yield put (actions.updateSanPhamSuccess({activePage:1,totalPage:1,listSanPham:listSanPham}))
         }
@@ -59,7 +62,7 @@ function* deleteSanPhamSaga(action) {
         let textSearch = yield select((store) => store.sanPham.textSearch)
         let activePage = yield select((store) => store.sanPham.activePage)
         let id = action.payload.id
-        let res = yield callAPIForm(types.HTTP_DELETE, `deletesanpham/${id}?page=${activePage}&q=${textSearch}&limit=${types.LIMIT}`)
+        let res = yield callAPIForm(types.HTTP_DELETE, `deletesanpham/${id}?page=${activePage}&q=${textSearch}&limit=${types.LIMITSANPHAMADMIN}`)
         console.log("res", res);
         yield put(actions.deleteSanPhamSuccess({}))
         if (res.listSanPham.length === 0) {
