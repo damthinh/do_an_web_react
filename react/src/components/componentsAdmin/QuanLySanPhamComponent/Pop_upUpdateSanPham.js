@@ -24,6 +24,7 @@ export default function FormDialog(props) {
     const [mo_ta, setMo_ta] = React.useState('');
     const [file, setFile] = React.useState([]);
     const [arrImg, setArrImg] = React.useState([]);
+    const [Img, setImg] = React.useState([]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -36,7 +37,8 @@ export default function FormDialog(props) {
         setBo_nho_trong(props.item.id_cau_hinh.bo_nho_trong)
         setPin(props.item.id_cau_hinh.pin)
         setSim(props.item.id_cau_hinh.sim)
-        setArrImg(props.item.img)
+        
+        setImg(props.item.img)
         setId(props.item._id)
     };
     const handleClose = () => {
@@ -90,7 +92,7 @@ export default function FormDialog(props) {
             </DriveFolderUploadRoundedIcon>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Update Sản Phẩm</DialogTitle>
-                <DialogContent>
+                <DialogContent >
                     <DialogContentText>
                         nhap gia tri
                     </DialogContentText>
@@ -205,6 +207,21 @@ export default function FormDialog(props) {
                             setMo_ta(e.target.value)
                         }}
                     />
+                    {
+                        Img ? Img.map((img, i) => {
+                            return (
+                                <span key={i} className='divImg'>
+                                    <img src={img} width={"200px"} alt='' height={"200px"} />
+                                    <button className='btnImg'
+                                        onClick={() => {
+                                            handleDeleteOneImg(i)
+                                        }}
+                                    >x</button>
+                                </span>
+                            )
+                        }) : null
+
+                    }
 
                     <input type='file' className='inputExcel' multiple style={{color:'transparent'}} onChange={(e) => {
                         handleChangeFile(e.target.files)

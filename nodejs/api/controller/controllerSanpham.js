@@ -11,19 +11,18 @@ exports.addSanpham = async (req, res) => {
             pin,
             sim, man_hinh, camera, mo_ta, giam_gia } = req.body
         let file = req.files
-        console.log("req.body", req.body);
-        console.log("req.files", req.files);
         let arrImg = []
         for (let i = 0; i < file.length; i++) {
             const url = `http://localhost:3001/${file[i].filename}`;
             arrImg.push(url)
         }
-        let check = await modelSanpham.findOne({ name })
+        let check = await modelSanpham.findOne({ name})
+        console.log("check", check);
         if (check) {
             for (let i = 0; i < file.length; i++) {
                 fs.unlink(`img/${file[i].filename}`)
             }
-            return res.send({ errorMessage: "da co sp" })
+            return res.send({ errorMessage: "Tên Sản Phẩm Đã Tồn Tại" })
         } else {
             addCauhinh = await modelCauhinh.create({ he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta })
             let addSanpham = await modelSanpham.create({ name, gia, giam_gia, so_luong, img: arrImg, id_cau_hinh: addCauhinh._id })
@@ -61,7 +60,6 @@ exports.paginationSanpham = async (req, res) => {
 
 exports.updateSanpham = async (req, res) => {
     try {
-        console.log("vo day");
         let { name, gia, so_luong, he_dieu_hanh,
             chip,
             ram,
@@ -71,7 +69,7 @@ exports.updateSanpham = async (req, res) => {
         let id_san_pham = req.params.id
         let file = req.files
         let arrImgNew = []
-
+        let activePage = 1
         let limit = parseInt(req.query.limit)
         let textSearch = req.query.q
         for (let i = 0; i < file.length; i++) {
@@ -84,29 +82,33 @@ exports.updateSanpham = async (req, res) => {
             for (let i = 0; i < arrImg.length; i++) {
                 fs.unlink(`img/${arrImg[i].slice(22)}`)
             }
-            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, img: arrImgNew, giam_gia }, { new: true })
+            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, img: arrImgNew, giam_gia }, { new: true }).populate({
+                path: 'id_cau_hinh'
+            })
             await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta })
 
             let getlistSanpham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }, { _id: 1 })
             for (let i = 0; i < getlistSanpham.length; i++) {
                 if (getlistSanpham[i]._id.equals(id_san_pham)) {
-                    activePage= Math.ceil(((i+1))/limit)
+                    activePage = Math.ceil(((i + 1)) / limit)
                 }
             }
             let listSanPham = [updateSanpham]
-            return res.send({ activePage,listSanPham })
+            return res.send({ activePage, listSanPham })
         } else {
-            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, giam_gia }, { new: true })
+            let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, giam_gia }, { new: true }).populate({
+                path: 'id_cau_hinh'
+            })
             await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta })
 
             let getlistSanpham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }, { _id: 1 })
             for (let i = 0; i < getlistSanpham.length; i++) {
                 if (getlistSanpham[i]._id.equals(id_san_pham)) {
-                    activePage= Math.ceil(((i+1))/limit)
+                    activePage = Math.ceil(((i + 1)) / limit)
                 }
             }
             let listSanPham = [updateSanpham]
-            return res.send({listSanPham,activePage})
+            return res.send({ listSanPham, activePage })
         }
     } catch (error) {
 

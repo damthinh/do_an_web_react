@@ -44,6 +44,22 @@ export default function FormDialog(props) {
     const handleOK = () => {
 
         // console.log("Vo day",Password.charAt(1));
+        // if (Password.length===CheckPassword.length) {
+        //     let check =[]
+        //     for (let i = 0; i < Password.length; i++) {
+        //         if (Password.charAt(i) === CheckPassword.charAt(i)) {
+        //             check.push(Password.charAt(i))
+        //         } else {
+        //             setAlertPass("Mật khẩu không khớp");
+        //         }
+        //     }
+        //     if (Password.length===check.length) {
+        //         props.DangKyUserRequest({userName:Email,password:Password})
+        //     }
+        // } else {
+        //     alert('Mật khẩu không khớp')
+        // }
+        
         if (Password.length===CheckPassword.length) {
             let check =[]
             for (let i = 0; i < Password.length; i++) {

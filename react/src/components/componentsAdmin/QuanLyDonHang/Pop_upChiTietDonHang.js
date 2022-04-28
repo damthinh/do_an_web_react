@@ -13,69 +13,74 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-// import { FormControl, FormLabel, RadioGroup as MuiRadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-// import MuiRadioGroup from '@material-ui/core'
 import { Grid } from '@mui/material';
 let list = []
+var updateSanPham = []
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [ma_don_hang, setMa_don_hang] = React.useState('1M123');
-    // const [ma_don_hang, setMa_don_hang] = React.useState('1M123');
-    const [sdt, setSdt] = React.useState('0123456789');
-    const [dia_chi, setDia_chi] = React.useState('so 43 ngach 15/18 ngõ Gốc đề minh khai-hai bà trưng-hà nội ');
-    const [ghi_chu, setGhi_chu] = React.useState('Hàng dễ vỡ');
-    const [ngay_dat, setNgay_dat] = React.useState('12/3/2022');
-    const [tong_don_hang, setTong_don_hang] = React.useState('3000');
+    const [Name, setName] = React.useState('');
+    const [sdt, setSdt] = React.useState('');
+    const [dia_chi, setDia_chi] = React.useState('');
+    const [ghi_chu, setGhi_chu] = React.useState('');
+    const [ngay_dat, setNgay_dat] = React.useState('');
+    const [tong_don_hang, setTong_don_hang] = React.useState('');
 
+    const [phuong_thuc_thanh_toan, setPhuong_thuc_thanh_toan] = React.useState('');
     const [trang_thai, setTrang_thai] = React.useState('');
-    const [list, setList] = React.useState([]);
-    
-var listSanPham =[]
+    var listSanPham = []
     const handleClickOpen = () => {
-        
+
+        list = props.item.id_gio_hang
+        updateSanPham = []
+
+        console.log("propss_popup", props.item);
         setOpen(true);
-        // setName(props.item.name)
-        // setGia(props.item.gia)
-        setTrang_thai('Chờ xét duyệt')
-        // setHe_dieu_hanh(props.item.id_cau_hinh.he_dieu_hanh)
-        // setChip(props.item.id_cau_hinh.chip)
-        // setRam(props.item.id_cau_hinh.ram)
-        // setBo_nho_trong(props.item.id_cau_hinh.bo_nho_trong)
-        // setPin(props.item.id_cau_hinh.pin)
-        // setSim(props.item.id_cau_hinh.sim)
-        // setArrImg(props.item.img)
-        // setId(props.item._id)
-        setList([{'name':'iphone3','gia':'1000d','so_luong':'3','img':['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU']}
-        ,{'name':'iphone13','gia':'2000d','so_luong':'1','img':['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU']}
-    ])
+        setGhi_chu(props.item.ghi_chu)
+        setSdt(props.item.id_dia_chi.Sdt)
+        setName(props.item.id_dia_chi.Name)
+        setDia_chi(props.item.id_dia_chi.dia_chi)
+        setTong_don_hang(props.item.tong_tien)
+        setTrang_thai(props.item.trang_thai)
+        setPhuong_thuc_thanh_toan(props.item.phuong_thuc_thanh_toan)
+        setNgay_dat(new Date(props.item.ngay_dat).toLocaleDateString())
+
+        for (let i = 0; i < list.length; i++) {
+
+            updateSanPham.push({ id_san_pham: list[i].id_san_pham._id, so_luong: list[i].so_luong })
+        }
+
     };
     const handleClose = () => {
         setOpen(false);
     };
     const handleOK = () => {
+        // props.updateDonHangAdminRequest({trang_thai:trang_thai,id:props.item._id})
+
+        console.log("propss_popup", updateSanPham);
         setOpen(false);
     };
     const handleChange = (event) => {
         setTrang_thai(event.target.value);
     };
     listSanPham = list.map((item, key) => {
+
         return (
             <tr key={key}>
                 <td className="text">{key + 1}</td>
-                <td className="text">{item.name}</td>
-                <td className="text">{item.gia}</td>
+                <td className="text">{item.id_san_pham.name}</td>
+                <td className="text">{item.id_san_pham.gia}</td>
                 <td className="text">{item.so_luong}</td>
-                <td className="text" ><img alt='' src={item.img[0]} width={'100px'} height={'100px'} /></td>
-                
+                <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
+
             </tr>
         )
     })
     return (
         <div >
             <RemoveRedEyeIcon variant="outlined" onClick={handleClickOpen}>
-            
+
             </RemoveRedEyeIcon>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Chi tiết đơn hàng</DialogTitle>
@@ -88,15 +93,12 @@ var listSanPham =[]
                             <Grid item xs={6}>
                                 <TextField
                                     autoFocus
-                                    value={ma_don_hang}
+                                    value={Name}
                                     margin="dense"
                                     id="name"
                                     label="Mã đơn hàng"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setName(e.target.value)
-                                    }}
                                 />
                                 <TextField
                                     autoFocus
@@ -105,9 +107,6 @@ var listSanPham =[]
                                     label="Số điện thoại"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setGia(e.target.value)
-                                    }}
                                 />
                                 <TextField
                                     autoFocus
@@ -117,9 +116,6 @@ var listSanPham =[]
                                     label="Địa Chỉ"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setSo_luong(e.target.value)
-                                    }}
                                 />
                                 <TextField
                                     autoFocus
@@ -129,9 +125,6 @@ var listSanPham =[]
                                     label="Ghi chú"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setSo_luong(e.target.value)
-                                    }}
                                 />
                                 <TextField
                                     autoFocus
@@ -141,27 +134,21 @@ var listSanPham =[]
                                     label="Ngày đặt "
                                     fullWidth
                                     variant="standard"
-                                    // onChange={(e) => {
-                                    //     setNgay_dat(e.target.value)
-                                    // }}
                                 />
                             </Grid>
                             <Grid item xs={1} >
 
                             </Grid>
                             <Grid item xs={4} sx={{ height: '50vh' }}>
-                                {/* <TextField
+                                <TextField
                                     autoFocus
-                                    // value={name}
                                     margin="dense"
                                     id="name"
-                                    label="Tên Sản Phẩm"
+                                    value={phuong_thuc_thanh_toan}
+                                    label="Phương Thức Thanh Toán"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setName(e.target.value)
-                                    }}
-                                /> */}
+                                />
                                 <TextField sx={{ height: '10vh' }}
                                     autoFocus
                                     value={tong_don_hang}
@@ -169,9 +156,6 @@ var listSanPham =[]
                                     label="Tổng tiền"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(e) => {
-                                        // setGia(e.target.value)
-                                    }}
                                 />
 
                                 <Box sx={{ minWidth: 120, height: '50vh' }}>
@@ -183,9 +167,10 @@ var listSanPham =[]
                                             value={trang_thai}
                                             onChange={handleChange}
                                         >
-                                            <MenuItem value={'Chờ xét duyệt'}>Chờ xét duyệt</MenuItem>
-                                            <MenuItem value={'đang chuẩn bị'}>đang chuẩn bị</MenuItem>
-                                            <MenuItem value={'đang giao hàng'}>đang giao hàng</MenuItem>
+                                            <MenuItem value={'Đã hủy'}>Đã hủy</MenuItem>
+                                            <MenuItem value={'Chờ xác nhận'}>Chờ xác nhận</MenuItem>
+                                            <MenuItem value={'Đang chuẩn bị'}>Đang chuẩn bị</MenuItem>
+                                            <MenuItem value={'Đang giao hàng'}>Đang giao hàng</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -209,8 +194,14 @@ var listSanPham =[]
                     </Grid>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleOK}>OK</Button>
+                    <button className='button' onClick={handleClose}>Cancel</button>
+                    {
+                        trang_thai === 'Đã hủy' ? <button className='button' onClick={handleOK}>xóa đơn hàng</button> : null
+                    }
+                    {
+                        trang_thai === 'Đã hủy' ? null : <button className='button' onClick={handleOK}>OK</button>
+                    }
+
                 </DialogActions>
             </Dialog>
         </div>

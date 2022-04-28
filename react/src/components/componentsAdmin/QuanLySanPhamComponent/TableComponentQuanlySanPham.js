@@ -8,30 +8,14 @@ import Pop_upAddSanPham from './Pop_upAddSanPham'
 import Pop_upUpdateSanPham from './Pop_upUpdateSanPham'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { LIMITSANPHAMADMIN } from '../../../constants';
-// import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 export default class TableComponentQuanlySanPham extends Component {
   state = {
     textSearch: '',
-    nhan_hang: 'aaaaaâ', page: ''
   }
-  handleChange = (e) => {
-    this.props.searchSanPhamRequest({ textSearch: e })
-    this.setState({nhan_hang:e})
-  };
   render() {
-    
-    // const [page, setPage] = React.useState(1);
-    // handleChange = (event, value) => {
-    //   this.setState({page:value})
-    // };
     let listSanPham = []
     let { totalPage } = this.props
     let stt = (this.props.activePage - 1) * LIMITSANPHAMADMIN
@@ -79,24 +63,6 @@ export default class TableComponentQuanlySanPham extends Component {
               this.setState({ textSearch: '' })
               this.props.searchSanPhamRequest({ textSearch: '' })
             }}>back get</Button>
-        </Grid>
-        <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'space-evenly' }}>
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel value={this.state.nhan_hang} id="demo-simple-select-label">Nhãn Hàng</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={this.state.nhan_hang}
-                label="Age"
-                onChange={(e)=>{this.handleChange(e.target.value)}}
-              >
-                <MenuItem value={'Iphone'}>Iphone</MenuItem>
-                <MenuItem value={'SamSung'}>SamSung</MenuItem>
-                <MenuItem value={'XiaoMi'}>XiaoMi</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
         </Grid>
         <Grid sx={{ backgroundColor: "#f1f1f1", height: '70%' }}>
           <table className='table' >

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import AuthenReducer from './AuthenReducer';
+import DonHangAdminReducer from './DonHangAdminReducer';
 import DonHangReducer from './DonHangReducer';
 import GioHangReducer from './GioHangReducer';
 import HomeReducer from './HomeReducer';
@@ -13,5 +14,6 @@ export default combineReducers({
     chiTiet:XemChitietReducer,
     taiKhoan:TaiKhoanReducer,
     gioHang:GioHangReducer,
-    donHang:DonHangReducer
+    donHang:DonHangReducer,
+    donHangAdmin:DonHangAdminReducer
 });

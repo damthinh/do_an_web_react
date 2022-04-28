@@ -19,7 +19,6 @@ function* paginationDonHangSaga(action) {
 function* huyDonHangSaga(action) {
     try {
         
-        console.log("sagaaaaaaaaa",action);
         let id_user=types.getIdUser()
         let id_don_hang = action.payload.id
         let res = yield callAPIJson(types.HTTP_DELETE, `donhang/${id_don_hang}?&id_user=${id_user}&limit=${types.LIMITDONHANG}`)
@@ -38,21 +37,6 @@ function* huyDonHangSaga(action) {
         yield put(actions.huyDonHangFailure({ errorMessage: error }))
     }
 }
-
-// function* xemchitietDonHangSaga(action) {
-//     try {
-//         console.log("textSearch",action.payload);
-        
-//         let res = yield callAPIJson(types.HTTP_CREATE,`thanhtoan`,action.payload)
-        
-//         console.log("ressssssssssssssss",res);
-//         // yield put(actions.thanhToanGioHangSuccess({ textSearch: textSearch }))
-//         yield put(actions.paginationDonHangRequest({ activePage: 1 }))
-//     } catch (error) {
-//         // yield put(actions.searchSanPhamFailure({ errorMessage: error })
-        
-//     }
-// }
 export const DonHangSaga = [
     takeEvery(types.PAGINATION_DONHANGUSER_REQUEST, paginationDonHangSaga),
     takeEvery(types.HUY_DONHANGUSER_REQUEST, huyDonHangSaga),

@@ -14,22 +14,36 @@ export default function FormDialog(props) {
     const [so_luong, setSo_luong] = React.useState('');
 
     const handleClickOpen = () => {
+        console.log(props);
         setSo_luong(props.item.so_luong)
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleOnChange = (e) => {
+        if (e <= props.so_luong) {
+            setSo_luong(e)
+        } else {
+            alert("bạn nhập quá số lượng ")
+        }
+    };
     const handleOK = () => {
-        
-        props.updateGioHangRequest({id_gio_hang:props.item._id,so_luong:so_luong})
-        setSo_luong('')
-        setOpen(false);
+
+        if (so_luong <= props.item.id_san_pham.so_luong) {
+            props.updateGioHangRequest({ id_gio_hang: props.item._id, so_luong: so_luong })
+            setSo_luong('')
+            setOpen(false);
+        } else {
+            alert("bạn nhập quá số lượng ")
+        }
+
     };
     return (
         <div>
             <button className='button' variant="outlined" onClick={handleClickOpen}>
-            Update
+                Update
             </button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Số lượng Sản Phẩm</DialogTitle>

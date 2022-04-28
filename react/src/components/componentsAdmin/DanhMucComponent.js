@@ -77,7 +77,7 @@ export default function CustomizedList() {
             </ListItemButton>
             <Divider />
             <ListItem component="div" disablePadding>
-              <ListItemButton sx={{ height: 56 }} component="a" href="/homeadmin">
+              <ListItemButton sx={{ height: 56 }} component="a" href="/home">
                 <ListItemIcon href="/">
                   <Home color="primary" href="/" />
                 </ListItemIcon>

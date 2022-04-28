@@ -19,42 +19,48 @@ function* addSanPhamSaga(action) {
     try {
         let form = action.payload.form
         let name = action.payload.name
-        let textSearch = yield select((store)=>store.sanPham.textSearch)
-        let res = yield callAPIForm(types.HTTP_CREATE,`addsanpham?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`,form)
+        let textSearch = yield select((store) => store.sanPham.textSearch)
+        let res = yield callAPIForm(types.HTTP_CREATE, `addsanpham?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`, form)
         let totalPage = res.totalPage
         let listSanPham = res.listSanPham
-        if (name.toLowerCase().includes(textSearch.toLowerCase()))
-        {
-            yield put(actions.addSanPhamSuccess({}))
-            yield put (actions.paginationSanPhamRequest({activePage:totalPage}))
+
+        let activePage = yield select((store) => store.sanPham.activePage)
+        if (res.errorMessage) {
+            alert(res.errorMessage)
+            yield put(actions.addSanPhamFailure({ errorMessage: res.errorMessage }))
+            yield put(actions.paginationSanPhamRequest({ activePage: activePage }))
+
         } else {
-            yield put(actions.addSanPhamSuccess({totalPage:1,activePage:1,listSanPham:listSanPham}))
+            if (name.toLowerCase().includes(textSearch.toLowerCase())) {
+                yield put(actions.addSanPhamSuccess({}))
+                yield put(actions.paginationSanPhamRequest({ activePage: totalPage }))
+            } else {
+                yield put(actions.addSanPhamSuccess({ totalPage: 1, activePage: 1, listSanPham: listSanPham }))
+            }
         }
     } catch (error) {
-        yield put (actions.addSanPhamFailure({errorMessage: error}))
+        yield put(actions.addSanPhamFailure({ errorMessage: error }))
     }
 }
 function* updateSanPhamSaga(action) {
     try {
-        console.log('sagaaaaaaâ',action);
-        let activePage =yield select((store)=>store.sanPham.activePage)
-        
-        let textSearch = yield select((store)=>(store.sanPham.textSearch))
+        console.log('sagaaaaaaâ', action);
+
+        let textSearch = yield select((store) => (store.sanPham.textSearch))
         let form = action.payload.form
         let name = action.payload.name
         let id = action.payload.id
-        let res = yield callAPIForm (types.HTTP_UPDATE,`updatesanpham/${id}?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`,form)
-        console.log("res",res);
-        let listSanPham= res.listSanPham
-        if (name.toLowerCase().includes(textSearch.toLowerCase())) 
-        {
-            yield put (actions.updateSanPhamSuccess({}))
-            yield put (actions.paginationSanPhamRequest({activePage:res.activePage}))
+        let res = yield callAPIForm(types.HTTP_UPDATE, `updatesanpham/${id}?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`, form)
+        console.log("res", res);
+        let listSanPham = res.listSanPham
+        if (name.toLowerCase().includes(textSearch.toLowerCase())) {
+            yield put(actions.updateSanPhamSuccess({}))
+            yield put(actions.paginationSanPhamRequest({ activePage: res.activePage }))
         } else {
-            yield put (actions.updateSanPhamSuccess({activePage:1,totalPage:1,listSanPham:listSanPham}))
+            yield put(actions.updateSanPhamSuccess({ activePage: 1, totalPage: 1, listSanPham: listSanPham }))
         }
     } catch (error) {
-        yield put (actions.updateSanPhamFailure({errorMessage: error}))
+        yield put(actions.updateSanPhamFailure({ errorMessage: error }))
     }
 }
 function* deleteSanPhamSaga(action) {
@@ -81,7 +87,7 @@ function* deleteSanPhamSaga(action) {
 function* searchSanPhamSaga(action) {
     try {
         let textSearch = action.payload.textSearch
-        console.log("textSearch",textSearch);
+        console.log("textSearch", textSearch);
         yield put(actions.searchSanPhamSuccess({ textSearch: textSearch }))
         yield put(actions.paginationSanPhamRequest({ activePage: 1 }))
     } catch (error) {
@@ -91,8 +97,8 @@ function* searchSanPhamSaga(action) {
 }
 export const SanPhamSaga = [
     takeEvery(types.PAGINATION_SANPHAM_REQUEST, paginationSanPhamSaga),
-    takeEvery(types.ADD_SANPHAM_REQUEST,addSanPhamSaga),
-    takeEvery(types.UPDATE_SANPHAM_REQUEST,updateSanPhamSaga),
+    takeEvery(types.ADD_SANPHAM_REQUEST, addSanPhamSaga),
+    takeEvery(types.UPDATE_SANPHAM_REQUEST, updateSanPhamSaga),
     takeEvery(types.DELETE_SANPHAM_REQUEST, deleteSanPhamSaga),
     takeEvery(types.SEARCH_SANPHAM_REQUEST, searchSanPhamSaga),
 ]

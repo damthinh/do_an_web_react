@@ -197,7 +197,7 @@ export default function FormDialog(props) {
                         fullWidth
                         variant="standard"
                         onChange={(e) => {
-                            // setSim(e.target.value)
+                            setCamera(e.target.value)
                         }}
                     />
                     <TextField
@@ -207,7 +207,7 @@ export default function FormDialog(props) {
                         fullWidth
                         variant="standard"
                         onChange={(e) => {
-                            // setSim(e.target.value)
+                            setMan_hinh(e.target.value)
                         }}
                     />
                     <TextField

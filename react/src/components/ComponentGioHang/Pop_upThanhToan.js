@@ -6,11 +6,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Link } from 'react-router-dom';
-import { getIdUser } from '../../constants';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -28,12 +24,15 @@ export default function FormDialog(props) {
     const [listSanPham, setListSanPham] = React.useState('');
     const [tong_tien, setTongTien] = React.useState('');
     const [listDiaChi, setListDiaChi] = React.useState('');
-
-
+    let updateSanPham = []
     const handleClickOpen = () => {
+        updateSanPham = []
+
+        console.log("props.list.", props.list);
         if (props.list.length > 0) {
             let number = 0
             let soSanPham = 0
+
             setListSanPham(props.list.map((item, key) => {
                 return (
                     <tr key={key}>
@@ -60,11 +59,14 @@ export default function FormDialog(props) {
             for (let i = 0; i < props.list.length; i++) {
                 soSanPham = soSanPham + props.list[i].so_luong
             }
-            console.log("props.list.", props.list);
             for (let i = 0; i < props.list.length; i++) {
                 let index = Math.ceil((props.list[i].id_san_pham.gia - ((props.list[i].id_san_pham.gia * props.list[i].id_san_pham.giam_gia) / 100)) * props.list[i].so_luong)
                 number = number + index
             }
+            // for (let i = 0; i < props.list.length; i++) {
+            //     updateSanPham.push({ id_san_pham: props.list[i].id_san_pham._id, so_luong: props.list[i].so_luong })
+
+            // }
             setTongTien(number)
             setSo_san_pham(soSanPham)
 
@@ -85,9 +87,18 @@ export default function FormDialog(props) {
         setOpen(false);
     };
     const handleOK = () => {
-        if (id_dia_chi) {
-            props.thanhToanGioHangRequest({ tong_tien: tong_tien, phuong_thuc_thanh_toan: phuong_thuc_thanh_toan, ghi_chu: ghi_chu, id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham, id_user: getIdUser() })
+        for (let i = 0; i < props.list.length; i++) {
+            updateSanPham.push({ id_san_pham: props.list[i].id_san_pham._id, so_luong: props.list[i].so_luong })
 
+        }
+        if (id_dia_chi) {
+            
+            // for (let i = 0; i < props.list.length; i++) {
+            //     updateSanPham.push({ id_san_pham: props.list[i].id_san_pham._id, so_luong: props.list[i].so_luong })
+
+            // }
+            // props.thanhToanGioHangRequest({ tong_tien: tong_tien, phuong_thuc_thanh_toan: phuong_thuc_thanh_toan, ghi_chu: ghi_chu, id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham, id_user: getIdUser() })
+            console.log("updateSanPham", updateSanPham);
             setTongTien(0)
             setId_ia_chi('')
             setGhi_chu('')
@@ -176,7 +187,7 @@ export default function FormDialog(props) {
                         <div className='title'>Phương thức thanh toán</div>
                         <ul className='main-thong-so'>
                             <li>
-                                <span className="checkbox"><input type={'checkbox'}  defaultChecked /></span>
+                                <span className="checkbox"><input type={'checkbox'} defaultChecked /></span>
                                 <span className='detail'>Thanh toán khi nhận hàng</span>
                             </li>
 
