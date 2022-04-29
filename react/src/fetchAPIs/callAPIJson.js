@@ -3,7 +3,9 @@ export default function callAPIJson(method, path, data) {
     let objFetch = {}
     if(method === constants.HTTP_READ || method === constants.HTTP_DELETE){
         objFetch = {
-            method
+            method,
+            headers: constants.HTTP_HEADER_JSON,
+            body: JSON.stringify(data)
           }
     }else{
         objFetch = {

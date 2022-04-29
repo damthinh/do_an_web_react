@@ -1,4 +1,5 @@
 const modelDonHang = require("../model/modelDonHang")
+const modelSanpham = require("../model/sanpham")
 
 exports.paginationDonHang = async (req, res) => {
     try {
@@ -19,11 +20,11 @@ exports.paginationDonHang = async (req, res) => {
 
 exports.huyDonHang = async (req, res) => {
     try {
+        
         let id_don_hang = req.params.id
         let id_user = req.query.id_user
         let limit = parseInt(req.query.limit)
-        
-        
+        let updateSanPham= req.body.updateSanPham
         let activePage
         let getAllDonHang = await modelDonHang.find({ id_user: id_user },{_id :1})
         for (let i = 0; i < getAllDonHang.length; i++) {
@@ -32,7 +33,10 @@ exports.huyDonHang = async (req, res) => {
             }
         }
         let skip = (activePage - 1) * limit
-        
+        for (let i = 0; i < updateSanPham.length; i++) {
+            let getSanPham = await modelSanpham.findById(updateSanPham[i].id_san_pham)
+            await modelSanpham.findByIdAndUpdate(updateSanPham[i].id_san_pham,{so_luong:getSanPham.so_luong + updateSanPham[i].so_luong},{new:true})
+        }
         let updateDonHang = await modelDonHang.findByIdAndUpdate(id_don_hang,{id_user:null,trang_thai:"Đã hủy"},{new:true})
         let listDonHang = await modelDonHang.find({ id_user: id_user }).skip(skip).limit(limit)
         res.send({ listDonHang,activePage ,updateDonHang})

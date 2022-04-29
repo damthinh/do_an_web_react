@@ -18,10 +18,10 @@ function* paginationDonHangSaga(action) {
 }
 function* huyDonHangSaga(action) {
     try {
-        
+        console.log("action",action);
         let id_user=types.getIdUser()
         let id_don_hang = action.payload.id
-        let res = yield callAPIJson(types.HTTP_DELETE, `donhang/${id_don_hang}?&id_user=${id_user}&limit=${types.LIMITDONHANG}`)
+        let res = yield callAPIJson(types.HTTP_DELETE, `donhang/${id_don_hang}?&id_user=${id_user}&limit=${types.LIMITDONHANG}`,action.payload)
         console.log("res",res);
         yield put(actions.huyDonHangSuccess({}))
         if (res.listDonHang.length === 0) {

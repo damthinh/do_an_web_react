@@ -31,9 +31,8 @@ export default function FormDialog(props) {
     const [trang_thai, setTrang_thai] = React.useState('');
     var listSanPham = []
     const handleClickOpen = () => {
-
+        list = []
         list = props.item.id_gio_hang
-        updateSanPham = []
 
         console.log("propss_popup", props.item);
         setOpen(true);
@@ -45,20 +44,22 @@ export default function FormDialog(props) {
         setTrang_thai(props.item.trang_thai)
         setPhuong_thuc_thanh_toan(props.item.phuong_thuc_thanh_toan)
         setNgay_dat(new Date(props.item.ngay_dat).toLocaleDateString())
+        updateSanPham = []
+        for (let i = 0; i < props.item.id_gio_hang.length; i++) {
+            updateSanPham.push({ id_san_pham: props.item.id_gio_hang[i].id_san_pham._id, so_luong: props.item.id_gio_hang[i].so_luong })
 
-        for (let i = 0; i < list.length; i++) {
-
-            updateSanPham.push({ id_san_pham: list[i].id_san_pham._id, so_luong: list[i].so_luong })
         }
+    };
 
+    const handleHuy = () => {
+        setOpen(false);
     };
     const handleClose = () => {
         setOpen(false);
     };
     const handleOK = () => {
-        // props.updateDonHangAdminRequest({trang_thai:trang_thai,id:props.item._id})
+        props.updateDonHangAdminRequest({ trang_thai: trang_thai, id: props.item._id, updateSanPham: updateSanPham })
 
-        console.log("propss_popup", updateSanPham);
         setOpen(false);
     };
     const handleChange = (event) => {
@@ -171,6 +172,8 @@ export default function FormDialog(props) {
                                             <MenuItem value={'Chờ xác nhận'}>Chờ xác nhận</MenuItem>
                                             <MenuItem value={'Đang chuẩn bị'}>Đang chuẩn bị</MenuItem>
                                             <MenuItem value={'Đang giao hàng'}>Đang giao hàng</MenuItem>
+
+
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -196,10 +199,9 @@ export default function FormDialog(props) {
                 <DialogActions>
                     <button className='button' onClick={handleClose}>Cancel</button>
                     {
-                        trang_thai === 'Đã hủy' ? <button className='button' onClick={handleOK}>xóa đơn hàng</button> : null
-                    }
-                    {
-                        trang_thai === 'Đã hủy' ? null : <button className='button' onClick={handleOK}>OK</button>
+                        props.item.trang_thai === 'Đã hủy' ?
+                            <button className='button' onClick={handleHuy}>xóa đơn hàng</button> :
+                            <button className='button' onClick={handleOK}>update</button>
                     }
 
                 </DialogActions>
