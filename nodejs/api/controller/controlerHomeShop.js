@@ -29,7 +29,6 @@ exports.addGiohang = async (req, res) => {
             if (id_gio_hang != []) {
                 let getGiohang = await modelGioHang.findById(id_gio_hang)
                 checksanpham = await modelGioHang.findByIdAndUpdate(id_gio_hang, { so_luong: parseInt(getGiohang.so_luong)+parseInt(so_luong) },{new:true})
-                console.log("checksanpham",checksanpham);
             }else{
                 addGiohang = await modelGioHang.create({so_luong,id_san_pham,id_user})
             }

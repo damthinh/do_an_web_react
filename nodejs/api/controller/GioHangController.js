@@ -45,7 +45,6 @@ exports.deleteGioHang = async(req,res)=>{
 
 exports.updateGioHang = async(req,res)=>{
     try {
-        console.log("voday");
         let id_user = req.query.id_user
         let {id_gio_hang,so_luong} = req.body
         let limit = parseInt(req.query.limit)

@@ -17,7 +17,6 @@ exports.addSanpham = async (req, res) => {
             arrImg.push(url)
         }
         let check = await modelSanpham.findOne({ name})
-        console.log("check", check);
         if (check) {
             for (let i = 0; i < file.length; i++) {
                 fs.unlink(`img/${file[i].filename}`)
@@ -119,7 +118,6 @@ exports.updateSanpham = async (req, res) => {
 exports.deleteSanPham = async (req, res) => {
     try {
         let id_san_pham = req.params.id
-        console.log("id_san_pham", id_san_pham);
         let deleteSanPham = await modelSanpham.findByIdAndDelete(id_san_pham)
         let arrImg = deleteSanPham.img
         for (let i = 0; i < arrImg.length; i++) {
