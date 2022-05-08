@@ -12,14 +12,10 @@ import Pagination from '@mui/material/Pagination';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-var list = [{ 'stt': 1, 'name': "HRM1",'sdt': '0869989162', 'gia': '100k', 'so_luong': 2, 'dia_chi': "số 42 ngách 15/18 ngõ gốc đề", 'trang_thai': "chờ xác nhận", "xem chiite": "aa" },
-{ 'stt': 1, 'name': "HRM1",'sdt': '0869989162', 'gia': '100k', 'so_luong': 2, 'dia_chi': "số 42 ngách 15/18 ngõ gốc đề", 'trang_thai': "chuẩn bị", "xem chiite": "aa" }
-]
 export default class TableComponentQuanlyDonHang extends Component {
     state = {
         textSearch: '',
@@ -41,6 +37,7 @@ export default class TableComponentQuanlyDonHang extends Component {
             return (
                 <tr key={key}>
                 <td className="text">{key + 1}</td>
+                <td className="text">{key}abc</td>
                 <td className="text">{item.id_dia_chi.Name}</td>
                 <td className="text">{item.id_dia_chi.Sdt}</td>
                 <td className="text">{item.so_san_pham}</td>
@@ -122,8 +119,9 @@ export default class TableComponentQuanlyDonHang extends Component {
                             <tr display={{ backgroundColor: "gray" }}>
                                 <th width={70} className="text">STT</th>
                                 <th width={100} className="text">NAME</th>
+                                <th width={100} className="text">Tên Người Nhận</th>
                                 <th width={100} className="text">Số điện thoại</th>
-                                <th width={100} className="text">Số Lượng</th>
+                                <th width={100} className="text">Tổng Số Lượng</th>
                                 <th width={200} className="text">Địa chỉ</th>
                                 <th width={100} className="text">Tổng tiền</th>
                                 <th width={200} className="text">Trạng Thái</th>
