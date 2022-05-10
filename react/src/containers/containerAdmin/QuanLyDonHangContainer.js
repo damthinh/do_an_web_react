@@ -19,6 +19,7 @@ const mapStateToProps = (store) => ({
   activePage:store.donHangAdmin.activePage,
   totalPage:store.donHangAdmin.totalPage,
   textSearch:store.donHangAdmin.textSearch,
+  trang_thai:store.donHangAdmin.trang_thai,
   so_luong_don_hang:store.donHangAdmin.so_luong_don_hang
 })
 

@@ -13,16 +13,16 @@ let updateSanPham=[]
 let list = []
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [Name, setName] = React.useState('1M123');
-    const [sdt, setSdt] = React.useState('0123456789');
-    const [dia_chi, setDia_chi] = React.useState('so 43 ngach 15/18 ngõ Gốc đề minh khai-hai bà trưng-hà nội ');
-    const [ghi_chu, setGhi_chu] = React.useState('Hàng dễ vỡ');
-    const [ngay_dat, setNgay_dat] = React.useState('12/3/2022');
-    const [tong_don_hang, setTong_don_hang] = React.useState('3000');
+    const [Name, setName] = React.useState('');
+    const [sdt, setSdt] = React.useState('');
+    const [dia_chi, setDia_chi] = React.useState('');
+    const [ghi_chu, setGhi_chu] = React.useState('');
+    const [ngay_dat, setNgay_dat] = React.useState('');
+    const [tong_don_hang, setTong_don_hang] = React.useState('');
     
     const [phuong_thuc_thanh_toan, setPhuong_thuc_thanh_toan] = React.useState('');
 
-    const [trang_thai, setTrang_thai] = React.useState('Chờ xét duyệt');
+    const [trang_thai, setTrang_thai] = React.useState();
     
 var listSanPham =[]
     const handleClickOpen = () => {

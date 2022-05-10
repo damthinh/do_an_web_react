@@ -65,11 +65,12 @@ exports.updateGioHang = async(req,res)=>{
 exports.addDonHang = async(req,res)=>{
     try {
         let {id_gio_hang,id_dia_chi,id_user,ghi_chu,phuong_thuc_thanh_toan,so_san_pham,tong_tien,updateSanPham} = req.body
+        let name= (Math.random() + 1).toString(36).substring(7)
         for (let i = 0; i < updateSanPham.length; i++) {
             let getSanPham = await modelSanpham.findById(updateSanPham[i].id_san_pham)
             await modelSanpham.findByIdAndUpdate(updateSanPham[i].id_san_pham,{so_luong:getSanPham.so_luong - updateSanPham[i].so_luong},{new:true})
         }
-        let addDonHang = await modelDonHang.create({id_gio_hang,id_dia_chi,id_user,ghi_chu,phuong_thuc_thanh_toan,so_san_pham,tong_tien,ngay_dat:Date.now()})
+        let addDonHang = await modelDonHang.create({id_gio_hang,id_dia_chi,id_user,ghi_chu,name,phuong_thuc_thanh_toan,so_san_pham,tong_tien,ngay_dat:Date.now()})
         for (let i = 0; i < id_gio_hang.length; i++) {
            await modelGioHang.findByIdAndUpdate(id_gio_hang[i],{id_user:null},{new:true})
         }

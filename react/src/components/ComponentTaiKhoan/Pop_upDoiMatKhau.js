@@ -12,9 +12,9 @@ import { getIdUser } from '../../constants';
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [dia_chi, setDia_chi] = React.useState('');
-    const [Name, setName] = React.useState('');
-    const [Sdt, setSdt] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [NewPassword, setNewPassword] = React.useState('');
+    const [RetypeNewPassrord, setRetypeNewPassrord] = React.useState('');
     const handleClickOpen = () => {
         
         setOpen(true);
@@ -23,10 +23,24 @@ export default function FormDialog(props) {
         setOpen(false);
     };
     const handleOK = () => {
-        if (dia_chi != '' && Name != '' && Sdt != '') {
-            props.addDiaChiRequest({Name:Name,dia_chi:dia_chi,Sdt:Sdt,id_user:getIdUser()})
-            
-        setOpen(false);
+        if (password != '' && NewPassword != '' && RetypeNewPassrord != '') {
+            if (NewPassword.length===RetypeNewPassrord.length) {
+                let check =[]
+                for (let i = 0; i < NewPassword.length; i++) {
+                    if (NewPassword.charAt(i) === RetypeNewPassrord.charAt(i)) {
+                        check.push(NewPassword.charAt(i))
+                    } else {
+                        alert("Mật khẩu không khớp");
+                    }
+                }
+                if (NewPassword.length===check.length) {
+                    // props.DangKyUserRequest({userName:Email,password:NewPassword})
+                    setOpen(false);
+                }
+            } else {
+                alert('Mật khẩu không khớp')
+            }
+        
         } else {
             alert("Nhập đủ thông tin")
         }
@@ -43,30 +57,30 @@ export default function FormDialog(props) {
                     <TextField 
                         autoFocus
                         margin="dense"
-                        label="Địa Chỉ"
+                        label="Mật khẩu cũ"
                         fullWidth
                         variant="standard"
                         onChange={(e) => {
-                            setDia_chi(e.target.value)
+                            setPassword(e.target.value)
                         }}
                     />
                     <TextField
                         autoFocus
                         margin="dense"
-                        label="Name"
+                        label="Mật khẩu mới"
                         fullWidth
                         variant="standard"
                         onChange={(e)=>{
-                            setName(e.target.value)
+                            setNewPassword(e.target.value)
                         }}
                     />
                     <TextField
                         autoFocus
                         margin="dense"
-                        label="Sdt"
+                        label="Nhập lại mật khẩu mới"
                         fullWidth
                         onChange={(e)=>{
-                            setSdt(e.target.value)
+                            setRetypeNewPassrord(e.target.value)
                         }}
                     />
                 </DialogContent>

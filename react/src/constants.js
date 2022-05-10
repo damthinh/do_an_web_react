@@ -13,7 +13,7 @@ export const LIMITSANPHAM = 20;
 
 export const LIMITGIOHANG = 4;
 
-export const LIMITDONHANG = 1;
+export const LIMITDONHANG = 4;
 
 export const LIMITDONHANGADMIN = 4;
 

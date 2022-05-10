@@ -24,7 +24,7 @@ export default class TableComponentQuanlyDonHang extends Component {
     handleChange = (e) => {
         
         this.setState({ trang_thai: e })
-        this.props.searchDonHangAdminRequest({ textSearch: e })
+        this.props.searchDonHangAdminRequest({ textSearch: this.props.textSearch, trang_thai: e})
     };
     render() {
         let tableHeader =[]
@@ -37,7 +37,7 @@ export default class TableComponentQuanlyDonHang extends Component {
             return (
                 <tr key={key}>
                 <td className="text">{key + 1}</td>
-                <td className="text">{key}abc</td>
+                <td className="text">{item.name}</td>
                 <td className="text">{item.id_dia_chi.Name}</td>
                 <td className="text">{item.id_dia_chi.Sdt}</td>
                 <td className="text">{item.so_san_pham}</td>
@@ -79,20 +79,20 @@ export default class TableComponentQuanlyDonHang extends Component {
                 </Grid>
                 <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center' }} >
                     {/* <Grid><Pop_upAddSanPham {...this.props} /></Grid> */}
-                    {/* <input style={{ height: '50%' }} value={this.state.textSearch}
+                    <input style={{ height: '50%' }} value={this.state.textSearch}
                         onChange={(e) => {
                             this.setState({ textSearch: e.target.value })
                         }}
-                    /> */}
-                    {/* <button style={{ width: '100px', height: '50%' }} onClick={() => {
-                        this.props.searchSanPhamRequest({ textSearch: this.state.textSearch })
-                    }}>search</button> */}
-                    <Button
-                        style={{ display: this.props.textSearch ? 'inline-block' : 'none' }}
+                    />
+                    <button className='button' style={{ width: '100px', height: '50%' }} onClick={() => {
+                        this.props.searchDonHangAdminRequest({ textSearch: this.state.textSearch,trang_thai:this.state.trang_thai })
+                    }}>search</button>
+                    <button  className='button'
+                        style={{ display: this.props.textSearch||this.props.trang_thai ? 'inline-block' : 'none' }}
                         onClick={() => {
-                            this.setState({ textSearch: '' })
-                            this.props.searchSanPhamRequest({ textSearch: '' })
-                        }}>back get</Button>
+                            this.setState({ textSearch: '',trang_thai:'' })
+                            this.props.searchDonHangAdminRequest({ textSearch: '',trang_thai:'' })
+                        }}>back get</button>
                 </Grid>
                 <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'space-evenly' }}>
                     <Box sx={{ minWidth: 120 }}>
@@ -118,7 +118,7 @@ export default class TableComponentQuanlyDonHang extends Component {
                         <tbody >
                             <tr display={{ backgroundColor: "gray" }}>
                                 <th width={70} className="text">STT</th>
-                                <th width={100} className="text">NAME</th>
+                                <th width={100} className="text">Mã đơn hàng</th>
                                 <th width={100} className="text">Tên Người Nhận</th>
                                 <th width={100} className="text">Số điện thoại</th>
                                 <th width={100} className="text">Tổng Số Lượng</th>

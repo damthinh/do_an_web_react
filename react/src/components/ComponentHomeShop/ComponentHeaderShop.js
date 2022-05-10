@@ -60,33 +60,36 @@ export default class ComponentHeaderShop extends Component {
                             <ul className="menu">
                                 <li>
                                     <div className="text-shoes">
-                                        <button className='button' onClick={() => {
+                                        <button style={{width: '150px'}}  className='button' onClick={() => {
                                             window.location.href = "/taikhoan"
                                         }}>Quản lý tài khoản</button>
                                     </div>
                                 </li>
                                 <li>
-                                    <div className="text-shoes">
-                                        <button className='button' onClick={() => {
+                                    <div  className="text-shoes">
+                                        <button style={{width: '150px'}} className='button' onClick={() => {
                                             window.location.href = "/donhang"
                                         }}>Đơn Hàng</button>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="text-shoes">
-                                        <button className='button' onClick={() => {
+                                        <button style={{width: '150px'}} className='button' onClick={() => {
                                             window.location.href = "/homeadmin"
                                         }}>Admin</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="text-shoes">
+                                        <button style={{width: '150px'}} className='button' onClick={() => {
+                                            window.location.href = "/"
+                                            localStorage.clear()
+                                        }}>Đăng xuất</button>
                                     </div>
                                 </li>
                             </ul>
                         </div>
 
-                        {/* <IconButton className='butonscss' caaria-label="rt" onClick={()=>{
-                            window.location.href = '/giohang'
-                        }}>
-                            
-                        </IconButton> */}
                         <StyledBadge className='butonscss' sx={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} badgeContent={10} color="secondary" onClick={() => {
                             window.location.href = '/giohang'
                         }}>

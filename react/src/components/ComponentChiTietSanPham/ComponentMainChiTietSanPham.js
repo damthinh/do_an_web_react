@@ -86,7 +86,7 @@ export default class ComponentMainChiTietSanPham extends Component {
                     </div>
                 </div>
                 <div className='textMota'>
-                    {cau_hinh.mo_ta}
+                    {/* {cau_hinh.mo_ta} */}
                 </div>
             </div>
         )

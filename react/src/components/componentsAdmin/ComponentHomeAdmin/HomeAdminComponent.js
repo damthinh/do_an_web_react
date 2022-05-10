@@ -19,7 +19,7 @@ export default class HomeAdminComponent extends Component {
           <Grid item xs="auto" sx={{ backgroundColor: "rgb(5, 30, 52)", height: '100vh' }} >
             <DanhMucComponent />
           </Grid >
-          <Grid xs={9.85} sx={{ height: '100vh', backgroundColor: 'rgba(0,0,0,.1)' }}   >
+          <Grid item xs={9.85} sx={{ height: '100vh', backgroundColor: 'rgba(0,0,0,.1)' }}   >
             <Grid>
               <ComponentMainHomeAdmin />
             </Grid >

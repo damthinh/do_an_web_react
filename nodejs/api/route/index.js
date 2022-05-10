@@ -1,7 +1,7 @@
 const { registerUser, loginUser } = require("../controller/AuthenController")
 const { getIdSanpham, addGiohang } = require("../controller/controlerHomeShop")
 const { addSanpham, paginationSanpham, updateSanpham, deleteSanPham } = require("../controller/controllerSanpham")
-const { paginationDonHangAdmin } = require("../controller/DonHangAdminController")
+const { paginationDonHangAdmin, deleteDonHangAdmin, updateDonHangAdmin } = require("../controller/DonHangAdminController")
 const { paginationDonHang, huyDonHang } = require("../controller/DonHangController")
 const { paginationGioHang, deleteGioHang, updateGioHang, addDonHang } = require("../controller/GioHangController")
 const { getUser, addDiaChi, updateDiaChi, deleteDiaChi, updateThongTin } = require("../controller/TaiKhoanControler")
@@ -14,6 +14,8 @@ const Router = (app)=>{
     app.delete('/deletesanpham/:id',deleteSanPham)
     // donHangAdmin
     app.get('/donhangadmin',paginationDonHangAdmin)
+    app.delete('/donhangadmin/:id',deleteDonHangAdmin)
+    app.put('/donhangadmin/:id',updateDonHangAdmin)
     // authen
 
     app.post('/register',registerUser)

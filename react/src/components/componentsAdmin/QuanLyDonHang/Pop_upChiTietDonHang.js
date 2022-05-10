@@ -45,19 +45,22 @@ export default function FormDialog(props) {
         setPhuong_thuc_thanh_toan(props.item.phuong_thuc_thanh_toan)
         setNgay_dat(new Date(props.item.ngay_dat).toLocaleDateString())
         updateSanPham = []
+        
+        console.log("props.item.id_gio_hang",props.item.id_gio_hang);
         for (let i = 0; i < props.item.id_gio_hang.length; i++) {
             updateSanPham.push({ id_san_pham: props.item.id_gio_hang[i].id_san_pham._id, so_luong: props.item.id_gio_hang[i].so_luong })
-
         }
     };
 
-    const handleHuy = () => {
+    const handleXoa = () => {
+        props.deleteDonHangAdminRequest({ id: props.item._id})
         setOpen(false);
     };
     const handleClose = () => {
         setOpen(false);
     };
     const handleOK = () => {
+        console.log("updateSanPham",updateSanPham);
         props.updateDonHangAdminRequest({ trang_thai: trang_thai, id: props.item._id, updateSanPham: updateSanPham })
 
         setOpen(false);
@@ -200,7 +203,7 @@ export default function FormDialog(props) {
                     <button className='button' onClick={handleClose}>Cancel</button>
                     {
                         props.item.trang_thai === 'Đã hủy' ?
-                            <button className='button' onClick={handleHuy}>xóa đơn hàng</button> :
+                            <button className='button' onClick={handleXoa}>xóa đơn hàng</button> :
                             <button className='button' onClick={handleOK}>update</button>
                     }
 

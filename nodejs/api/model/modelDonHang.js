@@ -1,6 +1,7 @@
 const  Mongoose  = require("mongoose");
 
 const todoSchema = Mongoose.Schema({
+    name:String,
     ghi_chu:String,
     phuong_thuc_thanh_toan:String,
     trang_thai:{

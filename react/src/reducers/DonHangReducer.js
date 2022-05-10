@@ -24,8 +24,6 @@ export default (state = initialState, action) => {
                 dataFetched: false,
                 error: false,
                 errorMessage: null,
-                activePage: 0,
-                totalPage: 0,
 
             }
 
@@ -53,8 +51,6 @@ export default (state = initialState, action) => {
                 dataFetched: false,
                 error: true,
                 errorMessage: action.payload,
-                activePage: 0,
-                totalPage: 0,
             }
 
 
@@ -68,8 +64,6 @@ export default (state = initialState, action) => {
                 dataFetched: true,
                 error: false,
                 errorMessage: null,
-                activePage: 0,
-                totalPage: 0,
             }
 
         default:

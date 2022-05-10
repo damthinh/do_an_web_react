@@ -37,7 +37,7 @@ exports.huyDonHang = async (req, res) => {
             let getSanPham = await modelSanpham.findById(updateSanPham[i].id_san_pham)
             await modelSanpham.findByIdAndUpdate(updateSanPham[i].id_san_pham,{so_luong:getSanPham.so_luong + updateSanPham[i].so_luong},{new:true})
         }
-        let updateDonHang = await modelDonHang.findByIdAndUpdate(id_don_hang,{id_user:null,trang_thai:"Đã hủy"},{new:true})
+        let updateDonHang = await modelDonHang.findByIdAndUpdate(id_don_hang,{trang_thai:"Đã hủy"},{new:true})
         let listDonHang = await modelDonHang.find({ id_user: id_user }).skip(skip).limit(limit)
         res.send({ listDonHang,activePage ,updateDonHang})
     } catch (error) {

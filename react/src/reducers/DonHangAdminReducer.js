@@ -9,6 +9,7 @@ const initialState = {
     totalPage: 0,
     so_luong_don_hang: [],
     textSearch:'',
+    trang_thai:'',
 }
 
 export default (state = initialState, action) => {
@@ -25,8 +26,6 @@ export default (state = initialState, action) => {
                 dataFetched: false,
                 error: false,
                 errorMessage: null,
-                activePage: 0,
-                totalPage: 0,
                 so_luong_don_hang: []
             }
         case types.PAGINATION_DONHANGADMIN_FAILURE:
@@ -40,9 +39,6 @@ export default (state = initialState, action) => {
                 dataFetched: false,
                 error: true,
                 errorMessage: action.payload,
-                activePage: 0,
-                totalPage: 0,
-                textSearch:'',
                 so_luong_don_hang: []
             }
 
@@ -71,9 +67,6 @@ export default (state = initialState, action) => {
                 dataFetched: true,
                 error: false,
                 errorMessage: null,
-                activePage: 0,
-                totalPage: 0,
-                textSearch:'',
                 so_luong_don_hang: []
             }
 
@@ -86,9 +79,8 @@ export default (state = initialState, action) => {
                 dataFetched: true,
                 error: false,
                 errorMessage: null,
-                activePage: 0,
-                totalPage: 0,
                 textSearch:action.payload.textSearch,
+                trang_thai:action.payload.trang_thai,
                 so_luong_don_hang: []
             }
 

@@ -67,7 +67,7 @@ export default class ComponentMainShop extends Component {
         }
         return (
             <div className='mainHome' display={{ minHeight: '100vh' }}>
-                <div className='header-collection'>
+                {/* <div className='header-collection'>
                     <div className="news-cmt">
                         <label htmlFor="cars">Sắp xếp theo:   </label>
                         <select name="cars" id="cars" onChange={(e) => {
@@ -79,7 +79,7 @@ export default class ComponentMainShop extends Component {
                             <option value="Sale">Sale</option>
                         </select>
                     </div>
-                </div>
+                </div> */}
                 <div>
 
                     <input className='input' placeholder='Nhập tên điện thoại... cần tìm' onChange={(e) => {

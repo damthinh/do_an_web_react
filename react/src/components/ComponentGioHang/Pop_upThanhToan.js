@@ -33,7 +33,7 @@ export default function FormDialog(props) {
         }
         console.log("props.list.", props.list);
         if (props.list.length > 0) {
-            
+
             let number = 0
             let soSanPham = 0
 
@@ -87,15 +87,17 @@ export default function FormDialog(props) {
         setOpen(false);
     };
     const handleOK = () => {
-        
+
         if (id_dia_chi) {
-            
+
             for (let i = 0; i < props.list.length; i++) {
                 updateSanPham.push({ id_san_pham: props.list[i].id_san_pham._id, so_luong: props.list[i].so_luong })
 
             }
-            props.thanhToanGioHangRequest({ tong_tien: tong_tien, phuong_thuc_thanh_toan: phuong_thuc_thanh_toan, ghi_chu: ghi_chu, 
-                id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham,updateSanPham:updateSanPham, id_user: types.getIdUser() })
+            props.thanhToanGioHangRequest({
+                tong_tien: tong_tien, phuong_thuc_thanh_toan: phuong_thuc_thanh_toan, ghi_chu: ghi_chu,
+                id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham, updateSanPham: updateSanPham, id_user: types.getIdUser()
+            })
             console.log("updateSanPham", updateSanPham);
             setTongTien(0)
             setId_ia_chi('')
@@ -146,9 +148,13 @@ export default function FormDialog(props) {
                                         setId_ia_chi(e.target.value)
                                     }}
                                 >
-                                    {listDiaChi}
-                                    <button>thêm địa chỉ</button>
+
+                                    {listDiaChi.length > 0 ? listDiaChi : <button style={{ width: '150px' }} className='button' onClick={() => {
+                                        window.location.href = "/taikhoan"
+                                    }}>Thêm địa chỉ</button>}
+
                                 </Select>
+
                             </FormControl>
                         </Box>
                         <TextField className='TextField'
@@ -189,10 +195,10 @@ export default function FormDialog(props) {
                                 <span className='detail'>Thanh toán khi nhận hàng</span>
                             </li>
 
-                            <li>
+                            {/* <li>
                                 <span className="checkbox"><input type={'checkbox'} /></span>
                                 <span className='detail'>Thanh toán MOMO</span>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>
