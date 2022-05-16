@@ -51,7 +51,11 @@ exports.paginationSanpham = async (req, res) => {
         let listSanPham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }).populate({
             path: 'id_cau_hinh'
         }).skip(skip).limit(limit)
-        res.send({ totalPage, listSanPham })
+        let lengthSanPham =  (await modelSanpham.find()).length
+        
+        let lengthSanPhamhHet =  (await modelSanpham.find({ so_luong: 0})).length
+        let listLength={lengthSanPham,lengthSanPhamhHet}
+        res.send({ totalPage, listSanPham,listLength })
     } catch (error) {
         res.send({ errorMessage: error })
     }

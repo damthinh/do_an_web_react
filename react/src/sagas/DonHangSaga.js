@@ -6,7 +6,7 @@ function* paginationDonHangSaga(action) {
     try {
         let activePage = action.payload.activePage
         let id_user=types.getIdUser()
-        let res = yield callAPIJson(types.HTTP_READ, `donhang?page=${activePage}&id_user=${id_user}&limit=${types.LIMITDONHANG}`)
+        let res = yield callAPIJson(types.HTTP_READ, `donhang?page=${activePage}&id_user=${id_user}&limit=${types.LIMITDONHANG}`,{token:types.getToken()})
         let listDonHang = res.listDonHang
         let totalPage = res.totalPage
         let listDiaChi = res.listDiaChi
@@ -21,7 +21,6 @@ function* huyDonHangSaga(action) {
         let id_user=types.getIdUser()
         let id_don_hang = action.payload.id
         let res = yield callAPIJson(types.HTTP_DELETE, `donhang/${id_don_hang}?&id_user=${id_user}&limit=${types.LIMITDONHANG}`,action.payload)
-        console.log("res",res);
         yield put(actions.huyDonHangSuccess({}))
         if (res.listDonHang.length === 0) {
             if (res.activePage === 1) {
@@ -39,6 +38,5 @@ function* huyDonHangSaga(action) {
 export const DonHangSaga = [
     takeEvery(types.PAGINATION_DONHANGUSER_REQUEST, paginationDonHangSaga),
     takeEvery(types.HUY_DONHANGUSER_REQUEST, huyDonHangSaga),
-    // takeEvery(types.XEMCHITIET_DONHANGUSER_REQUEST, xemchitietDonHangSaga),
 
 ]

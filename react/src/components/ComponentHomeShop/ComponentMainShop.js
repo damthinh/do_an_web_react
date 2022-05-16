@@ -14,13 +14,10 @@ export default class ComponentMainShop extends Component {
         this.props.searchSanPhamUserRequest({ textSearch: this.state.textSearch })
     }
     render() {
-        console.log("prop", this.props);
-        console.log("text", this.state.textSearch);
         let { totalPage, activePage } = this.props
         let listSanPham = []
         if (this.props.listSanPham) {
             listSanPham = this.props.listSanPham.map((item, key) => {
-                console.log("Math.ceil((item.gia * item.giam_gia) / 100)", Math.ceil((item.gia * item.giam_gia) / 100));
                 return (
                     <div key={key} className='main' onClick={() => {
                         localStorage.setItem('idSanPham',item._id)
@@ -67,19 +64,6 @@ export default class ComponentMainShop extends Component {
         }
         return (
             <div className='mainHome' display={{ minHeight: '100vh' }}>
-                {/* <div className='header-collection'>
-                    <div className="news-cmt">
-                        <label htmlFor="cars">Sắp xếp theo:   </label>
-                        <select name="cars" id="cars" onChange={(e) => {
-                            console.log('eeeeeê', e.target.value);
-                        }}>
-                            <option value="new">Mới nhất</option>
-                            <option value=">Giá giảm dần">Giá giảm dần</option>
-                            <option value="Giá tăng dần">Giá tăng dần</option>
-                            <option value="Sale">Sale</option>
-                        </select>
-                    </div>
-                </div> */}
                 <div>
 
                     <input className='input' placeholder='Nhập tên điện thoại... cần tìm' onChange={(e) => {

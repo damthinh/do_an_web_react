@@ -7,12 +7,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+
+import { Link } from '@material-ui/core'
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [Email, setEmail] = React.useState('');
-    const [Sdt, setSdt] = React.useState('');
     const [Password, setPassword] = React.useState('');
     const [CheckPassword, setCheckPassword] = React.useState('');
     const [alertPass, setAlertPass] = React.useState('');
@@ -23,28 +24,6 @@ export default function FormDialog(props) {
         let check = checkMail.match(
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )
-        if (check) {
-            return true
-        } else {
-            return false
-        }
-
-    }
-
-    const checkNumber = (e) => {
-        let check = e.match(/^[0-9]*$/)
-        if (check) {
-            // setEmail(checkMail)
-            return e
-        } else {
-            return null
-        }
-
-    }
-
-    const checkSdt = (e) => {
-        let check = e.match(/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/)
-
         if (check) {
             return true
         } else {
@@ -65,33 +44,27 @@ export default function FormDialog(props) {
     const handleClose = () => {
         setOpen(false);
     };
-    const handleOK = async () => {
-        if (Email != '' && Sdt != '' && Password != '' && CheckPassword != '') {
+    const handleOK = () => {
+        if (Email != ''  && Password != '' && CheckPassword != '') {
             if (checkMail(Email)) {
-                if (checkSdt(Sdt)) {
-                    if (checkPassword(Password)) {
-
-                        if (Password.length === CheckPassword.length) {
-                            let check = []
-                            for (let i = 0; i < Password.length; i++) {
-                                if (Password.charAt(i) === CheckPassword.charAt(i)) {
-                                    check.push(Password.charAt(i))
-                                } else {
-                                    alert("Mật khẩu không khớp");
-                                }
+                if (checkPassword(Password)) {
+                    if (Password.length === CheckPassword.length) {
+                        let check = []
+                        for (let i = 0; i < Password.length; i++) {
+                            if (Password.charAt(i) === CheckPassword.charAt(i)) {
+                                check.push(Password.charAt(i))
+                            } else {
+                                alert("Mật khẩu không khớp");
                             }
-                            if (Password.length === check.length) {
-                                props.DangKyUserRequest({ userName: Email, password: Password, Sdt: Sdt })
-                            }
-                        } else {
-                            alert('Mật khẩu không khớp')
+                        }
+                        if (Password.length === check.length) {
+                            props.quenMkUserRequest({ userName: Email, password: Password })
                         }
                     } else {
-                        alert("Password ít nhất phải có 8 ký tự ,có ít nhất 1 chữ in hoa và 1 số ")
+                        alert('Mật khẩu không khớp')
                     }
                 } else {
-
-                    alert("Nhập Sai Số điện Thoại")
+                    alert("Password ít nhất phải có 8 ký tự ,có ít nhất 1 chữ in hoa và 1 số ")
                 }
             } else {
 
@@ -106,11 +79,11 @@ export default function FormDialog(props) {
     };
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                đăng ký
-            </Button>
+            <Link variant="outlined" onClick={handleClickOpen}>
+                Quên Mật khẩu ?
+            </Link>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Đăng ký</DialogTitle>
+                <DialogTitle>Quên Mật khẩu</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         nhap gia tri
@@ -127,21 +100,6 @@ export default function FormDialog(props) {
                     />
                     <TextField
                         autoFocus
-                        // type={'number'}
-                        margin="dense"
-                        label="Nhập số điện thoại "
-                        fullWidth
-                        inputProps={{ maxLength: 10 }}
-                        variant="standard"
-                        onChange={(e) => {
-                            e.target.value = checkNumber(e.target.value)
-                        }}
-                        onBlur={(e) => {
-                            setSdt(e.target.value)
-                        }}
-                    />
-                    <TextField
-                        autoFocus
                         margin="dense"
                         id="name"
                         type={'password'}
@@ -151,6 +109,17 @@ export default function FormDialog(props) {
                         onChange={(e) => {
                             setPassword(e.target.value)
                         }}
+                        // pattern="[^@\s]+@[^@\s]+" 
+                        // onBlur={(e) => {
+                        //     let check = e.target.value.match(
+                        //         // /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                        //     )
+                        //     if (check) {
+                        //         setEmail(e.target.value)
+                        //     } else {
+
+                        //     }
+                        // }}
                         title="Invalid email address"
                     />
                     <TextField

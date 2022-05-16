@@ -2,17 +2,20 @@
 const userModel = require("../model/userModel")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const modelThongTinUser = require("../model/modelThongTinUser")
 require('dotenv').config()
 exports.registerUser = async (req, res) => {
     try {
-        let { userName, password } = req.body
+        console.log(" req.body", req.body);
+        let { userName, password,Sdt } = req.body
         let checkUserName = await userModel.findOne({ userName })
         if (checkUserName) {
-            return res.send({ errorMessage: 'tk ton tai' })
+            return res.send({ errorMessage: 'Tài Khoản Đã Tồn Tại' })
         } else {
             const mahoaPassword = await bcrypt.hash(password, 10)
             let addUser = await userModel.create({ userName, password: mahoaPassword })
-            res.send({ addUser,message:"Đăng ký thanh công"})
+            await modelThongTinUser.create({Email:userName,Sdt,id_user:addUser._id})
+            res.send({ addUser, message: "Đăng ký thanh công" })
         }
     } catch (error) {
         res.send({ errorMessage: error.message })
@@ -31,6 +34,22 @@ exports.loginUser = async (req, res) => {
             } else {
                 return res.send({ errorMessage: 'pass sai' })
             }
+        } else {
+            return res.send({ errorMessage: 'tk khong ton tai' })
+        }
+    } catch (error) {
+        res.send({ errorMessage: error.message })
+    }
+}
+
+exports.quenMKUser = async (req, res) => {
+    try {
+        let { userName, password } = req.body
+        let checkUserName = await userModel.findOne({ userName })
+        if (checkUserName) {
+            const mahoaPassword = await bcrypt.hash(password, 10)
+            let addUser = await userModel.findByIdAndUpdate(checkUserName._id,{ password: mahoaPassword },{new:true})
+            res.send({ addUser,message: "Đổi mật khẩu thanh công"  })
         } else {
             return res.send({ errorMessage: 'tk khong ton tai' })
         }

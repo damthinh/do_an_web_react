@@ -4,13 +4,11 @@ import { put, select, takeEvery } from "redux-saga/effects"
 import callAPIJson from "../fetchAPIs/callAPIJson"
 function* paginationDonHangAdminSaga(action) {
     try {
-        
-        console.log('paginationDonHangAdminSaga', action);
         let activePage = action.payload.activePage
         let textSearch = yield select((store) => store.donHangAdmin.textSearch)
         let trang_thai = yield select((store) => store.donHangAdmin.trang_thai)
         
-        let res = yield callAPIJson(types.HTTP_READ, `donhangadmin?page=${activePage}&textSearch=${textSearch}&trang_thai=${trang_thai}&limit=${types.LIMITDONHANGADMIN}`)
+        let res = yield callAPIJson(types.HTTP_READ, `donhangadmin?page=${activePage}&textSearch=${textSearch}&trang_thai=${trang_thai}&limit=${types.LIMITDONHANGADMIN}`,{token:types.getToken()})
         let listDonHang = res.listDonHang
         let so_luong_don_hang = res.so_luong_don_hang
         let totalPage = res.totalPage
@@ -45,8 +43,7 @@ function* deleteDonHangAdminSaga(action) {
         let textSearch = yield select((store) => store.donHangAdmin.textSearch)
         let trang_thai = yield select((store) => store.donHangAdmin.trang_thai)
         let id = action.payload.id
-        let res = yield callAPIJson(types.HTTP_DELETE, `donhangadmin/${id}?q=${textSearch}&trang_thai=${trang_thai}&limit=${types.LIMITDONHANGADMIN}`)
-        console.log("res", res);
+        let res = yield callAPIJson(types.HTTP_DELETE, `donhangadmin/${id}?q=${textSearch}&trang_thai=${trang_thai}&limit=${types.LIMITDONHANGADMIN}`,{token:types.getToken()})
         yield put(actions.deleteDonHangAdminSuccess({}))
         if (res.listDonHang.length === 0) {
             if (res.activePage === 1) {
@@ -63,10 +60,8 @@ function* deleteDonHangAdminSaga(action) {
 }
 function* searchDonHangAdminSaga(action) {
     try {
-        console.log('sagaaaaaaâ', action);
         let textSearch = action.payload.textSearch
         let trang_thai = action.payload.trang_thai
-        console.log("textSearch", textSearch);
         yield put(actions.searchDonHangAdminSuccess({ textSearch: textSearch ,trang_thai:trang_thai}))
         yield put(actions.paginationDonHangAdminRequest({ activePage: 1 }))
     } catch (error) {

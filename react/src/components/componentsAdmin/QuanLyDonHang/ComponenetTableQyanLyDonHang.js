@@ -29,7 +29,6 @@ export default class TableComponentQuanlyDonHang extends Component {
     render() {
         let tableHeader =[]
         let listDonHang = []
-        console.log("listDonHang", this.props);
         let totalPage = this.props.totalPage
 
 

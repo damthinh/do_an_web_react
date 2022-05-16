@@ -12,14 +12,12 @@ export default class TableComponentQuanlyDonHang extends Component {
     }
     render() {
         let listDonHang = []
-        console.log("listDonHang", this.props);
 
         let totalPage = this.props.totalPage
 
 
         listDonHang = this.props.listDonHang.map((item, key) => {
 
-            console.log("item.trang_thai", item.trang_thai);
             return (
                 <tr key={key}>
                     <td className="text">{key + 1}</td>

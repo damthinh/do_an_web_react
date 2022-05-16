@@ -8,7 +8,6 @@ function* loginSaga(action) {
         if (res.errorMessage) {
             alert(res.errorMessage)
         } else {
-            console.log('res',res);
             localStorage.setItem('token',res.token)
             localStorage.setItem('role',res.getUser.role)
             
@@ -34,7 +33,21 @@ function* dangkySaga(action) {
     }
 }
 
+function* quenMkSaga(action) {
+    try {
+        let res = yield callApiJson(types.HTTP_CREATE,'quenmk',action.payload)
+        if (res.errorMessage) {
+            alert(res.errorMessage)
+        } else {
+            yield put (actions.quenMkUserSuccess())
+            alert(res.message)
+        }
+    } catch (error) {
+        yield put (actions.DangKyUserFailure(error))
+    }
+}
 export const AuthenSaga =[
     takeEvery(types.DANGKY_USER_REQUEST,dangkySaga),
-    takeEvery(types.LOGIN_USER_REQUEST,loginSaga)
+    takeEvery(types.LOGIN_USER_REQUEST,loginSaga),
+    takeEvery(types.QUENMK_USER_REQUEST,quenMkSaga)
 ]

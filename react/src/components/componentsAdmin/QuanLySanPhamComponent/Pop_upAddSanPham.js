@@ -63,7 +63,6 @@ export default function FormDialog(props) {
         form.append('pin', pin)
         form.append('sim', sim)
         form.append('mo_ta', mo_ta)
-        console.log("state",name,giam_gia,gia,camera,man_hinh,he_dieu_hanh,so_luong,chip,ram,bo_nho_trong,pin,sim,mo_ta);
         props.addSanPhamRequest({ form: form, name: name })
         
         
@@ -87,7 +86,6 @@ export default function FormDialog(props) {
         setFile(fileInPut)
         for (var i = 0; i < fileInPut.length; i++) {
             const objectURL = URL.createObjectURL(fileInPut[i])
-            console.log("url", objectURL);
             newArr.push(objectURL)
         }
         setArrImg(newArr)

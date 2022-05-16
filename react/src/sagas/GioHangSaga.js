@@ -6,8 +6,7 @@ function* paginationGioHangSaga(action) {
     try {
         let activePage = action.payload.activePage
         let id_user=types.getIdUser()
-        let res = yield callAPIJson(types.HTTP_READ, `giohang?page=${activePage}&id_user=${id_user}&limit=${types.LIMITGIOHANG}`)
-        console.log("res saga",res);
+        let res = yield callAPIJson(types.HTTP_READ, `giohang?page=${activePage}&id_user=${id_user}&limit=${types.LIMITGIOHANG}`,{token:types.getToken()})
         let listGioHang = res.listGioHang
         let totalPage = res.totalPage
         let listDiaChi = res.listDiaChi
@@ -21,7 +20,7 @@ function* deleteGioHangSaga(action) {
     try {
         let id_user=types.getIdUser()
         let id_gio_hang = action.payload.id_gio_hang
-        let res = yield callAPIJson(types.HTTP_DELETE, `giohang?&id_user=${id_user}&limit=${types.LIMITGIOHANG}&id_gio_hang=${id_gio_hang}`)
+        let res = yield callAPIJson(types.HTTP_DELETE, `giohang?&id_user=${id_user}&limit=${types.LIMITGIOHANG}&id_gio_hang=${id_gio_hang}`,{token:types.getToken()})
         yield put(actions.deleteGioHangSuccess({}))
         if (res.listGioHang.length === 0) {
             if (res.activePage === 1) {
@@ -48,16 +47,13 @@ function* updateGioHangSaga(action) {
 }
 function* thanhToanGioHangSaga(action) {
     try {
-        console.log("textSearch",action.payload);
         
         yield put(actions.paginationGioHangRequest({ activePage: 1 }))
         let res = yield callAPIJson(types.HTTP_CREATE,`thanhtoan`,action.payload)
-        
-        console.log("ressssssssssssssss",res);
-        // yield put(actions.thanhToanGioHangSuccess({ textSearch: textSearch }))
+        yield put(actions.thanhToanGioHangSuccess())
         yield put(actions.paginationGioHangRequest({ activePage: 1 }))
     } catch (error) {
-        // yield put(actions.searchSanPhamFailure({ errorMessage: error })
+        yield put(actions.thanhToanGioHangFailure({ errorMessage: error }))
         
     }
 }

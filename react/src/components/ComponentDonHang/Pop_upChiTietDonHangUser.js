@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { Grid } from '@mui/material';
+import { getToken } from '../../constants';
 let updateSanPham=[]
 let list = []
 export default function FormDialog(props) {
@@ -30,7 +31,6 @@ var listSanPham =[]
         updateSanPham=[]
         
         
-        console.log("propss_popup",props);
         setOpen(true);
         setGhi_chu(props.item.ghi_chu)
         setSdt(props.item.id_dia_chi.Sdt)
@@ -45,14 +45,13 @@ var listSanPham =[]
             updateSanPham.push({ id_san_pham: list[i].id_san_pham._id, so_luong: list[i].so_luong })
 
         }
-    console.log("list",updateSanPham);
     };
 
     const handleClose = () => {
         setOpen(false);
     };
     const handleOK = () => {
-        props.huyDonHangRequest({id:props.item._id,updateSanPham:updateSanPham})
+        props.huyDonHangRequest({id:props.item._id,updateSanPham:updateSanPham,token:getToken()})
         setOpen(false);
     };
     listSanPham = list.map((item, key) => {

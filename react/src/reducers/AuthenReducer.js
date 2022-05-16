@@ -12,6 +12,7 @@ export default (state = STATE, action) => {
 
         case types.LOGIN_USER_REQUEST:
         case types.DANGKY_USER_REQUEST:
+            case types.QUENMK_USER_REQUEST:
             return {
                 ...state,
 
@@ -23,6 +24,7 @@ export default (state = STATE, action) => {
 
         case types.LOGIN_USER_SUCCESS:
         case types.DANGKY_USER_SUCCESS:
+            case types.QUENMK_USER_SUCCESS:
             return {
                 ...state,
 
@@ -34,6 +36,7 @@ export default (state = STATE, action) => {
 
         case types.LOGIN_USER_FAILURE:
         case types.DANGKY_USER_FAILURE:
+            case types.QUENMK_USER_FAILURE:
             return {
                 ...state,
 

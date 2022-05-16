@@ -8,7 +8,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from 'react-router-dom';
-import { getIdUser } from '../../constants';
+import { getIdUser, getToken } from '../../constants';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
@@ -30,11 +31,11 @@ export default function FormDialog(props) {
                     if (NewPassword.charAt(i) === RetypeNewPassrord.charAt(i)) {
                         check.push(NewPassword.charAt(i))
                     } else {
-                        alert("Mật khẩu không khớp");
+                        alert("Mật khẩu nhập lại không khớp");
                     }
                 }
                 if (NewPassword.length===check.length) {
-                    // props.DangKyUserRequest({userName:Email,password:NewPassword})
+                    props.doiPasswordRequest({NewPassword:NewPassword,password:password,id_user:getIdUser(),token:getToken()})
                     setOpen(false);
                 }
             } else {
@@ -57,6 +58,8 @@ export default function FormDialog(props) {
                     <TextField 
                         autoFocus
                         margin="dense"
+                        
+                        type={'password'}
                         label="Mật khẩu cũ"
                         fullWidth
                         variant="standard"
@@ -68,6 +71,8 @@ export default function FormDialog(props) {
                         autoFocus
                         margin="dense"
                         label="Mật khẩu mới"
+                        
+                        type={'password'}
                         fullWidth
                         variant="standard"
                         onChange={(e)=>{
@@ -77,6 +82,7 @@ export default function FormDialog(props) {
                     <TextField
                         autoFocus
                         margin="dense"
+                        type={'password'}
                         label="Nhập lại mật khẩu mới"
                         fullWidth
                         onChange={(e)=>{

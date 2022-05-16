@@ -1,6 +1,7 @@
 import * as types from '../constants'
 const QuanLyHangState = {
     listSanPham: [],
+    listLength: [],
     isFetching: false,
     dataFetched: false,
     error: false,
@@ -34,7 +35,8 @@ export default (state = QuanLyHangState, actions) => {
                 errorMessage: null,
                 listSanPham: actions.payload.listSanPham,
                 activePage: actions.payload.activePage,
-                totalPage: actions.payload.totalPage
+                totalPage: actions.payload.totalPage,
+                listLength:actions.payload.listLength
             }
         case types.PAGINATION_SANPHAM_FAILURE:
         case types.SEARCH_SANPHAM_FAILURE:

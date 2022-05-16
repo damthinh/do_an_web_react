@@ -1,5 +1,4 @@
 import '../componentsAdmin/component.css'
-// import './ComponentMainThanhToan.css'
 import React, { Component } from 'react'
 import TextField from '@mui/material/TextField';
 

@@ -1,16 +1,22 @@
 import * as constants from "../constants"
 export default function callAPIJson(method, path, data) {
     let objFetch = {}
-    if(method === constants.HTTP_READ || method === constants.HTTP_DELETE){
+    if(method === constants.HTTP_READ){
+        objFetch = {
+            // headers: {"Authorization": `Beare ${data.token}`},
+            method,
+            headers: {"Authorization": `Beare ${data.token}`},
+          }
+    }else if(method === constants.HTTP_DELETE){
         objFetch = {
             method,
-            headers: constants.HTTP_HEADER_JSON,
+            headers: {"Content-Type": "Application/json","Authorization": `Beare ${data.token}`},
             body: JSON.stringify(data)
           }
     }else{
         objFetch = {
             method,
-            headers: constants.HTTP_HEADER_JSON,
+            headers: {"Content-Type": "Application/json","Authorization": `Beare ${data.token}`},
             body: JSON.stringify(data)
           }
     }

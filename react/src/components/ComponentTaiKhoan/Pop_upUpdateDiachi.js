@@ -8,6 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from 'react-router-dom';
+import { getToken } from '../../constants';
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
@@ -16,7 +17,6 @@ export default function FormDialog(props) {
     const [Sdt, setSdt] = React.useState('');
     const [id_dia_chi, setId_dia_chi] = React.useState('');
     const handleClickOpen = () => {
-        console.log("props", props);
         setDia_chi(props.item.dia_chi)
         setName(props.item.Name)
         setSdt(props.item.Sdt)
@@ -29,7 +29,7 @@ export default function FormDialog(props) {
     const handleOK = () => {
         if (dia_chi != '' && Name != '' && Sdt != '') {
 
-            props.updateDiaChiRequest({ Name: Name, dia_chi: dia_chi, Sdt: Sdt, id_dia_chi: id_dia_chi })
+            props.updateDiaChiRequest({ Name: Name, dia_chi: dia_chi, Sdt: Sdt, id_dia_chi: id_dia_chi ,token:getToken()})
             setOpen(false);
         } else {
             alert("Nhập đủ thông tin")

@@ -16,6 +16,7 @@ import Select from '@mui/material/Select';
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { Grid } from '@mui/material';
+import { getToken } from '../../../constants';
 let list = []
 var updateSanPham = []
 export default function FormDialog(props) {
@@ -34,7 +35,6 @@ export default function FormDialog(props) {
         list = []
         list = props.item.id_gio_hang
 
-        console.log("propss_popup", props.item);
         setOpen(true);
         setGhi_chu(props.item.ghi_chu)
         setSdt(props.item.id_dia_chi.Sdt)
@@ -45,8 +45,6 @@ export default function FormDialog(props) {
         setPhuong_thuc_thanh_toan(props.item.phuong_thuc_thanh_toan)
         setNgay_dat(new Date(props.item.ngay_dat).toLocaleDateString())
         updateSanPham = []
-        
-        console.log("props.item.id_gio_hang",props.item.id_gio_hang);
         for (let i = 0; i < props.item.id_gio_hang.length; i++) {
             updateSanPham.push({ id_san_pham: props.item.id_gio_hang[i].id_san_pham._id, so_luong: props.item.id_gio_hang[i].so_luong })
         }
@@ -60,8 +58,7 @@ export default function FormDialog(props) {
         setOpen(false);
     };
     const handleOK = () => {
-        console.log("updateSanPham",updateSanPham);
-        props.updateDonHangAdminRequest({ trang_thai: trang_thai, id: props.item._id, updateSanPham: updateSanPham })
+        props.updateDonHangAdminRequest({ trang_thai: trang_thai, id: props.item._id, updateSanPham: updateSanPham,token:getToken() })
 
         setOpen(false);
     };

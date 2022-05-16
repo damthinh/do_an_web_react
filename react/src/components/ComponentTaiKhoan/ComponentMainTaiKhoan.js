@@ -11,6 +11,7 @@ import Select from '@mui/material/Select';
 import { Grid } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
+import { getToken } from '../../constants'
 let list = [{ 'dia_chi': 'Số 43 ngách 15/18 ngõ gốc đề minh khai-hai bà trưng', 'gia': '1000d', 'so_luong': '3', 'img': ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6cZDIco8NgbvUotl8Y9VTjWGOCpiDo5Dkvw&usqp=CAU'] }
     , { 'dia_chi': 'Số 43 ngách 15/18 ngõ gốc đề minh khai-hai bà trưng' }
 ]
@@ -19,7 +20,6 @@ export default class ComponentMainTaiKhoan extends Component {
         
         let listDiaChi = []
         let user = new Object(this.props.user[0]) 
-        console.log("pros",user);
         if(this.props.listDiaChi){
             listDiaChi = this.props.listDiaChi.map((item, key) => {
                 return (
@@ -30,7 +30,7 @@ export default class ComponentMainTaiKhoan extends Component {
 
                         <td className="text">{item.dia_chi}</td>
                         <td className="text"><DeleteIcon variant="outlined" onClick={() => {
-                            this.props.deleteDiaChiRequest({id:item._id})
+                            this.props.deleteDiaChiRequest({id:item._id,token:getToken()})
                         }}/></td>
                         <td className="text"><Pop_upUpdateDiachi {...this.props} item={item}/></td>
                     </tr>

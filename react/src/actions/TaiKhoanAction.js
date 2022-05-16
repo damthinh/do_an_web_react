@@ -18,6 +18,26 @@ export function getUserFailure(payload) {
         payload
     }
 }
+
+// doiPassword
+export function doiPasswordRequest(payload) {
+    return{
+        type : types.DOI_PASSWORD_REQUEST,
+        payload
+    }
+}
+export function doiPasswordSuccess(payload) {
+    return{
+        type : types.DOI_PASSWORD_SUCCESS,
+        payload
+    }
+}
+export function doiPasswordFailure(payload) {
+    return{
+        type : types.DOI_PASSWORD_FAILURE,
+        payload
+    }
+}
 // addDiaChi
 
 export function addDiaChiRequest(payload) {

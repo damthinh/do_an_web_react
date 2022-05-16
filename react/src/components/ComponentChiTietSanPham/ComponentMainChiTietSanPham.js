@@ -4,7 +4,6 @@ import Pop_upThemGioHang from './Pop_upThemGioHang'
 export default class ComponentMainChiTietSanPham extends Component {
 
     render() {
-        console.log("propssssssss", this.props);
         let SanPham = this.props.SanPham
         let cau_hinh = new Object(SanPham.id_cau_hinh)
         return (

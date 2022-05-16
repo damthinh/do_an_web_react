@@ -5,9 +5,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import Checkbox from '@material-ui/core/Checkbox';
 
+import Pop_upQuenMK from './Pop_upQuenMK'
 import Pop_upDangKy from './Pop_upDangKy'
 const Login = (props) => { 
-  console.log("prop",props);
   const [Email, setEmail] = React.useState('');
   const [Password, setPassword] = React.useState('');
   const background = {backgroundImage: `url(${imgLogin})` ,height:'97vh',
@@ -31,13 +31,13 @@ const Login = (props) => {
           <TextField label='Password' placeholder='Enter password' type='password' onChange={(e)=>{
             setPassword(e.target.value)
           }}  fullWidth required />
-          <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth onClick={() => {
+          <Button type='submit' color='primary' 
+          variant="contained" 
+          style={btnstyle} fullWidth onClick={() => {
             props.LoginUserRequest({userName:Email,password:Password})
           }}>Sign in</Button>
           <Typography >
-            <Link href="/home" >
-              Quên mật khẩu ?
-            </Link>
+            <Pop_upQuenMK  {...props} /> 
           </Typography>
           <Typography > Bạn chưa có tài khoản ?
 

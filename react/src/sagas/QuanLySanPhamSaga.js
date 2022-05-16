@@ -2,15 +2,17 @@ import * as types from "../constants"
 import * as actions from "../actions/QuanLySanPhamActions"
 import { put, select, takeEvery } from "redux-saga/effects"
 import callAPIForm from "../fetchAPIs/callAPIForm"
+import callAPIJson from "../fetchAPIs/callAPIJson"
 function* paginationSanPhamSaga(action) {
     try {
         let activePage = action.payload.activePage
         let textSearch = yield select((store) => store.sanPham.textSearch)
-        let res = yield callAPIForm(types.HTTP_READ, `paginationSanpham?page=${activePage}&q=${textSearch}&limit=${types.LIMITSANPHAMADMIN}`)
+        let res = yield callAPIJson(types.HTTP_READ, `paginationSanpham?page=${activePage}&q=${textSearch}&limit=${types.LIMITSANPHAMADMIN}`,{token:types.getToken()})
         let listSanPham = res.listSanPham
         let totalPage = res.totalPage
+        let listLength = res.listLength
         if (totalPage === 0) totalPage = 1
-        yield put(actions.paginationSanPhamSuccess({ activePage, totalPage, listSanPham }))
+        yield put(actions.paginationSanPhamSuccess({ activePage, totalPage, listSanPham,listLength }))
     } catch (error) {
         yield put(actions.paginationSanPhamFailure({ errorMessage: error }))
     }
@@ -20,7 +22,7 @@ function* addSanPhamSaga(action) {
         let form = action.payload.form
         let name = action.payload.name
         let textSearch = yield select((store) => store.sanPham.textSearch)
-        let res = yield callAPIForm(types.HTTP_CREATE, `addsanpham?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`, form)
+        let res = yield callAPIForm(types.HTTP_CREATE, `addsanpham?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`, {form,token:types.getToken()})
         let totalPage = res.totalPage
         let listSanPham = res.listSanPham
 
@@ -44,14 +46,12 @@ function* addSanPhamSaga(action) {
 }
 function* updateSanPhamSaga(action) {
     try {
-        console.log('sagaaaaaaâ', action);
 
         let textSearch = yield select((store) => (store.sanPham.textSearch))
         let form = action.payload.form
         let name = action.payload.name
         let id = action.payload.id
-        let res = yield callAPIForm(types.HTTP_UPDATE, `updatesanpham/${id}?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`, form)
-        console.log("res", res);
+        let res = yield callAPIForm(types.HTTP_UPDATE, `updatesanpham/${id}?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`, {form,token:types.getToken()})
         let listSanPham = res.listSanPham
         if (name.toLowerCase().includes(textSearch.toLowerCase())) {
             yield put(actions.updateSanPhamSuccess({}))
@@ -68,8 +68,7 @@ function* deleteSanPhamSaga(action) {
         let textSearch = yield select((store) => store.sanPham.textSearch)
         let activePage = yield select((store) => store.sanPham.activePage)
         let id = action.payload.id
-        let res = yield callAPIForm(types.HTTP_DELETE, `deletesanpham/${id}?page=${activePage}&q=${textSearch}&limit=${types.LIMITSANPHAMADMIN}`)
-        console.log("res", res);
+        let res = yield callAPIForm(types.HTTP_DELETE, `deletesanpham/${id}?page=${activePage}&q=${textSearch}&limit=${types.LIMITSANPHAMADMIN}`,{token:types.getToken()})
         yield put(actions.deleteSanPhamSuccess({}))
         if (res.listSanPham.length === 0) {
             if (activePage === 1) {
@@ -87,7 +86,6 @@ function* deleteSanPhamSaga(action) {
 function* searchSanPhamSaga(action) {
     try {
         let textSearch = action.payload.textSearch
-        console.log("textSearch", textSearch);
         yield put(actions.searchSanPhamSuccess({ textSearch: textSearch }))
         yield put(actions.paginationSanPhamRequest({ activePage: 1 }))
     } catch (error) {

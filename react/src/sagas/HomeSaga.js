@@ -4,17 +4,15 @@ import { put, select, takeEvery } from "redux-saga/effects"
 import callAPIJson from "../fetchAPIs/callAPIJson"
 function* paginationSanPhamUserSaga(action) {
     try {
-        console.log("saga");
         let activePage = action.payload.activePage
         let textSearch = yield select((store) => store.home.textSearch)
-        let res = yield callAPIJson(types.HTTP_READ, `paginationSanpham?page=${activePage}&q=${textSearch}&limit=${types.LIMITSANPHAM}`)
-        console.log("res",res);
+        let res = yield callAPIJson(types.HTTP_READ, `paginationhome?page=${activePage}&q=${textSearch}&limit=${types.LIMITSANPHAM}`,{token:types.getToken()})
         let listSanPham = res.listSanPham
         let totalPage = res.totalPage
         if (totalPage === 0) totalPage = 1
         yield put(actions.paginationSanPhamUserSuccess({ activePage, totalPage, listSanPham }))
     } catch (error) {
-        // yield put(actions.paginationSanPhamUserFailure({ errorMessage: error }))
+        yield put(actions.paginationSanPhamUserFailure({ errorMessage: error }))
     }
 }
 function* searchSanPhamUserSaga(action) {

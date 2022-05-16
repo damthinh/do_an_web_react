@@ -7,6 +7,7 @@ import img from '../../img/iphone13.jpg'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import imgLogin from '../../img/logo.png'
 import Avatar from '@mui/material/Avatar';
+import { getRole } from '../../constants';
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
         right: -3,
@@ -60,28 +61,31 @@ export default class ComponentHeaderShop extends Component {
                             <ul className="menu">
                                 <li>
                                     <div className="text-shoes">
-                                        <button style={{width: '150px'}}  className='button' onClick={() => {
+                                        <button style={{ width: '150px' }} className='button' onClick={() => {
                                             window.location.href = "/taikhoan"
                                         }}>Quản lý tài khoản</button>
                                     </div>
                                 </li>
                                 <li>
-                                    <div  className="text-shoes">
-                                        <button style={{width: '150px'}} className='button' onClick={() => {
+                                    <div className="text-shoes">
+                                        <button style={{ width: '150px' }} className='button' onClick={() => {
                                             window.location.href = "/donhang"
                                         }}>Đơn Hàng</button>
                                     </div>
                                 </li>
+                                {
+                                    getRole() == "1" ?
+                                        <li>
+                                            <div className="text-shoes">
+                                                <button style={{ width: '150px' }} className='button' onClick={() => {
+                                                    window.location.href = "/homeadmin"
+                                                }}>Admin</button>
+                                            </div>
+                                        </li> : null
+                                }
                                 <li>
                                     <div className="text-shoes">
-                                        <button style={{width: '150px'}} className='button' onClick={() => {
-                                            window.location.href = "/homeadmin"
-                                        }}>Admin</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="text-shoes">
-                                        <button style={{width: '150px'}} className='button' onClick={() => {
+                                        <button style={{ width: '150px' }} className='button' onClick={() => {
                                             window.location.href = "/"
                                             localStorage.clear()
                                         }}>Đăng xuất</button>
@@ -90,7 +94,7 @@ export default class ComponentHeaderShop extends Component {
                             </ul>
                         </div>
 
-                        <StyledBadge className='butonscss' sx={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} badgeContent={10} color="secondary" onClick={() => {
+                        <StyledBadge className='butonscss' sx={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} color="secondary" onClick={() => {
                             window.location.href = '/giohang'
                         }}>
                             <ShoppingCartIcon />

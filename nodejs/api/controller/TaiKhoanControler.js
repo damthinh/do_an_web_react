@@ -1,6 +1,8 @@
 const modelDiaChi = require("../model/modelDiaChi")
 const modelThongTinUser = require("../model/modelThongTinUser")
+const userModel = require("../model/userModel")
 
+const bcrypt = require('bcrypt')
 
 exports.getUser = async (req, res) => {
     try {
@@ -47,6 +49,26 @@ exports.updateThongTin = async(req,res)=>{
         let {Sdt,id_thong_tin} =req.body
         let updateThongTin = await modelThongTinUser.findByIdAndUpdate(id_thong_tin,{Sdt})
         res.send(updateThongTin)
+    } catch (error) {
+        res.send({ errorMessage:error.message })
+    }
+}
+exports.doiPassword = async(req,res)=>{
+    try {
+        // console.log(req.body);
+        let {NewPassword,password,id_user} =req.body
+        let getUser = await userModel.findById(id_user)
+        
+        const checkPassword = await bcrypt.compare(password, getUser.password)
+        if (checkPassword) {
+            
+            const mahoaPassword = await bcrypt.hash(NewPassword, 10)
+           let updateUser= await userModel.findByIdAndUpdate(id_user,{password:mahoaPassword})
+           res.send(updateUser)
+        } else {
+           return res.send({ errorMessage:"Mật khẩu không đúng"})
+        }
+
     } catch (error) {
         res.send({ errorMessage:error.message })
     }

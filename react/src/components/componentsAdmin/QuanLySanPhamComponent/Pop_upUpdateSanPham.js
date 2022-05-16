@@ -79,7 +79,6 @@ export default function FormDialog(props) {
         setFile(fileInPut)
         for (var i = 0; i < fileInPut.length; i++) {
             const objectURL = URL.createObjectURL(fileInPut[i])
-            console.log("url", objectURL);
             newArr.push(objectURL)
         }
         setArrImg(newArr)
@@ -212,11 +211,11 @@ export default function FormDialog(props) {
                             return (
                                 <span key={i} className='divImg'>
                                     <img src={img} width={"200px"} alt='' height={"200px"} />
-                                    <button className='btnImg'
+                                    {/* <button className='btnImg'
                                         onClick={() => {
                                             handleDeleteOneImg(i)
                                         }}
-                                    >x</button>
+                                    >x</button> */}
                                 </span>
                             )
                         }) : null

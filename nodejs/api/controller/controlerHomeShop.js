@@ -40,3 +40,26 @@ exports.addGiohang = async (req, res) => {
         res.send({ errorMessage:error.message })
     }
 }
+exports.paginationHome = async (req, res) => {
+    try {
+        console.log("vo day");
+        let activePage = parseInt(req.query.page)
+        let limit = parseInt(req.query.limit)
+        let textSearch = req.query.q
+        let skip = (activePage - 1) * limit
+        let getSanpham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }).populate({
+            path: 'id_cau_hinh'
+        })
+        totalPage = Math.ceil(getSanpham.length / limit)
+        let listSanPham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }).populate({
+            path: 'id_cau_hinh'
+        }).skip(skip).limit(limit)
+        let lengthSanPham =  (await modelSanpham.find()).length
+        
+        let lengthSanPhamhHet =  (await modelSanpham.find({ so_luong: 0})).length
+        let listLength={lengthSanPham,lengthSanPhamhHet}
+        res.send({ totalPage, listSanPham,listLength })
+    } catch (error) {
+        res.send({ errorMessage: error })
+    }
+}

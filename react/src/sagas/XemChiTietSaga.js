@@ -4,9 +4,8 @@ import { put, select, takeEvery } from "redux-saga/effects"
 import callAPIJson from "../fetchAPIs/callAPIJson"
 function* xemchitietSanPhamUserSaga(action) {
     try {
-        console.log("saga", action);
-        let res = yield callAPIJson(types.HTTP_READ, `xemchitiet/${action.payload.id}`)
-        console.log("res", res);
+        let res = yield callAPIJson(types.HTTP_READ, `xemchitiet/${action.payload.id}`,{token:types.getToken()})
+        console.log("res",res);
         let SanPham = res.getId
         yield put(actions.xemchitietSanPhamUserSuccess({ SanPham }))
     } catch (error) {
@@ -15,9 +14,7 @@ function* xemchitietSanPhamUserSaga(action) {
 }
 function* addGioHangSaga(action) {
     try {
-        console.log("action saga", action);
         let res = yield callAPIJson(types.HTTP_CREATE, `addgiohang`, action.payload)
-        console.log("res", res);
         yield put(actions.addGioHangSuccess())
     } catch (error) {
         yield put(actions.addGioHangFailure(error))

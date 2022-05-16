@@ -1,4 +1,4 @@
-// import '../component.css'
+
 import React, { Component } from 'react'
 import DanhMucComponent from '../DanhMucComponent'
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
@@ -8,7 +8,6 @@ import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import { width } from '@mui/system';
 import ComponentMainHomeAdmin from './ComponentMainHomeAdmin';
 import ComponentChartHomeAdmin from './ComponentChartHomeAdmin'
-// import { display } from '@mui/system';
 export default class HomeAdminComponent extends Component {
 
 

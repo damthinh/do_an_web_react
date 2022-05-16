@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch)=> {
     LoginUserRequest:(data)=>{
       dispatch(actions.LoginUserRequest(data))
     },
+    quenMkUserRequest:(data)=>{
+      dispatch(actions.quenMkUserRequest(data))
+    },
   }
  }
 

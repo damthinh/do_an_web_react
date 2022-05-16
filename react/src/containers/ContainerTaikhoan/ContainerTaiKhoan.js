@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch)=> {
     getUserRequest:(data)=>{
       dispatch(actions.getUserRequest(data))
     },
+    doiPasswordRequest:(data)=>{
+      dispatch(actions.doiPasswordRequest(data))
+    },
     addDiaChiRequest:(data)=>{
       dispatch(actions.addDiaChiRequest(data))
     },

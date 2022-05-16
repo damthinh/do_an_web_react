@@ -17,7 +17,8 @@ const mapStateToProps = (store) => ({
     listSanPham: store.sanPham.listSanPham,
     activePage:store.sanPham.activePage,
     totalPage:store.sanPham.totalPage,
-    textSearch:store.sanPham.textSearch
+    textSearch:store.sanPham.textSearch,
+    listLength:store.sanPham.listLength
 })
 
 const mapDispatchToProps = (dispatch)=> {

@@ -7,6 +7,12 @@ export function getIdUser(){
     return localStorage.getItem('idUser')
 }
 
+export function getToken(){
+    return localStorage.getItem('token')
+}
+export function getRole(){
+    return localStorage.getItem('role')
+}
 
 export const LIMITSANPHAMADMIN = 3;
 export const LIMITSANPHAM = 20;
@@ -31,6 +37,10 @@ export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE'
 export const DANGKY_USER_REQUEST = 'DANGKY_USER_REQUEST'
 export const DANGKY_USER_SUCCESS = 'DANGKY_USER_SUCCESS'
 export const DANGKY_USER_FAILURE = 'DANGKY_USER_FAILURE'
+
+export const QUENMK_USER_REQUEST = 'QUENMK_USER_REQUEST'
+export const QUENMK_USER_SUCCESS = 'QUENMK_USER_SUCCESS'
+export const QUENMK_USER_FAILURE = 'QUENMK_USER_FAILURE'
 
 //  San pham user
 
@@ -74,6 +84,10 @@ export const HUY_DONHANGUSER_FAILURE = 'HUY_DONHANGUSER_FAILURE'
 
 
 // tai khoan
+
+export const DOI_PASSWORD_REQUEST = 'DOI_PASSWORD_REQUEST'
+export const DOI_PASSWORD_SUCCESS = 'DOI_PASSWORD_SUCCESS'
+export const DOI_PASSWORD_FAILURE = 'DOI_PASSWORD_FAILURE'
 
 export const ADD_DIACHI_REQUEST = 'ADD_DIACHI_REQUEST'
 export const ADD_DIACHI_SUCCESS = 'ADD_DIACHI_SUCCESS'

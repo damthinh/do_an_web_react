@@ -1,5 +1,4 @@
 
-// import './ComponentMainThanhToan.css'
 import React, { Component } from 'react'
 
 import ComponentFooter from '../ComponentHomeShop/ComponentFooter'

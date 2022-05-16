@@ -31,7 +31,6 @@ export default function FormDialog(props) {
             updateSanPham.push({ id_san_pham: props.list[i].id_san_pham._id, so_luong: props.list[i].so_luong })
 
         }
-        console.log("props.list.", props.list);
         if (props.list.length > 0) {
 
             let number = 0
@@ -96,9 +95,8 @@ export default function FormDialog(props) {
             }
             props.thanhToanGioHangRequest({
                 tong_tien: tong_tien, phuong_thuc_thanh_toan: phuong_thuc_thanh_toan, ghi_chu: ghi_chu,
-                id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham, updateSanPham: updateSanPham, id_user: types.getIdUser()
+                id_gio_hang: props.id_gio_hang, id_dia_chi: id_dia_chi, so_san_pham: so_san_pham, updateSanPham: updateSanPham, id_user: types.getIdUser(),token:types.getToken()
             })
-            console.log("updateSanPham", updateSanPham);
             setTongTien(0)
             setId_ia_chi('')
             setGhi_chu('')

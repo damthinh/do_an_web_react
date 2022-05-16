@@ -1,44 +1,48 @@
-const { registerUser, loginUser } = require("../controller/AuthenController")
-const { getIdSanpham, addGiohang } = require("../controller/controlerHomeShop")
+const { registerUser, loginUser, quenMKUser } = require("../controller/AuthenController")
+const { getIdSanpham, addGiohang, paginationHome } = require("../controller/controlerHomeShop")
 const { addSanpham, paginationSanpham, updateSanpham, deleteSanPham } = require("../controller/controllerSanpham")
 const { paginationDonHangAdmin, deleteDonHangAdmin, updateDonHangAdmin } = require("../controller/DonHangAdminController")
 const { paginationDonHang, huyDonHang } = require("../controller/DonHangController")
 const { paginationGioHang, deleteGioHang, updateGioHang, addDonHang } = require("../controller/GioHangController")
-const { getUser, addDiaChi, updateDiaChi, deleteDiaChi, updateThongTin } = require("../controller/TaiKhoanControler")
+const { getUser, addDiaChi, updateDiaChi, deleteDiaChi, updateThongTin, doiPassword } = require("../controller/TaiKhoanControler")
+const { verify, verifyAuthor } = require("../middlewera/jwt")
 
 const Router = (app)=>{
     // san pham admin
-    app.post('/addsanpham',addSanpham)
-    app.get('/paginationSanpham',paginationSanpham)
-    app.put('/updatesanpham/:id',updateSanpham)
-    app.delete('/deletesanpham/:id',deleteSanPham)
+    app.post('/addsanpham',verifyAuthor,addSanpham)
+    app.get('/paginationSanpham',verifyAuthor,paginationSanpham)
+    app.put('/updatesanpham/:id',verifyAuthor,updateSanpham)
+    app.delete('/deletesanpham/:id',verifyAuthor,deleteSanPham)
     // donHangAdmin
-    app.get('/donhangadmin',paginationDonHangAdmin)
-    app.delete('/donhangadmin/:id',deleteDonHangAdmin)
-    app.put('/donhangadmin/:id',updateDonHangAdmin)
+    app.get('/donhangadmin',verifyAuthor,paginationDonHangAdmin)
+    app.delete('/donhangadmin/:id',verifyAuthor,deleteDonHangAdmin)
+    app.put('/donhangadmin/:id',verifyAuthor,updateDonHangAdmin)
     // authen
 
     app.post('/register',registerUser)
     app.post('/login',loginUser)
+    app.post('/quenmk',quenMKUser)
     // home
-    app.get('/xemchitiet/:id',getIdSanpham)
+    app.get('/xemchitiet/:id',verify,getIdSanpham)
+    app.get('/paginationhome',verify,paginationHome)
 
-    app.post('/addgiohang',addGiohang)
+    app.post('/addgiohang',verify,addGiohang)
     // taiKhoan
-    app.get('/taikhoan/:id',getUser)
-    app.post('/diachi',addDiaChi)
-    app.put('/diachi',updateDiaChi)
-    app.delete('/diachi/:id',deleteDiaChi)  
-    app.put('/taikhoan',updateThongTin)
+    app.get('/taikhoan/:id',verify,getUser)
+    app.post('/diachi',verify,addDiaChi)
+    app.put('/diachi',verify,updateDiaChi)
+    app.delete('/diachi/:id',verify,deleteDiaChi)  
+    app.put('/taikhoan',verify,updateThongTin)
+    app.post('/taikhoan',verify,doiPassword)
 
     // giohang
-    app.get('/giohang',paginationGioHang)
-    app.delete('/giohang',deleteGioHang)
-    app.put('/giohang',updateGioHang)
-    app.post('/thanhtoan',addDonHang)
+    app.get('/giohang',verify,paginationGioHang)
+    app.delete('/giohang',verify,deleteGioHang)
+    app.put('/giohang',verify,updateGioHang)
+    app.post('/thanhtoan',verify,addDonHang)
     // donhang
-    app.get('/donhang',paginationDonHang)
-    app.delete('/donhang/:id',huyDonHang)
+    app.get('/donhang',verify,paginationDonHang)
+    app.delete('/donhang/:id',verify,huyDonHang)
 }
 
 module.exports=Router

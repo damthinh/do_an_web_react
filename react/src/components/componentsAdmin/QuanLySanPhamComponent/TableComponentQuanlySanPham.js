@@ -44,8 +44,8 @@ export default class TableComponentQuanlySanPham extends Component {
 
         
         <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'space-evenly',alignItems:'center',height:'10%' }} >
-          <h3 width={400} >Tổng Sản phẩm :{100}</h3>
-          <h3 width={300}>sản phẩm đã hết :{3}</h3>
+          <h3 width={400} >Tổng Sản phẩm :{this.props.listLength.lengthSanPham}</h3>
+          <h3 width={300}>sản phẩm đã hết :{this.props.listLength.lengthSanPhamhHet}</h3>
         </Grid>
         <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center' }} >
           <Grid><Pop_upAddSanPham {...this.props} /></Grid>

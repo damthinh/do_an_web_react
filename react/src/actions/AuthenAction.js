@@ -38,3 +38,23 @@ export function DangKyUserFailure(payload) {
         payload
     }
 }
+// quenMk
+
+export function quenMkUserRequest(payload) {
+    return{
+        type : types.QUENMK_USER_REQUEST,
+        payload
+    }
+}
+export function quenMkUserSuccess(payload) {
+    return{
+        type : types.QUENMK_USER_SUCCESS,
+        payload
+    }
+}
+export function quenMkUserFailure(payload) {
+    return{
+        type : types.QUENMK_USER_FAILURE,
+        payload
+    }
+}

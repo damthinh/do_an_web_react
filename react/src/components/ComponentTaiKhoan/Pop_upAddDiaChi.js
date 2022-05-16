@@ -8,7 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from 'react-router-dom';
-import { getIdUser } from '../../constants';
+import { getIdUser, getToken } from '../../constants';
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
@@ -24,7 +24,7 @@ export default function FormDialog(props) {
     };
     const handleOK = () => {
         if (dia_chi != '' && Name != '' && Sdt != '') {
-            props.addDiaChiRequest({Name:Name,dia_chi:dia_chi,Sdt:Sdt,id_user:getIdUser()})
+            props.addDiaChiRequest({Name:Name,dia_chi:dia_chi,Sdt:Sdt,id_user:getIdUser(),token:getToken()})
             
         setOpen(false);
         } else {
