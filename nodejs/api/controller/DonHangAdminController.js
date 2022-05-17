@@ -29,7 +29,6 @@ exports.paginationDonHangAdmin = async (req, res) => {
 }
 exports.deleteDonHangAdmin = async (req, res) => {
     try {
-        console.log("req.query.",req.query);
         let id_don_hang = req.params.id
         let trang_thai = req.query.trang_thai
         let textSearch = req.query.q

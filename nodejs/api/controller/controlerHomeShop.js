@@ -42,7 +42,6 @@ exports.addGiohang = async (req, res) => {
 }
 exports.paginationHome = async (req, res) => {
     try {
-        console.log("vo day");
         let activePage = parseInt(req.query.page)
         let limit = parseInt(req.query.limit)
         let textSearch = req.query.q

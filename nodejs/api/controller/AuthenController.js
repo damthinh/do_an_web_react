@@ -6,7 +6,6 @@ const modelThongTinUser = require("../model/modelThongTinUser")
 require('dotenv').config()
 exports.registerUser = async (req, res) => {
     try {
-        console.log(" req.body", req.body);
         let { userName, password,Sdt } = req.body
         let checkUserName = await userModel.findOne({ userName })
         if (checkUserName) {

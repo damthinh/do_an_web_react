@@ -2,7 +2,6 @@
 const jwt = require('jsonwebtoken')
 const verify = (req,res,next)=>{
     try {
-        console.log('voday');
         let authenHeader = req.headers['authorization']
         let token = authenHeader.split(' ')[1]
         if (!token) {

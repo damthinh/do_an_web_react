@@ -55,7 +55,6 @@ exports.updateThongTin = async(req,res)=>{
 }
 exports.doiPassword = async(req,res)=>{
     try {
-        // console.log(req.body);
         let {NewPassword,password,id_user} =req.body
         let getUser = await userModel.findById(id_user)
         
