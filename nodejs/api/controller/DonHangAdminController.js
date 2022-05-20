@@ -18,10 +18,10 @@ exports.paginationDonHangAdmin = async (req, res) => {
         let ChoXacNhan = (await modelDonHang.find({ trang_thai: { $regex: "Chờ xác nhận", $options: 'i' } })).length
         let DonHang = getDonHang.length
         let DangChuanBi = (await modelDonHang.find({ trang_thai: { $regex: "Đang chuẩn bị", $options: 'i' } })).length
-        let DaGiao = (await modelDonHang.find({ trang_thai: { $regex: "Đã giao", $options: 'i' } })).length
-
+        let DangGiao = (await modelDonHang.find({ trang_thai: { $regex: "Đang giao", $options: 'i' } })).length
+        let GiaoHangThanhCong = (await modelDonHang.find({ trang_thai: { $regex: "Giao hàng thành công", $options: 'i' } })).length
         let DaHuy = (await modelDonHang.find({ trang_thai: { $regex: "Đã hủy", $options: 'i' } })).length
-        let so_luong_don_hang = [{ DaHuy, ChoXacNhan, DangChuanBi, DaGiao, DonHang }]
+        let so_luong_don_hang = [{ DaHuy, ChoXacNhan, DangChuanBi, DangGiao, DonHang,GiaoHangThanhCong }]
         res.send({ totalPage, listDonHang, so_luong_don_hang })
     } catch (error) {
         res.send({ errorMessage: error.message })

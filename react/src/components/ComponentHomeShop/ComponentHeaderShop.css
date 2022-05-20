@@ -100,7 +100,7 @@
     display: none;
     width: 50%;
     height: 100px;
-    background-color: #fff;
+    background: none;
     position: absolute;
     padding-top: 20px;
     right: 0;
@@ -113,7 +113,7 @@
     /* align-content: space-around; */
     width:20%;
     height: 100px;
-    background-color: #fff;
+    background: none;
     position: absolute;
     padding-top: 20px;
     right: 0;

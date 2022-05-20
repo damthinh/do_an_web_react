@@ -34,50 +34,61 @@ export default function FormDialog(props) {
     const handleClickOpen = () => {
         list = []
         list = props.item.id_gio_hang
-
         setOpen(true);
         setGhi_chu(props.item.ghi_chu)
-        setSdt(props.item.id_dia_chi.Sdt)
-        setName(props.item.id_dia_chi.Name)
-        setDia_chi(props.item.id_dia_chi.dia_chi)
+        if (props.item.id_dia_chi) {
+            setSdt(props.item.id_dia_chi.Sdt)
+            setName(props.item.id_dia_chi.Name)
+            setDia_chi(props.item.id_dia_chi.dia_chi)
+        }
+
         setTong_don_hang(props.item.tong_tien)
         setTrang_thai(props.item.trang_thai)
         setPhuong_thuc_thanh_toan(props.item.phuong_thuc_thanh_toan)
         setNgay_dat(new Date(props.item.ngay_dat).toLocaleDateString())
         updateSanPham = []
-        for (let i = 0; i < props.item.id_gio_hang.length; i++) {
-            updateSanPham.push({ id_san_pham: props.item.id_gio_hang[i].id_san_pham._id, so_luong: props.item.id_gio_hang[i].so_luong })
+        if (props.item.id_gio_hang) {
+            for (let i = 0; i < props.item.id_gio_hang.length; i++) {
+                updateSanPham.push({ id_san_pham: props.item.id_gio_hang[i].id_san_pham._id, so_luong: props.item.id_gio_hang[i].so_luong })
+            }
         }
+
     };
 
     const handleXoa = () => {
-        props.deleteDonHangAdminRequest({ id: props.item._id})
+        props.deleteDonHangAdminRequest({ id: props.item._id })
         setOpen(false);
     };
     const handleClose = () => {
         setOpen(false);
     };
     const handleOK = () => {
-        props.updateDonHangAdminRequest({ trang_thai: trang_thai, id: props.item._id, updateSanPham: updateSanPham,token:getToken() })
+        props.updateDonHangAdminRequest({ trang_thai: trang_thai, id: props.item._id, updateSanPham: updateSanPham, token: getToken() })
 
         setOpen(false);
     };
     const handleChange = (event) => {
         setTrang_thai(event.target.value);
     };
-    listSanPham = list.map((item, key) => {
-
-        return (
-            <tr key={key}>
-                <td className="text">{key + 1}</td>
-                <td className="text">{item.id_san_pham.name}</td>
-                <td className="text">{item.id_san_pham.gia}</td>
-                <td className="text">{item.so_luong}</td>
-                <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
-
-            </tr>
-        )
-    })
+    if (props.item.id_gio_hang) {
+        listSanPham = list.map((item, key) => {
+            return (
+                <tr key={key}>
+                    <td className="text">{key + 1}</td>
+                    {
+                        item.id_san_pham != null ? <td className="text">{item.id_san_pham.name}</td> : null
+                    }
+                    {
+                        item.id_san_pham != null ? <td className="text">{item.id_san_pham.gia.toLocaleString()}</td> : null
+                    }
+                    <td className="text">{item.so_luong}</td>
+                    {
+                        item.id_san_pham != null ? <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td> : null
+                    }   
+                </tr>
+            )
+        })
+    }
     return (
         <div >
             <RemoveRedEyeIcon variant="outlined" onClick={handleClickOpen}>
@@ -152,7 +163,7 @@ export default function FormDialog(props) {
                                 />
                                 <TextField sx={{ height: '10vh' }}
                                     autoFocus
-                                    value={tong_don_hang}
+                                    value={tong_don_hang.toLocaleString()}
                                     margin="dense"
                                     label="Tổng tiền"
                                     fullWidth
@@ -172,7 +183,7 @@ export default function FormDialog(props) {
                                             <MenuItem value={'Chờ xác nhận'}>Chờ xác nhận</MenuItem>
                                             <MenuItem value={'Đang chuẩn bị'}>Đang chuẩn bị</MenuItem>
                                             <MenuItem value={'Đang giao hàng'}>Đang giao hàng</MenuItem>
-
+                                            <MenuItem value={'Giao hàng thành công'}>Giao hàng thành công</MenuItem>
 
                                         </Select>
                                     </FormControl>
@@ -199,9 +210,9 @@ export default function FormDialog(props) {
                 <DialogActions>
                     <button className='button' onClick={handleClose}>Cancel</button>
                     {
-                        props.item.trang_thai === 'Đã hủy' ?
+                        props.item.trang_thai === 'Đã hủy' || props.item.trang_thai === 'Giao hàng thành công' ?
                             <button className='button' onClick={handleXoa}>xóa đơn hàng</button> :
-                            <button className='button' onClick={handleOK}>update</button>
+                                 <button className='button' onClick={handleOK}>update</button>
                     }
 
                 </DialogActions>

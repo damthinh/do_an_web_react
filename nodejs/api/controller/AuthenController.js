@@ -28,7 +28,7 @@ exports.loginUser = async (req, res) => {
             const checkPassword = await bcrypt.compare(password, checkUserName.password)
             if (checkPassword) {
                 let getUser = await userModel.findOne({ userName }).select('-password')
-                const token = jwt.sign({ getUser }, process.env.KEY_TOKEN, { expiresIn: '1h' })
+                const token = jwt.sign({ getUser }, process.env.KEY_TOKEN, { expiresIn: '1d' })
                 res.send({ getUser, token })
             } else {
                 return res.send({ errorMessage: 'pass sai' })

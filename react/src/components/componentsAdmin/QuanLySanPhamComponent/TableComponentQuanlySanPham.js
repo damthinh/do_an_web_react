@@ -26,7 +26,7 @@ export default class TableComponentQuanlySanPham extends Component {
           <tr key={key}>
             <td className="text">{stt + key + 1}</td>
             <td className="text">{item.name}</td>
-            <td className="text">{item.gia}</td>
+            <td className="text">{item.gia.toLocaleString()}</td>
             <td className="text">{item.so_luong}</td>
             <td className="text" ><img alt='' src={item.img[0]} width={'100px'} height={'100px'} /></td>
             <td className="text"><DeleteIcon variant="outlined" onClick={() => {
@@ -45,7 +45,7 @@ export default class TableComponentQuanlySanPham extends Component {
         
         <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'space-evenly',alignItems:'center',height:'10%' }} >
           <h3 width={400} >Tổng Sản phẩm :{this.props.listLength.lengthSanPham}</h3>
-          <h3 width={300}>sản phẩm đã hết :{this.props.listLength.lengthSanPhamhHet}</h3>
+          {/* <h3 width={300}>sản phẩm đã hết :{this.props.listLength.lengthSanPhamhHet}</h3> */}
         </Grid>
         <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center' }} >
           <Grid><Pop_upAddSanPham {...this.props} /></Grid>

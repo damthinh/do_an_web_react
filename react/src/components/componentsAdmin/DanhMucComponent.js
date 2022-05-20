@@ -21,7 +21,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import Public from '@mui/icons-material/Public';
 
 const data = [
-  { icon: <People />, label: 'Quản Lý User' },
+  // { icon: <People />, label: 'Quản Lý User' },
   { icon: <ShoppingCartIcon />, label: 'Quản Lý Đơn Hàng',link: '/quanlydonhang' },
   { icon: <PermMedia />, label: 'Quản Lý Sản Phẩm', link: '/quanlysanpham' },
   // { icon: <Public />, label: 'Hosting' },
@@ -150,7 +150,7 @@ export default function CustomizedList() {
                     lineHeight: '20px',
                     mb: '2px',
                   }}
-                  secondary="Quản Lý User, Quản Lý Đơn Hàng, Quản Lý Sản Phẩm"
+                  secondary=" Quản Lý Đơn Hàng, Quản Lý Sản Phẩm"
                   secondaryTypographyProps={{
                     noWrap: true,
                     fontSize: 12,

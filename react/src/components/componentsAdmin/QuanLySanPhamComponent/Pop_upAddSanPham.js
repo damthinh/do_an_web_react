@@ -45,41 +45,47 @@ export default function FormDialog(props) {
         inputExcel.value = ''
     }
     const handleOK = () => {
-        var form = new FormData()
-        var arrFile = file
-        for (let i = 0; i < arrFile.length; i++) {
-            form.append("img", arrFile[i])
+        if(name != ''&&gia != ''&&camera != ''&&so_luong != ''&&he_dieu_hanh != ''&&chip != ''&&ram != ''&&bo_nho_trong != ''
+        &&pin != ''&&sim != ''){
+            var form = new FormData()
+            var arrFile = file
+            for (let i = 0; i < arrFile.length; i++) {
+                form.append("img", arrFile[i])
+            }
+            form.append('name', name)
+            form.append('giam_gia', giam_gia)
+            form.append('gia', gia)
+            form.append('camera', camera)
+            form.append('man_hinh', man_hinh)
+            form.append('so_luong', so_luong)
+            form.append('he_dieu_hanh', he_dieu_hanh)
+            form.append('chip', chip)
+            form.append('ram', ram)
+            form.append('bo_nho_trong', bo_nho_trong)
+            form.append('pin', pin)
+            form.append('sim', sim)
+            form.append('mo_ta', mo_ta)
+            props.addSanPhamRequest({ form: form, name: name })
+            
+            setPin('')
+            setName('')
+            setGia('')
+            setGiam_gia('')
+            setArrImg([])
+            setBo_nho_trong('')
+            setCamera('')
+            setChip('')
+            setFile([])
+            setHe_dieu_hanh('')
+            setMan_hinh('')
+            setMo_ta('')
+            let inputExcel = document.querySelector('.inputExcel')
+            inputExcel.value = '' 
+            setOpen(false);
+        }else{
+            alert('Nhập đầy đủ thông tin')
         }
-        form.append('name', name)
-        form.append('giam_gia', giam_gia)
-        form.append('gia', gia)
-        form.append('camera', camera)
-        form.append('man_hinh', man_hinh)
-        form.append('so_luong', so_luong)
-        form.append('he_dieu_hanh', he_dieu_hanh)
-        form.append('chip', chip)
-        form.append('ram', ram)
-        form.append('bo_nho_trong', bo_nho_trong)
-        form.append('pin', pin)
-        form.append('sim', sim)
-        form.append('mo_ta', mo_ta)
-        props.addSanPhamRequest({ form: form, name: name })
         
-        
-        setName('')
-        setGia('')
-        setGiam_gia('')
-        setArrImg([])
-        setBo_nho_trong('')
-        setCamera('')
-        setChip('')
-        setFile([])
-        setHe_dieu_hanh('')
-        setMan_hinh('')
-        setMo_ta('')
-        let inputExcel = document.querySelector('.inputExcel')
-        inputExcel.value = '' 
-        setOpen(false);
     };
     const handleChangeFile = (fileInPut) => {
         var newArr = []

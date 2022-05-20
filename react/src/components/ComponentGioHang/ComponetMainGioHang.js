@@ -39,7 +39,7 @@ export default class TableComponentQuanlySanPham extends Component {
                     }} /></td> : <td className="text"><input type={'checkbox'} disabled="1" /></td>}
 
                     <td className="text">{item.id_san_pham.name}</td>
-                    <td className="text">{Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))}</td>
+                    <td className="text">{(Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))).toLocaleString()}</td>
                     <td className="text">{item.so_luong}</td>
                     <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
                     <td className="text"><DeleteIcon variant="outlined" onClick={() => {

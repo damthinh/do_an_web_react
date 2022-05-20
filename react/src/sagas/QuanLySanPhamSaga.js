@@ -53,6 +53,7 @@ function* updateSanPhamSaga(action) {
         let id = action.payload.id
         let res = yield callAPIForm(types.HTTP_UPDATE, `updatesanpham/${id}?limit=${types.LIMITSANPHAMADMIN}&q=${textSearch}`, {form,token:types.getToken()})
         let listSanPham = res.listSanPham
+        console.log("résssssssss",res);
         if (name.toLowerCase().includes(textSearch.toLowerCase())) {
             yield put(actions.updateSanPhamSuccess({}))
             yield put(actions.paginationSanPhamRequest({ activePage: res.activePage }))

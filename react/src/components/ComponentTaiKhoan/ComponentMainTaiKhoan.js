@@ -40,7 +40,7 @@ export default class ComponentMainTaiKhoan extends Component {
         return (
             <div className='mainTaiKhoan'>
                 <div className='thong_so'>
-                    <div className='title'>Tài khoản CỦA BẠN</div>
+                    <div className='title'>Tài khoản của bạn</div>
                     <ul className='main-thong-so'>
 
                         <li>

@@ -5,6 +5,7 @@ export default class ComponentMainChiTietSanPham extends Component {
 
     render() {
         let SanPham = this.props.SanPham
+        // console.log(SanPham.gia.toLocaleString());
         let cau_hinh = new Object(SanPham.id_cau_hinh)
         return (
             <div>
@@ -13,12 +14,13 @@ export default class ComponentMainChiTietSanPham extends Component {
                         <div className='title'>{SanPham.name}</div>
                         <img src={SanPham.img} />
                         {
+                            
                             SanPham.giam_gia !== null ?
                                 (<div className="pro-prices">
-                                    <p>{Math.ceil(SanPham.gia - ((SanPham.gia * SanPham.giam_gia) / 100))} đ</p>
-                                    <span>{SanPham.gia} đ</span>
+                                    <p>{(Math.ceil(SanPham.gia - ((SanPham.gia * SanPham.giam_gia) / 100))).toLocaleString()} đ</p>
+                                    {/* <span>{SanPham.gia.toLocaleString()} đ</span> */}
                                 </div>)
-                                : <div className="pro-prices"><p>{SanPham.gia} đ</p></div>
+                                : <div className="pro-prices"><p>{SanPham.gia.toLocaleString()} đ</p></div>
                         }
 
                         {

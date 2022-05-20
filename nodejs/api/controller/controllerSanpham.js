@@ -79,6 +79,7 @@ exports.updateSanpham = async (req, res) => {
             const url = `http://localhost:3001/${file[i].filename}`;
             arrImgNew.push(url)
         }
+        let update
         if (file.length > 0) {
             let getSanpham = await modelSanpham.findById(id_san_pham)
             let arrImg = getSanpham.img
@@ -88,7 +89,7 @@ exports.updateSanpham = async (req, res) => {
             let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, img: arrImgNew, giam_gia }, { new: true }).populate({
                 path: 'id_cau_hinh'
             })
-            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta })
+            update= await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta },{new:true})
 
             let getlistSanpham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }, { _id: 1 })
             for (let i = 0; i < getlistSanpham.length; i++) {
@@ -102,7 +103,7 @@ exports.updateSanpham = async (req, res) => {
             let updateSanpham = await modelSanpham.findByIdAndUpdate(id_san_pham, { name, gia, so_luong, giam_gia }, { new: true }).populate({
                 path: 'id_cau_hinh'
             })
-            await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta })
+            update= await modelCauhinh.findByIdAndUpdate(updateSanpham.id_cau_hinh, { he_dieu_hanh, chip, ram, bo_nho_trong, pin, sim, man_hinh, camera, mo_ta },{new:true})
 
             let getlistSanpham = await modelSanpham.find({ name: { $regex: textSearch, $options: 'i' } }, { _id: 1 })
             for (let i = 0; i < getlistSanpham.length; i++) {
@@ -110,9 +111,11 @@ exports.updateSanpham = async (req, res) => {
                     activePage = Math.ceil(((i + 1)) / limit)
                 }
             }
+            
             let listSanPham = [updateSanpham]
             return res.send({ listSanPham, activePage })
         }
+        
     } catch (error) {
 
         res.send({ error: error.message })

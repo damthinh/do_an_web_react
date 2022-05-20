@@ -16,6 +16,7 @@ export default class ComponentMainShop extends Component {
     render() {
         let { totalPage, activePage } = this.props
         let listSanPham = []
+        console.log(this.props.listSanPham);
         if (this.props.listSanPham) {
             listSanPham = this.props.listSanPham.map((item, key) => {
                 return (
@@ -37,10 +38,10 @@ export default class ComponentMainShop extends Component {
                                 {
                                     item.giam_gia !== null ?
                                         (<div className="pro-prices">
-                                            <p>{Math.ceil(item.gia - ((item.gia * item.giam_gia) / 100))} đ</p>
-                                            <span>{item.gia} đ</span>
+                                            <p>{(Math.ceil(item.gia - ((item.gia * item.giam_gia) / 100))).toLocaleString()} đ</p>
+                                            <span>{item.gia.toLocaleString()} đ</span>
                                         </div>)
-                                        : <div className="pro-prices"><p>{item.gia} đ</p></div>
+                                        : <div className="pro-prices"><p>{item.gia.toLocaleString()} đ</p></div>
                                 }
                             </div>
                             {

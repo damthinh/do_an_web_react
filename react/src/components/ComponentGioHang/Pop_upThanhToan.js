@@ -41,7 +41,7 @@ export default function FormDialog(props) {
                     <tr key={key}>
                         <td className="text">{key + 1}</td>
                         <td className="text">{item.id_san_pham.name}</td>
-                        <td className="text">{Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))}</td>
+                        <td className="text">{(Math.ceil(item.id_san_pham.gia - ((item.id_san_pham.gia * item.id_san_pham.giam_gia) / 100))).toLocaleString()}</td>
                         <td className="text">{item.so_luong}</td>
                         <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
 
@@ -176,7 +176,7 @@ export default function FormDialog(props) {
 
                             <li>
                                 <span className='properties'>Tổng tiền sản phẩm:</span>
-                                <span className='detail'>{tong_tien} đ</span>
+                                <span className='detail'>{tong_tien.toLocaleString()} đ</span>
                             </li>
 
                             <li>

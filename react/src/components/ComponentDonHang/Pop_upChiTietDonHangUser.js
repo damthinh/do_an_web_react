@@ -33,10 +33,13 @@ var listSanPham =[]
         
         setOpen(true);
         setGhi_chu(props.item.ghi_chu)
-        setSdt(props.item.id_dia_chi.Sdt)
-        setName(props.item.id_dia_chi.Name)
-        setDia_chi(props.item.id_dia_chi.dia_chi)
-        setTong_don_hang(props.item.tong_tien)
+        if(props.item.id_dia_chi!=null){
+            setSdt(props.item.id_dia_chi.Sdt)
+            setName(props.item.id_dia_chi.Name)
+            setDia_chi(props.item.id_dia_chi.dia_chi)
+        }
+        
+        setTong_don_hang(props.item.tong_tien.toLocaleString())
         setTrang_thai(props.item.trang_thai)
         setPhuong_thuc_thanh_toan(props.item.phuong_thuc_thanh_toan)
         setNgay_dat(new Date(props.item.ngay_dat).toLocaleDateString())
@@ -59,7 +62,7 @@ var listSanPham =[]
             <tr key={key}>
                 <td className="text">{key + 1}</td>
                 <td className="text">{item.id_san_pham.name}</td>
-                <td className="text">{item.id_san_pham.gia}</td>
+                <td className="text">{item.id_san_pham.gia.toLocaleString()}</td>
                 <td className="text">{item.so_luong}</td>
                 <td className="text" ><img alt='' src={item.id_san_pham.img[0]} width={'100px'} height={'100px'} /></td>
                 

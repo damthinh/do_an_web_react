@@ -14,6 +14,10 @@ export default function FormDialog(props) {
     const [name, setName] = React.useState('');
     const [id, setId] = React.useState('');
     const [gia, setGia] = React.useState('');
+    
+    const [giam_gia, setGiam_gia] = React.useState('');
+    const [camera, setCamera] = React.useState('');
+    const [man_hinh, setMan_hinh] = React.useState('');
     const [so_luong, setSo_luong] = React.useState('');
     const [he_dieu_hanh, setHe_dieu_hanh] = React.useState('');
     const [chip, setChip] = React.useState('');
@@ -29,6 +33,7 @@ export default function FormDialog(props) {
     const handleClickOpen = () => {
         setOpen(true);
         setName(props.item.name)
+        
         setGia(props.item.gia)
         setSo_luong(props.item.so_luong)
         setHe_dieu_hanh(props.item.id_cau_hinh.he_dieu_hanh)
@@ -37,9 +42,14 @@ export default function FormDialog(props) {
         setBo_nho_trong(props.item.id_cau_hinh.bo_nho_trong)
         setPin(props.item.id_cau_hinh.pin)
         setSim(props.item.id_cau_hinh.sim)
-        
+        setMan_hinh(props.item.id_cau_hinh.man_hinh)
+        setCamera(props.item.id_cau_hinh.camera)
+        if(props.item.id_cau_hinh.mo_ta)setMo_ta(props.item.id_cau_hinh.mo_ta)
+        console.log(props.item.id_cau_hinh.mo_ta);
+        if(props.item.giam_gia)setGiam_gia(props.item.giam_gia)
         setImg(props.item.img)
         setId(props.item._id)
+        console.log(props.item.id_cau_hinh.man_hinh);
     };
     const handleClose = () => {
         setOpen(false);
@@ -56,6 +66,31 @@ export default function FormDialog(props) {
         inputExcel.value = ''
     }
     const handleOK = () => {
+        // if(name != ''&&gia != ''&&camera != ''&&so_luong != ''&&he_dieu_hanh != ''&&chip != ''&&ram != ''&&bo_nho_trong != ''
+        // &&pin != ''&&sim != ''){
+        //     var form = new FormData()
+        // var arrFile = file
+        // for (let i = 0; i < arrFile.length; i++) {
+        //     form.append("img", arrFile[i])
+        // }
+        // form.append('name', name)
+        // form.append('gia', gia)
+        // form.append('giam_gia', giam_gia)
+        // form.append('camera', camera)
+        // form.append('man_hinh', man_hinh)
+        // form.append('so_luong', so_luong)
+        // form.append('he_dieu_hanh', he_dieu_hanh)
+        // form.append('chip', chip)
+        // form.append('ram', ram)
+        // form.append('bo_nho_trong', bo_nho_trong)
+        // form.append('pin', pin)
+        // form.append('sim', sim)
+        // form.append('mo_ta', mo_ta)
+        // props.updateSanPhamRequest({ form: form, name: name, id })
+        // setOpen(false);
+        // }else{
+        //     alert("Nhập đầy đủ thông tin")
+        // }
         var form = new FormData()
         var arrFile = file
         for (let i = 0; i < arrFile.length; i++) {
@@ -63,6 +98,9 @@ export default function FormDialog(props) {
         }
         form.append('name', name)
         form.append('gia', gia)
+        form.append('giam_gia', giam_gia)
+        form.append('camera', camera)
+        form.append('man_hinh', man_hinh)
         form.append('so_luong', so_luong)
         form.append('he_dieu_hanh', he_dieu_hanh)
         form.append('chip', chip)
@@ -73,6 +111,7 @@ export default function FormDialog(props) {
         form.append('mo_ta', mo_ta)
         props.updateSanPhamRequest({ form: form, name: name, id })
         setOpen(false);
+        
     };
     const handleChangeFile = (fileInPut) => {
         var newArr = []
@@ -128,6 +167,17 @@ export default function FormDialog(props) {
                         variant="standard"
                         onChange={(e) => {
                             setSo_luong(e.target.value)
+                        }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        label="Giảm Giá"
+                        value={giam_gia}
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => {
+                            setGiam_gia(e.target.value)
                         }}
                     />
                     <TextField
@@ -199,7 +249,30 @@ export default function FormDialog(props) {
                     <TextField
                         autoFocus
                         margin="dense"
+                        label="Camera"
+                        value={camera}
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => {
+                            setCamera(e.target.value)
+                        }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        label="Màn Hình"
+                        value={man_hinh}
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => {
+                            setMan_hinh(e.target.value)
+                        }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
                         label="Mô tả"
+                        value={mo_ta}
                         fullWidth
                         variant="standard"
                         onChange={(e) => {

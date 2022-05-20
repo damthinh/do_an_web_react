@@ -22,12 +22,12 @@ export default class TableComponentQuanlyDonHang extends Component {
         trang_thai: '', page: ''
     }
     handleChange = (e) => {
-        
+
         this.setState({ trang_thai: e })
-        this.props.searchDonHangAdminRequest({ textSearch: this.props.textSearch, trang_thai: e})
+        this.props.searchDonHangAdminRequest({ textSearch: this.props.textSearch, trang_thai: e })
     };
     render() {
-        let tableHeader =[]
+        let tableHeader = []
         let listDonHang = []
         let totalPage = this.props.totalPage
 
@@ -35,15 +35,23 @@ export default class TableComponentQuanlyDonHang extends Component {
         listDonHang = this.props.listDonHang.map((item, key) => {
             return (
                 <tr key={key}>
-                <td className="text">{key + 1}</td>
-                <td className="text">{item.name}</td>
-                <td className="text">{item.id_dia_chi.Name}</td>
-                <td className="text">{item.id_dia_chi.Sdt}</td>
-                <td className="text">{item.so_san_pham}</td>
-                <td className="text">{item.id_dia_chi.dia_chi}</td>
-                <td className="text">{item.tong_tien}</td>
-                <td className="text">{item.trang_thai}</td>
-                    <td className="text"><Pop_upChiTietDonHang {...this.props} item={item}/></td>
+                    <td className="text">{key + 1}</td>
+                    <td className="text">{item.name}</td>
+                    {
+                        item.id_dia_chi != null ? <td className="text">{item.id_dia_chi.Name}</td> : null
+                    }
+                    {
+                        item.id_dia_chi != null ? <td className="text">{item.id_dia_chi.Sdt}</td> : null
+                    }
+
+
+                    <td className="text">{item.so_san_pham}</td>
+                    {
+                        item.id_dia_chi != null ? <td className="text">{item.id_dia_chi.dia_chi}</td> : null
+                    }
+                    <td className="text">{item.tong_tien.toLocaleString()}</td>
+                    <td className="text">{item.trang_thai}</td>
+                    <td className="text"><Pop_upChiTietDonHang {...this.props} item={item} /></td>
                 </tr>
             )
         })
@@ -52,10 +60,10 @@ export default class TableComponentQuanlyDonHang extends Component {
                 <tr key={key}>
                     <td className="text">{item.DonHang}</td>
                     <td className="text">{item.ChoXacNhan}</td>
-                    <td className="text">{item.DaGiao}</td>
+                    <td className="text">{item.DangGiao}</td>
                     <td className="text">{item.DangChuanBi}</td>
-                    
                     <td className="text">{item.DaHuy}</td>
+                    <td className="text">{item.GiaoHangThanhCong}</td>
                 </tr>
             )
         })
@@ -67,30 +75,29 @@ export default class TableComponentQuanlyDonHang extends Component {
                             <tr>
                                 <th width={200} className="text">Tổng Đơn hàng :</th>
                                 <th width={200} className="text">Đơn hàng chưa xác nhận :</th>
-                                <th width={200} className="text">Đơn hàng đã giao :</th>
+                                <th width={200} className="text">Đơn hàng đang giao :</th>
                                 <th width={200} className="text">Đơn hàng chuẩn bị :</th>
                                 <th width={200} className="text">Đơn hàng đã hủy :</th>
+                                <th width={200} className="text">Giao hàng thành công :</th>
                             </tr>
                             {tableHeader}
                         </tbody>
-                        
                     </table>
                 </Grid>
                 <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'center' }} >
-                    {/* <Grid><Pop_upAddSanPham {...this.props} /></Grid> */}
                     <input style={{ height: '50%' }} value={this.state.textSearch}
                         onChange={(e) => {
                             this.setState({ textSearch: e.target.value })
                         }}
                     />
                     <button className='button' style={{ width: '100px', height: '50%' }} onClick={() => {
-                        this.props.searchDonHangAdminRequest({ textSearch: this.state.textSearch,trang_thai:this.state.trang_thai })
+                        this.props.searchDonHangAdminRequest({ textSearch: this.state.textSearch, trang_thai: this.state.trang_thai })
                     }}>search</button>
-                    <button  className='button'
-                        style={{ display: this.props.textSearch||this.props.trang_thai ? 'inline-block' : 'none' }}
+                    <button className='button'
+                        style={{ display: this.props.textSearch || this.props.trang_thai ? 'inline-block' : 'none' }}
                         onClick={() => {
-                            this.setState({ textSearch: '',trang_thai:'' })
-                            this.props.searchDonHangAdminRequest({ textSearch: '',trang_thai:'' })
+                            this.setState({ textSearch: '', trang_thai: '' })
+                            this.props.searchDonHangAdminRequest({ textSearch: '', trang_thai: '' })
                         }}>back get</button>
                 </Grid>
                 <Grid sx={{ backgroundColor: "#f1f1f1", display: 'flex', justifyContent: 'space-evenly' }}>
@@ -104,10 +111,11 @@ export default class TableComponentQuanlyDonHang extends Component {
                                 label="Age"
                                 onChange={(e) => { this.handleChange(e.target.value) }}
                             >
-                            <MenuItem value={'Đã hủy'}>Đã hủy</MenuItem>
-                            <MenuItem value={'Chờ xác nhận'}>Chờ xác nhận</MenuItem>
-                            <MenuItem value={'Đang chuẩn bị'}>Đang chuẩn bị</MenuItem>
-                            <MenuItem value={'Đang giao hàng'}>Đang giao hàng</MenuItem>
+                                <MenuItem value={'Đã hủy'}>Đã hủy</MenuItem>
+                                <MenuItem value={'Chờ xác nhận'}>Chờ xác nhận</MenuItem>
+                                <MenuItem value={'Đang chuẩn bị'}>Đang chuẩn bị</MenuItem>
+                                <MenuItem value={'Đang giao hàng'}>Đang giao hàng</MenuItem>
+                                <MenuItem value={'Giao hàng thành công'}>Giao hàng thành công</MenuItem>
                             </Select>
                         </FormControl>
                     </Box>
